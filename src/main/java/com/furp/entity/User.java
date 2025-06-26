@@ -1,4 +1,4 @@
-package com.furp.pojo;
+package com.furp.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

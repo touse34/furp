@@ -1,8 +1,12 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.furp.pojo.User;
+import com.furp.entity.Teacher;
+import com.furp.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * 用户表的 Mapper 接口
@@ -10,7 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
  * * @Mapper 注解是可选的，因为主启动类中已经使用了 @MapperScan。
  * 但保留它也无害。
  */
-
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
     // 如果有复杂的、自定义的 SQL 查询，可以在这里定义方法，并在 XML 文件中实现
     // 但对于基础的 CRUD, 这里已经完全足够了，无需任何代码。
