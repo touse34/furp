@@ -17,4 +17,8 @@ private TeacherMapper teacherMapper;
     public List<Teacher> findAllTeacher(){
         return teacherMapper.selectAll();
     }
+
+    public List<Teacher> findEligibleAssessors(){
+
+    }
 }
