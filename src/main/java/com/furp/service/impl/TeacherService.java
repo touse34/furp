@@ -35,6 +35,13 @@ private SupervisorMapper supervisorMapper;
             return allTeachers;
         }
 
+        List<Teacher> eligibleAssessors = allTeachers.stream()
+                .filter(teacher -> !supervisorIDs.contains(teacher.getId()))
+                .collect(Collectors.toList());
+
+        return eligibleAssessors;
+
+
 
     }
 }
