@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 @Mapper
-public interface SurpervisorMapper extends BaseMapper<Supervisor>{
+public interface SupervisorMapper extends BaseMapper<Supervisor>{
     /**
      * 根据博士生ID (phd.id)，查询其所有导师的完整信息。
      *

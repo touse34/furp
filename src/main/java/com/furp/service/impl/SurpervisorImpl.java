@@ -1,7 +1,7 @@
 package com.furp.service.impl;
 
 import com.furp.entity.Supervisor;
-import com.furp.mapper.SurpervisorMapper;
+import com.furp.mapper.SupervisorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ public class SurpervisorImpl {
 
 
     @Autowired
-    private SurpervisorMapper surpervisorMapper;
+    private SupervisorMapper supervisorMapper;
 
     public List<Supervisor> findSupervisors(Integer phdId){
-        return surpervisorMapper.findSupervisorsByPhdId(phdId);
+        return supervisorMapper.findSupervisorsByPhdId(phdId);
     }
 }
