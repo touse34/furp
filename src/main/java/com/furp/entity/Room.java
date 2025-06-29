@@ -1,6 +1,6 @@
 package com.furp.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+/*import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
@@ -10,4 +10,19 @@ public class Room {
     private int userId;
     private int capacity;
 
+}*/
+
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@TableName("meeting_room")  // 表名
+public class Room {
+    private Integer id;         // 会议室的ID
+    private String location;    // 会议室的位置
+    private Integer capacity;   // 会议室的容量
 }
