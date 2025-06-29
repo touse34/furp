@@ -4,6 +4,7 @@ import com.furp.entity.Teacher;
 import com.furp.mapper.SupervisorMapper;
 import com.furp.mapper.TeacherMapper;
 
+import com.furp.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class TeacherImp {
+public class TeacherImp implements TeacherService {
 @Autowired
 private TeacherMapper teacherMapper;
 private SupervisorMapper supervisorMapper;
