@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class TeacherService {
+public class TeacherImp {
 @Autowired
 private TeacherMapper teacherMapper;
 private SupervisorMapper supervisorMapper;
