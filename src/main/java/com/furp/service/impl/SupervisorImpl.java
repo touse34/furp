@@ -14,7 +14,7 @@ public class SupervisorImpl implements SupervisorService {
     @Autowired
     private SupervisorMapper supervisorMapper;
 
-    public List<Supervisor> findSupervisors(Integer phdId){
+    public List<Supervisor> findSupervisorsByPhdId(Integer phdId){
         return supervisorMapper.findSupervisorsByPhdId(phdId);
     }
 }

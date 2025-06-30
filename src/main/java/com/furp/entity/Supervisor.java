@@ -12,6 +12,7 @@ public class Supervisor {
 }*/
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("supervisor")  // 指定表名为supervisor
 public class Supervisor {
+    @TableId
+    private Integer id;
+
     private Integer phdId;     // 关联的PhD的ID
     private Integer teacherId; // 关联的教师的ID
     private Integer isLead;    // 是否是主导师，1表示是主导师，0表示不是主导师
+
+
 }

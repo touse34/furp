@@ -18,7 +18,7 @@ public interface SupervisorMapper extends BaseMapper<Supervisor>{
      */
 
     @Select("select t.* from teachers t join supervisor s ON t.id = s.teacher_id where s.phd_id = #{phdId}")
-    List<Teacher> findSupervisorsByPhdId(@Param("phdId") Integer phdId) ;
+    List<Supervisor> findSupervisorsByPhdId(@Param("phdId") Integer phdId) ;
 
 
 }

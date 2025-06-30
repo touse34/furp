@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
 import com.furp.mapper.SupervisorMapper;
 import com.furp.mapper.TeacherMapper;
@@ -26,7 +27,7 @@ private SupervisorMapper supervisorMapper;
 
         List<Teacher> allTeachers = teacherMapper.selectAll();
 
-        List<Teacher> supervisors = supervisorMapper.findSupervisorsByPhdId(phdId);
+        List<Supervisor> supervisors = supervisorMapper.findSupervisorsByPhdId(phdId);
 
         Set<Integer> supervisorIDs = supervisors.stream()
                 .map(teacher -> teacher.getId())
