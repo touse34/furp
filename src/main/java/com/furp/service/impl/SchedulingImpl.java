@@ -29,7 +29,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class SchedulingServiceImpl implements SchedulingService {
+public class SchedulingImpl implements SchedulingService {
 
     @Autowired private PhdMapper phdMapper;
     @Autowired private TeacherMapper teacherMapper;
