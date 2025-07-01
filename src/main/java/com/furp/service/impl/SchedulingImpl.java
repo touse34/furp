@@ -1,31 +1,26 @@
 package com.furp.service.impl;
 
+import com.furp.DTO.response.PendingReviewDto;
 import com.furp.entity.AnnualReview;
-import com.furp.entity.Phd;
 import com.furp.entity.Room;
 import com.furp.entity.Teacher;
-import com.furp.mapper.AnnualReviewMapper;
 import com.furp.mapper.PhdMapper;
 import com.furp.mapper.RoomMapper;
 import com.furp.mapper.TeacherMapper;
+import com.furp.service.AnnualReviewService;
 import com.furp.service.SchedulingService;
+import com.furp.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 
-
-import com.furp.entity.*;
-import com.furp.mapper.*;
-import com.furp.service.SchedulingService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,16 +29,17 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private PhdMapper phdMapper;
     @Autowired private TeacherMapper teacherMapper;
     @Autowired private RoomMapper roomMapper;
-    @Autowired private AnnualReviewMapper reviewMapper;
+    @Autowired private AnnualReviewService annualReviewService;
+    @Autowired private TeacherService teacherService
 
     // TimeSlot class
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class TimeSlot {
-        private String day;
-        private String start;
-        private String end;
+        private LocalDateTime startTime; // 开始时间
+        private LocalDateTime endTime;   // 结束时间
+
     }
 
     // PotentialAssignment class
@@ -51,27 +47,32 @@ public class SchedulingImpl implements SchedulingService {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class PotentialAssignment {
-        private Long phdId;
-        private Long teacher1Id;
-        private Long teacher2Id;
+        private int phdId;
+        private int teacher1Id;
+        private int teacher2Id;
         private TimeSlot timeSlot;
         private int skillScore;
     }
 
     @Override
     public void autoSchedule() {
-        List<Phd> pendingPhds = phdMapper.selectList(null); // stub
-        List<Teacher> teachers = teacherMapper.selectList(null);
-        List<Room> allRooms = roomMapper.selectList(null);
+        List<PendingReviewDto> pendingReviews = annualReviewService.getPendingReviews();
+        List<Integer> pendingPhdIds = pendingReviews.stream()
+                .map(PendingReviewDto::getPhdId)
+                .collect(Collectors.toList());   //获取等待分配的phdId
+
+
+        List<Teacher> teachers = teacherService.findAllTeacher();
+        List<Room> allRooms = roomMapper.selectAllRooms();
 
         Map<Long, Integer> teacherWorkload = initWorkloadMap(teachers);
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots();
         Set<Long> usedRooms = new HashSet<>();
 
-        List<PotentialAssignment> pool = generatePotentialAssignments(pendingPhds, teachers, busyMap);
+        List<PotentialAssignment> pool = generatePotentialAssignments(pendingPhdIds, teachers, busyMap); // 方案池
         List<AnnualReview> finalResult = new ArrayList<>();
 
-        while (!pendingPhds.isEmpty() && !pool.isEmpty()) {
+        while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
             PotentialAssignment best = selectBest(pool, teacherWorkload);
             Room assignedRoom = allocateRoom(best.getTimeSlot(), usedRooms, allRooms, busyMap);
             if (assignedRoom == null) {
@@ -82,7 +83,7 @@ public class SchedulingImpl implements SchedulingService {
             updateBusy(busyMap, best, assignedRoom);
             updateWorkload(teacherWorkload, best);
             usedRooms.add(assignedRoom.getId());
-            pendingPhds.removeIf(s -> s.getId().equals(best.getPhdId()));
+            pendingPhdIds.removeIf(s -> s.getId().equals(best.getPhdId()));
             pool = removeConflicts(pool, best, assignedRoom);
         }
 
@@ -100,11 +101,12 @@ public class SchedulingImpl implements SchedulingService {
         return new HashMap<>(); // TODO: implement based on AnnualReview table
     }
 
-    private List<PotentialAssignment> generatePotentialAssignments(List<Phd> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
+    private List<PotentialAssignment> generatePotentialAssignments(List<Integer> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
         return new ArrayList<>(); // TODO: 实现组合生成逻辑
     }
 
     private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Long, Integer> workload) {
+
         return pool.get(0); // TODO: 加入打分排序逻辑
     }
 

@@ -3,7 +3,7 @@ package com.furp.DTO.response;
 import lombok.Data;
 
 @Data
-public class PendingReviewDTO {
+public class PendingReviewDto {
     private Integer reviewId;
     private Integer reviewYear;
     private String status;

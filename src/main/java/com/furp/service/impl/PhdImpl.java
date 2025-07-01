@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.furp.mapper.AnnualReviewMapper;
 import com.furp.service.PhdService;
 import org.springframework.stereotype.Service;
 
@@ -10,4 +11,7 @@ public class PhdImpl implements PhdService {
      *
      *
      * */
+    private AnnualReviewMapper annualReviewMapper;
+
+
 }
