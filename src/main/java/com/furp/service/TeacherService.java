@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TeacherService {
     public List<Teacher> findAllTeacher();
+
+    public List<Teacher> findEligibleAssessors(Integer phdId);
 }

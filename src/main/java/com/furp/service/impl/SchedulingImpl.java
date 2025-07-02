@@ -69,7 +69,7 @@ public class SchedulingImpl implements SchedulingService {
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots();
         Set<Long> usedRooms = new HashSet<>();
 
-        List<PotentialAssignment> pool = generatePotentialAssignments(pendingPhdIds, teachers, busyMap); // 方案池
+        List<PotentialAssignment> pool = generatePotentialAssignments(pendingReviews, teachers, busyMap); // 方案池
         List<AnnualReview> finalResult = new ArrayList<>();
 
         while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
@@ -91,9 +91,11 @@ public class SchedulingImpl implements SchedulingService {
         finalResult.forEach(reviewMapper::insert);
     }
 
-    private Map<Long, Integer> initWorkloadMap(List<Teacher> teachers) {
-        Map<Long, Integer> map = new HashMap<>();
-        for (Teacher t : teachers) map.put(t.getId(), 0);
+    private Map<Integer, Integer> initWorkloadMap(List<Teacher> teachers) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (Teacher t : teachers) {
+            map.put(t.getId(), 0);
+        }
         return map;
     }
 
@@ -101,8 +103,18 @@ public class SchedulingImpl implements SchedulingService {
         return new HashMap<>(); // TODO: implement based on AnnualReview table
     }
 
-    private List<PotentialAssignment> generatePotentialAssignments(List<Integer> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
-        return new ArrayList<>(); // TODO: 实现组合生成逻辑
+    private List<PotentialAssignment> generatePotentialAssignments(List<PendingReviewDto> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
+
+        List<PotentialAssignment> pool = new ArrayList<>(); // TODO: 实现组合生成逻辑
+        for (PendingReviewDto review : students) {
+            List<Teacher> eligibleAssessors = teacherService.findEligibleAssessors(review.getPhdId());
+            if (eligibleAssessors.size() < 2) {
+                System.out.println("学生 ${review.getStudentName()} 的候选评审员不足两人，已跳过。");
+                continue;
+            }
+
+
+        }
     }
 
     private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Long, Integer> workload) {
