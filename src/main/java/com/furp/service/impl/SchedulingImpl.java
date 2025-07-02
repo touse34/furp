@@ -28,6 +28,7 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private PhdSkillService phdSkillService;
     @Autowired private TeacherSkillService teacherSkillService;
     @Autowired private AvailableTimeMapper availableTimeMapper;
+    @Autowired private SchedulesMapper schedulesMapper;
 
     // TimeSlot class
     @Data
@@ -97,7 +98,37 @@ public class SchedulingImpl implements SchedulingService {
     }
 
     private Map<String, Set<TimeSlot>> loadBusySlots() {
-        return new HashMap<>(); // TODO: implement based on AnnualReview table
+
+        Map<String, Set<TimeSlot>> busyMap = new HashMap<>();
+        List<Schedules> schedules = schedulesMapper.findAllFutureSchedules();
+
+        for(Schedules schedule: schedules){
+
+            TimeSlot busySlot = new TimeSlot(schedule.getStartTime(), schedule.getEndTime());
+
+            if(schedule.getTeacherId()!=null){
+                String teacherKey = "Teacher-" + schedule.getTeacherId();
+                busyMap.computeIfAbsent(teacherKey, k -> new HashSet<>()).add(busySlot);
+                /**
+                 * 对于给定的 teacherKey：
+                 *
+                 * 检查 busyMap 中是否已经有这个老师的忙碌时间表（一个 Set<TimeSlot>）。
+                 *
+                 * 如果没有，或者对应的值是 null，那么就为这个老师创建一个新的空的 HashSet<TimeSlot>，并将其作为值放入 busyMap 中。
+                 *
+                 * 无论 Set 是新创建的还是已经存在的，都将 busySlot 这个具体的时间段添加到该老师的忙碌时间 Set 中。
+                 */
+
+            }
+
+            if(schedule.getRoomId()!=null){
+                String roomKey = "room-" + schedule.getRoomId();
+                busyMap.computeIfAbsent(roomKey, k -> new HashSet<>()).add(busySlot);
+            }
+        }
+
+
+        return busyMap; // TODO: implement based on AnnualReview table
     }
 
     private List<PotentialAssignment> generatePotentialAssignments(List<PendingReviewDto> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
@@ -131,6 +162,10 @@ public class SchedulingImpl implements SchedulingService {
                     List<AvailableTime> t2AvailableTime = availableTimeMapper.findByTeacherId(t2.getId());
 
                     List<TimeSlot> commonTimeSlots = findCommonTimeSlots(t1AvailableTime, t2AvailableTime);
+
+                    for(TimeSlot slot : commonTimeSlots){
+
+                    }
                 }
             }
 
