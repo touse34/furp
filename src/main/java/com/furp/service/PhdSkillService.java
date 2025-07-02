@@ -1,7 +1,8 @@
 package com.furp.service;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PhdSkillService {
-    public List<Integer> findPhdSkillsById(Integer phdId);
+    public Set<Integer> findPhdSkillsById(Integer phdId);
 }

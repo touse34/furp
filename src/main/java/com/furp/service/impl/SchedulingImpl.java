@@ -119,7 +119,16 @@ public class SchedulingImpl implements SchedulingService {
                 continue;
             }
 
-            List<Integer> phdSkills = phdSkillService.findPhdSkillsById(phd);
+            Set<Integer> phdSkills = phdSkillService.findPhdSkillsById(phd);
+
+            for(int i = 0; i < eligibleAssessors.size()-1; i++){
+                for(int j = i+1; j < eligibleAssessors.size(); j++){
+                    Teacher t1 = eligibleAssessors.get(i);
+                    Teacher t2 = eligibleAssessors.get(j);
+
+                }
+            }
+
 
 
 
