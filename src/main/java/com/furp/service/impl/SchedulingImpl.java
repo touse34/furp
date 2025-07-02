@@ -38,6 +38,20 @@ public class SchedulingImpl implements SchedulingService {
         private LocalDateTime startTime; // 开始时间
         private LocalDateTime endTime;   // 结束时间
 
+
+        public boolean overlaps(TimeSlot other){
+            // 如果满足以下两个条件，则两个时间段有重叠：
+            // 1. 当前时间段的开始时间在另一个时间段的结束时间之前
+            // AND
+            // 2. 另一个时间段的开始时间在当前时间段的结束时间之前
+            return this.startTime.isBefore(other.endTime) &&
+                    other.startTime.isBefore(this.endTime);
+            //在这个 overlaps 方法中，this.startTime.isBefore(other.endTime) 确保了第一个时间段没有完全在第二个时间段之后。
+            //而另一个条件 other.startTime.isBefore(this.endTime) 则确保了第二个时间段没有完全在第一个时间段之后。
+            //这两个条件同时满足，才表示它们有重叠。
+            //这个逻辑是处理时间或区间重叠问题的标准方法之一
+        }
+
     }
 
     // PotentialAssignment class
@@ -98,12 +112,14 @@ public class SchedulingImpl implements SchedulingService {
     }
 
     private Map<String, Set<TimeSlot>> loadBusySlots() {
-
+        //busyMap为资源名（String）对应 Timeslot集合 的键值对形式
         Map<String, Set<TimeSlot>> busyMap = new HashMap<>();
+
+        //加载已经存在的未来日程
         List<Schedules> schedules = schedulesMapper.findAllFutureSchedules();
 
         for(Schedules schedule: schedules){
-
+            //将该日程的时间段转化为Timeslot结构存储
             TimeSlot busySlot = new TimeSlot(schedule.getStartTime(), schedule.getEndTime());
 
             if(schedule.getTeacherId()!=null){
@@ -194,8 +210,15 @@ public class SchedulingImpl implements SchedulingService {
         return null;
     }
 
-    private boolean isFree(String key, TimeSlot slot, Map<String, Set<TimeSlot>> busyMap) {
-        return true; // TODO: 根据 TimeSlot 比较逻辑判断冲突
+    private boolean isFree(String key, TimeSlot targetSlot, Map<String, Set<TimeSlot>> busyMap) {
+        Set<TimeSlot> busySlots= busyMap.get(key);
+        if (busySlots.isEmpty()){
+            return true;
+        }
+        return busySlots.stream().noneMatch(busySlot -> busySlot.overlaps(targetSlot));
+
+
+        // TODO: 根据 TimeSlot 比较逻辑判断冲突
     }
 
     private AnnualReview toAnnualReview(PotentialAssignment p, Room room) {
