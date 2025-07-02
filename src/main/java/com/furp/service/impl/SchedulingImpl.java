@@ -8,10 +8,8 @@ import com.furp.entity.Teacher;
 import com.furp.mapper.PhdMapper;
 import com.furp.mapper.RoomMapper;
 import com.furp.mapper.TeacherMapper;
-import com.furp.service.AnnualReviewService;
-import com.furp.service.PhdSkillService;
-import com.furp.service.SchedulingService;
-import com.furp.service.TeacherService;
+import com.furp.mapper.TeacherSkillMapper;
+import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +32,9 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private AnnualReviewService annualReviewService;
     @Autowired private TeacherService teacherService;
     @Autowired private PhdSkillService phdSkillService;
+    @Autowired private TeacherSkillService teacherSkillService;
+    @Autowired
+    private TeacherSkillMapper teacherSkillMapper;
 
     // TimeSlot class
     @Data
@@ -126,6 +127,12 @@ public class SchedulingImpl implements SchedulingService {
                     Teacher t1 = eligibleAssessors.get(i);
                     Teacher t2 = eligibleAssessors.get(j);
 
+                    Set<Integer> t1Skill = teacherSkillService.findTeacherSkillsById(t1.getId());
+                    Set<Integer> t2Skill = teacherSkillService.findTeacherSkillsById(t2.getId());
+
+                    long t1MatchCount = t1Skill.stream().filter(phdSkills::contains).count();
+                    long t2MatchCount = t2Skill.stream().filter(phdSkills::contains).count();
+                    int skillScore = (int) (t1MatchCount + t2MatchCount);
                 }
             }
 
