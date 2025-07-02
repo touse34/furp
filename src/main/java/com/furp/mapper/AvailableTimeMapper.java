@@ -12,5 +12,5 @@ public interface AvailableTimeMapper extends BaseMapper<AvailableTime> {
 
 
     @Select("SELECT * FROM available_time WHERE teacher_id = #{teacherId}")
-    List<AvailableTime> findByTeacherId(Long teacherId);
+    List<AvailableTime> findByTeacherId(Integer teacherId);
 }

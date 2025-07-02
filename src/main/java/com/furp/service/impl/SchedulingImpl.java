@@ -1,14 +1,8 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.response.PendingReviewDto;
-import com.furp.entity.AnnualReview;
-import com.furp.entity.PhdSkill;
-import com.furp.entity.Room;
-import com.furp.entity.Teacher;
-import com.furp.mapper.PhdMapper;
-import com.furp.mapper.RoomMapper;
-import com.furp.mapper.TeacherMapper;
-import com.furp.mapper.TeacherSkillMapper;
+import com.furp.entity.*;
+import com.furp.mapper.*;
 import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +27,7 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private TeacherService teacherService;
     @Autowired private PhdSkillService phdSkillService;
     @Autowired private TeacherSkillService teacherSkillService;
-    @Autowired
-    private TeacherSkillMapper teacherSkillMapper;
+    @Autowired private AvailableTimeMapper availableTimeMapper;
 
     // TimeSlot class
     @Data
@@ -133,6 +126,11 @@ public class SchedulingImpl implements SchedulingService {
                     long t1MatchCount = t1Skill.stream().filter(phdSkills::contains).count();
                     long t2MatchCount = t2Skill.stream().filter(phdSkills::contains).count();
                     int skillScore = (int) (t1MatchCount + t2MatchCount);
+
+                    List<AvailableTime> t1AvailableTime = availableTimeMapper.findByTeacherId(t1.getId());
+                    List<AvailableTime> t2AvailableTime = availableTimeMapper.findByTeacherId(t2.getId());
+
+                    List<TimeSlot> commonTimeSlots = findCommonTimeSlots(t1AvailableTime, t2AvailableTime);
                 }
             }
 
@@ -188,4 +186,22 @@ public class SchedulingImpl implements SchedulingService {
         return pool.stream().filter(p -> !Objects.equals(p.getPhdId(), used.getPhdId()))
                 .collect(Collectors.toList());
     }
+
+    private List<TimeSlot> findCommonTimeSlots(List<AvailableTime> list1, List<AvailableTime> list2) {
+        List<TimeSlot> commonSlots = new ArrayList<>();
+        Set<TimeSlot> slot1 = list1.stream()
+                .map(at1 -> new TimeSlot(at1.getStart_time(), at1.getEnd_time()))
+                .collect(Collectors.toSet());
+
+        for(AvailableTime at2 : list2){
+            TimeSlot slot2 = new TimeSlot(at2.getStart_time(), at2.getEnd_time());
+            if(slot1.contains(slot2)){
+                commonSlots.add(slot2);
+            }
+        }
+
+        return commonSlots;
+
+        }
 }
+
