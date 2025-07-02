@@ -77,7 +77,7 @@ public class SchedulingImpl implements SchedulingService {
         List<Teacher> teachers = teacherService.findAllTeacher();
         List<Room> allRooms = roomMapper.selectAllRooms();
 
-        Map<Long, Integer> teacherWorkload = initWorkloadMap(teachers);
+        Map<Integer, Integer> teacherWorkload = initWorkloadMap(teachers);
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots();
         Set<Long> usedRooms = new HashSet<>();
 
@@ -205,7 +205,7 @@ public class SchedulingImpl implements SchedulingService {
         }
     }
 
-    private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Long, Integer> workload) {
+    private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Integer, Integer> workload) {
 
         return pool.get(0); // TODO: 加入打分排序逻辑
     }
