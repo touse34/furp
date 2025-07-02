@@ -1,0 +1,20 @@
+package com.furp.service.impl;
+
+import com.furp.mapper.PhdSkillMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class PhdSkillImpl {
+    @Autowired
+    private PhdSkillMapper phdSkillMapper;
+
+    public List<Integer> findPhdSkillsById(Integer phdId){
+        return phdSkillMapper.selectSkill(phdId).stream().map(phdSkill -> phdSkill.getSkillId()).collect(Collectors.toList());
+    }
+
+
+}

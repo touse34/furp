@@ -16,4 +16,4 @@ public class AvailableTime {
     private Integer teacherId;
     private LocalDateTime start_time;
     private LocalDateTime end_time;
-
+}

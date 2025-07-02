@@ -2,12 +2,14 @@ package com.furp.service.impl;
 
 import com.furp.DTO.response.PendingReviewDto;
 import com.furp.entity.AnnualReview;
+import com.furp.entity.PhdSkill;
 import com.furp.entity.Room;
 import com.furp.entity.Teacher;
 import com.furp.mapper.PhdMapper;
 import com.furp.mapper.RoomMapper;
 import com.furp.mapper.TeacherMapper;
 import com.furp.service.AnnualReviewService;
+import com.furp.service.PhdSkillService;
 import com.furp.service.SchedulingService;
 import com.furp.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,8 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private TeacherMapper teacherMapper;
     @Autowired private RoomMapper roomMapper;
     @Autowired private AnnualReviewService annualReviewService;
-    @Autowired private TeacherService teacherService
+    @Autowired private TeacherService teacherService;
+    @Autowired private PhdSkillService phdSkillService;
 
     // TimeSlot class
     @Data
@@ -107,11 +110,17 @@ public class SchedulingImpl implements SchedulingService {
 
         List<PotentialAssignment> pool = new ArrayList<>(); // TODO: 实现组合生成逻辑
         for (PendingReviewDto review : students) {
-            List<Teacher> eligibleAssessors = teacherService.findEligibleAssessors(review.getPhdId());
+
+            Integer phd = review.getPhdId();
+
+            List<Teacher> eligibleAssessors = teacherService.findEligibleAssessors(phd);
             if (eligibleAssessors.size() < 2) {
                 System.out.println("学生 ${review.getStudentName()} 的候选评审员不足两人，已跳过。");
                 continue;
             }
+
+            List<Integer> phdSkills = phdSkillService.findPhdSkillsById(phd);
+
 
 
         }
