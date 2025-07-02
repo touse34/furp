@@ -152,15 +152,15 @@ public class SchedulingImpl implements SchedulingService {
         List<PotentialAssignment> pool = new ArrayList<>(); // TODO: 实现组合生成逻辑
         for (PendingReviewDto review : students) {
 
-            Integer phd = review.getPhdId();
+            Integer phdId = review.getPhdId();
 
-            List<Teacher> eligibleAssessors = teacherService.findEligibleAssessors(phd);
+            List<Teacher> eligibleAssessors = teacherService.findEligibleAssessors(phdId);
             if (eligibleAssessors.size() < 2) {
                 System.out.println("学生 ${review.getStudentName()} 的候选评审员不足两人，已跳过。");
                 continue;
             }
 
-            Set<Integer> phdSkills = phdSkillService.findPhdSkillsById(phd);
+            Set<Integer> phdSkills = phdSkillService.findPhdSkillsById(phdId);
 
             for(int i = 0; i < eligibleAssessors.size()-1; i++){
                 for(int j = i+1; j < eligibleAssessors.size(); j++){
@@ -180,6 +180,20 @@ public class SchedulingImpl implements SchedulingService {
                     List<TimeSlot> commonTimeSlots = findCommonTimeSlots(t1AvailableTime, t2AvailableTime);
 
                     for(TimeSlot slot : commonTimeSlots){
+
+                        if(isFree("teacher-" + t1.getId(), slot, busyMap) &&
+                            isFree("teacher-" + t2.getId(), slot, busyMap)){
+
+                            PotentialAssignment pa = new PotentialAssignment(
+                                    phdId,
+                                    t1.getId(),
+                                    t2.getId(),
+                                    slot,
+                                    skillScore
+                            );
+
+                            pool.add(pa);
+                        }
 
                     }
                 }
