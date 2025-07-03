@@ -29,6 +29,8 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private TeacherSkillService teacherSkillService;
     @Autowired private AvailableTimeMapper availableTimeMapper;
     @Autowired private SchedulesMapper schedulesMapper;
+    @Autowired
+    private AnnualReviewMapper annualReviewMapper;
 
 
     // TimeSlot class
@@ -115,7 +117,7 @@ public class SchedulingImpl implements SchedulingService {
         }
 
         // TODO: Replace with your mapper method
-        finalResult.forEach(reviewMapper::insert);
+        finalResult.forEach(annualReviewMapper::insert);
     }
 
     // 将 PotentialAssignment 转换为 FinalAssignment

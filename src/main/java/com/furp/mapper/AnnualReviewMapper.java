@@ -2,6 +2,8 @@ package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.furp.DTO.response.PendingReviewDto;
+import com.furp.service.impl.SchedulingImpl;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,4 +25,9 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReviewMapper> {
             "JOIN user u ON p.student_id = u.id " +
             "WHERE ar.phd_id = #{phdId}")
     PendingReviewDto getReviewInfoByPhdId(Integer phdId);
+
+    // 新增插入方法
+    @Insert("INSERT INTO annual_review (review_year, status, phd_id, student_id) " +
+            "VALUES (#{reviewYear}, #{status}, #{phdId}, #{studentId})")
+    void insert(SchedulingImpl.FinalAssignment finalAssignment);
 }
