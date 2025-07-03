@@ -77,7 +77,7 @@ public class SchedulingImpl implements SchedulingService {
         private TimeSlot timeSlot;
     }
 
-    @Override
+
     public void autoSchedule() {
         List<PendingReviewDto> pendingReviews = annualReviewService.getPendingReviews();
         List<Integer> pendingPhdIds = pendingReviews.stream()
@@ -93,7 +93,7 @@ public class SchedulingImpl implements SchedulingService {
         Set<Long> usedRooms = new HashSet<>();
 
         List<PotentialAssignment> pool = generatePotentialAssignments(pendingReviews, teachers, busyMap); // 方案池
-        List<AnnualReview> finalResult = new ArrayList<>();
+        List<FinalAssignment> finalResult = new ArrayList<>();
 
         while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
             PotentialAssignment best = selectBest(pool, teacherWorkload);
@@ -249,7 +249,7 @@ public class SchedulingImpl implements SchedulingService {
 
     private boolean isFree(String key, TimeSlot targetSlot, Map<String, Set<TimeSlot>> busyMap) {
         Set<TimeSlot> busySlots= busyMap.get(key);
-        if (busySlots.isEmpty()){
+        if (busySlots == null ||busySlots.isEmpty()){
             return true;
         }
         return busySlots.stream().noneMatch(busySlot -> busySlot.overlaps(targetSlot));
