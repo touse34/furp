@@ -116,6 +116,21 @@ public class SchedulingImpl implements SchedulingService {
         finalResult.forEach(reviewMapper::insert);
     }
 
+    // 将 PotentialAssignment 转换为 FinalAssignment
+    private FinalAssignment toAnnualReview(PotentialAssignment best, Room assignedRoom) {
+
+        // 通过潜在的评审分配（PotentialAssignment）获取相应的信息
+        PendingReviewDto reviewInfo = annualReviewService.getReviewInfoByPhdId(potentialAssignment.getPhdId());
+
+        Teacher teacher1 = teacherMapper.selectById(potentialAssignment.getTeacher1Id());
+        Teacher teacher2 = teacherMapper.selectById(potentialAssignment.getTeacher2Id());
+
+        TimeSlot timeSlot = potentialAssignment.getTimeSlot();
+
+        // 创建 FinalAssignment 对象并返回
+        return new FinalAssignment(reviewInfo, teacher1, teacher2, assignedRoom, timeSlot);
+    }
+
     private Map<Integer, Integer> initWorkloadMap(List<Teacher> teachers) {
         Map<Integer, Integer> map = new HashMap<>();
         for (Teacher t : teachers) {
