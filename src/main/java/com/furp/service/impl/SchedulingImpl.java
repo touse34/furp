@@ -187,6 +187,10 @@ public class SchedulingImpl implements SchedulingService {
                     long t2MatchCount = t2Skill.stream().filter(phdSkills::contains).count();
                     int skillScore = (int) (t1MatchCount + t2MatchCount);
 
+                    if (skillScore == 0){
+                        continue;
+                    }
+
                     List<AvailableTime> t1AvailableTime = availableTimeMapper.findByTeacherId(t1.getId());
                     List<AvailableTime> t2AvailableTime = availableTimeMapper.findByTeacherId(t2.getId());
 
@@ -195,8 +199,7 @@ public class SchedulingImpl implements SchedulingService {
                     for(TimeSlot slot : commonTimeSlots){
 
                         if(isFree("teacher-" + t1.getId(), slot, busyMap) &&
-                            isFree("teacher-" + t2.getId(), slot, busyMap) &&
-                                (skillScore != 0)){
+                            isFree("teacher-" + t2.getId(), slot, busyMap)){
 
                             PotentialAssignment pa = new PotentialAssignment(
                                     phdId,
