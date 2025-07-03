@@ -66,6 +66,17 @@ public class SchedulingImpl implements SchedulingService {
         private int skillScore;
     }
 
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class FinalAssignment {
+        private PendingReviewDto reviewInfo; // 包含学生信息和 reviewId
+        private Teacher teacher1;
+        private Teacher teacher2;
+        private Room room;
+        private TimeSlot timeSlot;
+    }
+
     @Override
     public void autoSchedule() {
         List<PendingReviewDto> pendingReviews = annualReviewService.getPendingReviews();
@@ -91,6 +102,8 @@ public class SchedulingImpl implements SchedulingService {
                 pool.remove(best);
                 continue;
             }
+
+
             finalResult.add(toAnnualReview(best, assignedRoom));
             updateBusy(busyMap, best, assignedRoom);
             updateWorkload(teacherWorkload, best);
@@ -242,16 +255,6 @@ public class SchedulingImpl implements SchedulingService {
         // TODO: 根据 TimeSlot 比较逻辑判断冲突
     }
 
-    private AnnualReview toAnnualReview(PotentialAssignment p, Room room) {
-        AnnualReview ar = new AnnualReview();
-        ar.setPhdId(p.getPhdId());
-        ar.setAssessor1Id(p.getTeacher1Id());
-        ar.setAssessor2Id(p.getTeacher2Id());
-        ar.setRoomId(room.getId());
-        ar.setTimeSlot(p.getTimeSlot().toString()); // or better: encode start+end
-        return ar;
-    }
-
     private void updateBusy(Map<String, Set<TimeSlot>> busyMap, PotentialAssignment p, Room room) {
         // TODO: 将 slot 写入 teacher1, teacher2 和 room 的 busyMap
         TimeSlot newBusySlot = p.getTimeSlot();
@@ -283,14 +286,13 @@ public class SchedulingImpl implements SchedulingService {
         int scheduledRoomId = room.getId();
         TimeSlot scheduledSlot = used.getTimeSlot();
 
-        // 使用 Stream filter 进行过滤
         return pool.stream()
                 .filter(p -> {
-                    // 规则1：不能是刚刚已被安排的学生的其他方案
+                    // 不能是刚刚已被安排的学生的其他方案
                     if (p.getPhdId() == scheduledPhdId) {
                         return false;
                     }
-                    // 规则2：不能是在同一时间使用T1, T2或Room的任何方案
+                    // 不能是在同一时间使用T1, T2或Room
                     if (p.getTimeSlot().overlaps(scheduledSlot)) {
                         if (p.getTeacher1Id() == scheduledT1Id || p.getTeacher2Id() == scheduledT1Id ||
                                 p.getTeacher1Id() == scheduledT2Id || p.getTeacher2Id() == scheduledT2Id) {
@@ -307,11 +309,11 @@ public class SchedulingImpl implements SchedulingService {
     private List<TimeSlot> findCommonTimeSlots(List<AvailableTime> list1, List<AvailableTime> list2) {
         List<TimeSlot> commonSlots = new ArrayList<>();
         Set<TimeSlot> slot1 = list1.stream()
-                .map(at1 -> new TimeSlot(at1.getStart_time(), at1.getEnd_time()))
+                .map(at1 -> new TimeSlot(at1.getStartTime(), at1.getEndTime()))
                 .collect(Collectors.toSet());
 
         for(AvailableTime at2 : list2){
-            TimeSlot slot2 = new TimeSlot(at2.getStart_time(), at2.getEnd_time());
+            TimeSlot slot2 = new TimeSlot(at2.getStartTime(), at2.getEndTime());
             if(slot1.contains(slot2)){
                 commonSlots.add(slot2);
             }
@@ -326,13 +328,13 @@ public class SchedulingImpl implements SchedulingService {
         final double W_WORKLOAD = 5.0;
         // final double W_CONTINUITY = 3.0; // 时间连续性奖励权重 (此项较复杂，可后续添加)
 
-        // 1. 获取技能分 (已在生成阶段算好)
+        // 1. 获取技能分
         double skillScore = p.getSkillScore();
 
         // 2. 计算工作量惩罚
         double workloadPenalty = workload.get(p.getTeacher1Id()) + workload.get(p.getTeacher2Id());
 
-        // 3. 计算时间连续性奖励 (高级功能，初版可先返回0)
+        // 3. 计算时间连续性奖励
         // double continuityBonus = calculateContinuityBonus(p, finalResult);
         double continuityBonus = 0.0;
 
