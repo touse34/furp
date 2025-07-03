@@ -17,4 +17,10 @@ public class AnnualReviewImpl implements AnnualReviewService {
     public List<PendingReviewDto> getPendingReviews() {
         return annualReviewMapper.findPendingReviews();
     }
+
+    // 新增的 getReviewInfoByPhdId 方法
+    public PendingReviewDto getReviewInfoByPhdId(Integer phdId) {
+        // 调用 annualReviewMapper 获取指定 phdId 的评审信息
+        return annualReviewMapper.getReviewInfoByPhdId(phdId);
+    }
 }

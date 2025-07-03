@@ -30,6 +30,7 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private AvailableTimeMapper availableTimeMapper;
     @Autowired private SchedulesMapper schedulesMapper;
 
+
     // TimeSlot class
     @Data
     @AllArgsConstructor
@@ -107,8 +108,9 @@ public class SchedulingImpl implements SchedulingService {
             finalResult.add(toAnnualReview(best, assignedRoom));
             updateBusy(busyMap, best, assignedRoom);
             updateWorkload(teacherWorkload, best);
-            usedRooms.add(assignedRoom.getId());
-            pendingPhdIds.removeIf(s -> s.getId().equals(best.getPhdId()));
+            usedRooms.add((long)assignedRoom.getId());
+            //pendingPhdIds.removeIf(s -> s.getId().equals(best.getPhdId()));
+            pendingPhdIds.removeIf(s -> s.equals(best.getPhdId()));
             pool = removeConflicts(pool, best, assignedRoom);
         }
 
@@ -120,12 +122,12 @@ public class SchedulingImpl implements SchedulingService {
     private FinalAssignment toAnnualReview(PotentialAssignment best, Room assignedRoom) {
 
         // 通过潜在的评审分配（PotentialAssignment）获取相应的信息
-        PendingReviewDto reviewInfo = annualReviewService.getReviewInfoByPhdId(potentialAssignment.getPhdId());
+        PendingReviewDto reviewInfo = annualReviewService.getReviewInfoByPhdId(best.getPhdId());
 
-        Teacher teacher1 = teacherMapper.selectById(potentialAssignment.getTeacher1Id());
-        Teacher teacher2 = teacherMapper.selectById(potentialAssignment.getTeacher2Id());
+        Teacher teacher1 = teacherMapper.selectById(best.getTeacher1Id());
+        Teacher teacher2 = teacherMapper.selectById(best.getTeacher2Id());
 
-        TimeSlot timeSlot = potentialAssignment.getTimeSlot();
+        TimeSlot timeSlot = best.getTimeSlot();
 
         // 创建 FinalAssignment 对象并返回
         return new FinalAssignment(reviewInfo, teacher1, teacher2, assignedRoom, timeSlot);
@@ -235,6 +237,9 @@ public class SchedulingImpl implements SchedulingService {
 
 
         }
+
+        // 返回所有的潜在评审分配方案
+        return pool;
     }
 
     private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Integer, Integer> workload) {
