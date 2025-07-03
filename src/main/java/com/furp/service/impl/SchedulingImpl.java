@@ -78,7 +78,7 @@ public class SchedulingImpl implements SchedulingService {
         List<Room> allRooms = roomMapper.selectAllRooms();
 
         Map<Integer, Integer> teacherWorkload = initWorkloadMap(teachers);
-        Map<String, Set<TimeSlot>> busyMap = loadBusySlots();
+        Map<String, Set<TimeSlot>> busyMap = loadBusySlots(); //busymap:一个资源名对应一个timeslot的set集合
         Set<Long> usedRooms = new HashSet<>();
 
         List<PotentialAssignment> pool = generatePotentialAssignments(pendingReviews, teachers, busyMap); // 方案池
@@ -182,7 +182,8 @@ public class SchedulingImpl implements SchedulingService {
                     for(TimeSlot slot : commonTimeSlots){
 
                         if(isFree("teacher-" + t1.getId(), slot, busyMap) &&
-                            isFree("teacher-" + t2.getId(), slot, busyMap)){
+                            isFree("teacher-" + t2.getId(), slot, busyMap) &&
+                                (skillScore != 0)){
 
                             PotentialAssignment pa = new PotentialAssignment(
                                     phdId,
@@ -207,7 +208,13 @@ public class SchedulingImpl implements SchedulingService {
 
     private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Integer, Integer> workload) {
 
-        return pool.get(0); // TODO: 加入打分排序逻辑
+        if (pool == null || pool.isEmpty()) {
+            return null;
+        }
+        return pool.stream()
+                .max(Comparator.comparingDouble(p -> calculateFinalScore(p, workload)))
+                .orElse(null);
+        // 遍历 pool 中的每一个元素，使用 calculateFinalScore 方法为每个元素计算一个分数，然后找出这些元素中分数最高的那个元素。
     }
 
     private Room allocateRoom(TimeSlot slot, Set<Long> used, List<Room> allRooms, Map<String, Set<TimeSlot>> busyMap) {
@@ -245,17 +252,55 @@ public class SchedulingImpl implements SchedulingService {
         return ar;
     }
 
-    private void updateBusy(Map<String, Set<TimeSlot>> map, PotentialAssignment p, Room room) {
+    private void updateBusy(Map<String, Set<TimeSlot>> busyMap, PotentialAssignment p, Room room) {
         // TODO: 将 slot 写入 teacher1, teacher2 和 room 的 busyMap
+        TimeSlot newBusySlot = p.getTimeSlot();
+        System.out.println(String.format("  > 更新日程图: 锁定 %s, 老师 %d, 老师 %d, 房间 %d",
+                newBusySlot, p.getTeacher1Id(), p.getTeacher2Id(), room.getId()));
+
+        // 为两位老师和一间会议室添加相同的繁忙时间段
+        String teacher1Key = "teacher-" + p.getTeacher1Id();
+        String teacher2Key = "teacher-" + p.getTeacher2Id();
+        String roomKey = "room-" + room.getId();
+
+        busyMap.computeIfAbsent(teacher1Key, k -> new HashSet<>()).add(newBusySlot);
+        busyMap.computeIfAbsent(teacher2Key, k -> new HashSet<>()).add(newBusySlot);
+        busyMap.computeIfAbsent(roomKey, k -> new HashSet<>()).add(newBusySlot);
+        //
     }
 
-    private void updateWorkload(Map<Long, Integer> workload, PotentialAssignment p) {
+    private void updateWorkload(Map<Integer, Integer> workload, PotentialAssignment p) {
         workload.put(p.getTeacher1Id(), workload.get(p.getTeacher1Id()) + 1);
         workload.put(p.getTeacher2Id(), workload.get(p.getTeacher2Id()) + 1);
     }
 
+    //在排好一名学生后，移除冲突
     private List<PotentialAssignment> removeConflicts(List<PotentialAssignment> pool, PotentialAssignment used, Room room) {
-        return pool.stream().filter(p -> !Objects.equals(p.getPhdId(), used.getPhdId()))
+        // 获取刚刚被占用的资源和时间
+        int scheduledPhdId = used.getPhdId();
+        int scheduledT1Id = used.getTeacher1Id();
+        int scheduledT2Id = used.getTeacher2Id();
+        int scheduledRoomId = room.getId();
+        TimeSlot scheduledSlot = used.getTimeSlot();
+
+        // 使用 Stream filter 进行过滤
+        return pool.stream()
+                .filter(p -> {
+                    // 规则1：不能是刚刚已被安排的学生的其他方案
+                    if (p.getPhdId() == scheduledPhdId) {
+                        return false;
+                    }
+                    // 规则2：不能是在同一时间使用T1, T2或Room的任何方案
+                    if (p.getTimeSlot().overlaps(scheduledSlot)) {
+                        if (p.getTeacher1Id() == scheduledT1Id || p.getTeacher2Id() == scheduledT1Id ||
+                                p.getTeacher1Id() == scheduledT2Id || p.getTeacher2Id() == scheduledT2Id) {
+                            return false;
+                        }
+                        //待添加roomId
+                        //if (p.getRoomId() == scheduledRoomId) { return false; }
+                    }
+                    return true;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -274,6 +319,27 @@ public class SchedulingImpl implements SchedulingService {
 
         return commonSlots;
 
-        }
+    }
+
+    private double calculateFinalScore(PotentialAssignment p, Map<Integer, Integer> workload){
+        final double W_SKILL = 10.0;
+        final double W_WORKLOAD = 5.0;
+        // final double W_CONTINUITY = 3.0; // 时间连续性奖励权重 (此项较复杂，可后续添加)
+
+        // 1. 获取技能分 (已在生成阶段算好)
+        double skillScore = p.getSkillScore();
+
+        // 2. 计算工作量惩罚
+        double workloadPenalty = workload.get(p.getTeacher1Id()) + workload.get(p.getTeacher2Id());
+
+        // 3. 计算时间连续性奖励 (高级功能，初版可先返回0)
+        // double continuityBonus = calculateContinuityBonus(p, finalResult);
+        double continuityBonus = 0.0;
+
+        // 返回最终加权分数
+        return (W_SKILL * skillScore) - (W_WORKLOAD * workloadPenalty);
+    }
+
+
 }
 
