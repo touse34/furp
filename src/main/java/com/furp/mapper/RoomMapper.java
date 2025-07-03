@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface RoomMapper {
-    @Select("SELECT * from room")
+    @Select("SELECT * from meeting_room")
     List<Room> selectAllRooms();
 
 
