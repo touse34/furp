@@ -1,5 +1,6 @@
 package com.furp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AvailableTime {
+    @TableId
     private Integer id;
+
     private Integer teacherId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

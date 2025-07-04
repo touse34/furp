@@ -1,5 +1,6 @@
 package com.furp.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,9 @@ import org.apache.ibatis.annotations.Select;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhdSkill {
+    @TableId
     private Integer id;
+
     private Integer phdId;
     private Integer skillId;
 }

@@ -26,6 +26,7 @@ public class User {
 }*/
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +37,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @TableName("user")  // 指定表名为 user
 public class User {
+    @TableId
     private Integer id;         // 用户的唯一ID
+
     private Integer roleId;     // 用户的角色ID
     private String wechatId;    // 用户的微信ID（可能为null）
     private String name;        // 用户的姓名
