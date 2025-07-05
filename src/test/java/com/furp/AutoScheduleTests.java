@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class AutoScheduleTests {
@@ -34,34 +35,34 @@ public class AutoScheduleTests {
         MockitoAnnotations.openMocks(this); // 初始化 @Mock 和 @InjectMocks
     }
 
+
+
     @Test
     void testAutoSchedule_SuccessCase() {
-        // 模拟学生
+        // ---------- 1. 准备模拟数据 ----------
         PendingReviewDto phd = new PendingReviewDto();
         phd.setPhdId(1);
         phd.setStudentName("张三");
 
-        // 模拟评审老师
         Teacher t1 = new Teacher();
         t1.setId(101);
         Teacher t2 = new Teacher();
         t2.setId(102);
 
-        // 模拟会议室
         Room room = new Room();
         room.setId(201);
 
-        // 模拟时间
         LocalDateTime start = LocalDateTime.of(2025, 7, 10, 9, 0);
-        LocalDateTime end = start.plusMinutes(45);
-        AvailableTime at = new AvailableTime();
+        LocalDateTime end   = start.plusMinutes(45);
+        AvailableTime at    = new AvailableTime();
         at.setStartTime(start);
         at.setEndTime(end);
 
-        // mock 返回值
+        // ---------- 2. stub 所有用到的依赖 ----------
         when(annualReviewService.getPendingReviews()).thenReturn(List.of(phd));
         when(teacherService.findAllTeacher()).thenReturn(List.of(t1, t2));
-        when(teacherService.findEligibleAssessors(1)).thenReturn(List.of(t1, t2));  // ✅必须补上
+        when(teacherService.findEligibleAssessors(1)).thenReturn(List.of(t1, t2));
+
         when(roomMapper.selectAllRooms()).thenReturn(List.of(room));
         when(phdSkillService.findPhdSkillsById(1)).thenReturn(Set.of(1, 2));
         when(teacherSkillService.findTeacherSkillsById(101)).thenReturn(Set.of(1));
@@ -69,27 +70,29 @@ public class AutoScheduleTests {
         when(availableTimeMapper.findByTeacherId(101)).thenReturn(List.of(at));
         when(availableTimeMapper.findByTeacherId(102)).thenReturn(List.of(at));
         when(schedulesMapper.findAllFutureSchedules()).thenReturn(List.of());
-
         when(annualReviewService.getReviewInfoByPhdId(1)).thenReturn(phd);
 
-        // 调用方法
+        // **关键：补上 selectById 的返回值，避免 NPE**
+        when(teacherMapper.selectById(101)).thenReturn(t1);
+        when(teacherMapper.selectById(102)).thenReturn(t2);
+
+        // ---------- 3. 执行待测方法 ----------
         scheduling.autoSchedule();
 
-        // 验证是否调用 insert 方法
-        verify(annualReviewMapper, times(1)).insert(Mockito.any(SchedulingImpl.FinalAssignment.class));
+        // ---------- 4. 捕获并断言插入的数据 ----------
+        ArgumentCaptor<SchedulingImpl.FinalAssignment> captor =
+                ArgumentCaptor.forClass(SchedulingImpl.FinalAssignment.class);
 
-        //System.out.println("学生 " + phd.getStudentName() + " 的候选评审员不足两人，已跳过。");
-
-        ArgumentCaptor<SchedulingImpl.FinalAssignment> captor = ArgumentCaptor.forClass(SchedulingImpl.FinalAssignment.class);
-        verify(annualReviewMapper).insert(captor.capture());
+        // **把验证和捕获合并成一次，避免重复 verify**
+        verify(annualReviewMapper, times(1)).insert(captor.capture());
 
         SchedulingImpl.FinalAssignment result = captor.getValue();
+        assertNotNull(result);                         // 保险起见
         assertEquals(101, result.getTeacher1().getId());
         assertEquals(102, result.getTeacher2().getId());
         assertEquals(201, result.getRoom().getId());
         assertEquals(start, result.getTimeSlot().getStartTime());
-
-
-
+        assertEquals(end,   result.getTimeSlot().getEndTime());
     }
+
 }
