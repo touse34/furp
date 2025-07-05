@@ -75,7 +75,6 @@ public class AutoScheduleTests {
         scheduling.autoSchedule();
 
         // 验证是否调用 insert 方法
-        //verify(annualReviewMapper, times(1)).insert(any());
         verify(annualReviewMapper, times(1)).insert(Mockito.any(SchedulingImpl.FinalAssignment.class));
 
 
