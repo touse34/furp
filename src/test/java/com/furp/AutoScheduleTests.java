@@ -11,6 +11,7 @@ import org.mockito.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AutoScheduleTests {
@@ -76,6 +77,17 @@ public class AutoScheduleTests {
 
         // 验证是否调用 insert 方法
         verify(annualReviewMapper, times(1)).insert(Mockito.any(SchedulingImpl.FinalAssignment.class));
+
+        //System.out.println("学生 " + phd.getStudentName() + " 的候选评审员不足两人，已跳过。");
+
+        ArgumentCaptor<SchedulingImpl.FinalAssignment> captor = ArgumentCaptor.forClass(SchedulingImpl.FinalAssignment.class);
+        verify(annualReviewMapper).insert(captor.capture());
+
+        SchedulingImpl.FinalAssignment result = captor.getValue();
+        assertEquals(101, result.getTeacher1().getId());
+        assertEquals(102, result.getTeacher2().getId());
+        assertEquals(201, result.getRoom().getId());
+        assertEquals(start, result.getTimeSlot().getStartTime());
 
 
 
