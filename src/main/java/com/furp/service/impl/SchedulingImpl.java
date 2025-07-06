@@ -91,6 +91,12 @@ public class SchedulingImpl implements SchedulingService {
         List<Teacher> teachers = teacherService.findAllTeacher();
         List<Room> allRooms = roomMapper.selectAllRooms();
 
+        // 检查是否有足够的房间
+        if (allRooms.isEmpty()) {
+            System.out.println("房间资源不足");
+            return;  // 没有房间则提前退出
+        }
+
         Map<Integer, Integer> teacherWorkload = initWorkloadMap(teachers);
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots(); //busymap:一个资源名对应一个timeslot的set集合
         Set<Long> usedRooms = new HashSet<>();
@@ -101,23 +107,27 @@ public class SchedulingImpl implements SchedulingService {
         while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
             PotentialAssignment best = selectBest(pool, teacherWorkload);
             Room assignedRoom = allocateRoom(best.getTimeSlot(), usedRooms, allRooms, busyMap);
+
             if (assignedRoom == null) {
+                // 房间不足，跳过此任务并输出提示信息
+                System.out.println("房间资源不足,跳过学生" + best.getPhdId());
                 pool.remove(best);
                 continue;
             }
+
 
 
             finalResult.add(toAnnualReview(best, assignedRoom));
             updateBusy(busyMap, best, assignedRoom);
             updateWorkload(teacherWorkload, best);
             usedRooms.add((long)assignedRoom.getId());
-            //pendingPhdIds.removeIf(s -> s.getId().equals(best.getPhdId()));
+
             pendingPhdIds.removeIf(s -> s.equals(best.getPhdId()));
             pool = removeConflicts(pool, best, assignedRoom);
         }
 
         // TODO: Replace with your mapper method
-        finalResult.forEach(annualReviewMapper::insert);
+        finalResult.forEach(annualReviewMapper::insertFinalAssignment);
     }
 
     // 将 PotentialAssignment 转换为 FinalAssignment

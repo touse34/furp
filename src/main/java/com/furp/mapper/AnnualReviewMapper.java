@@ -29,5 +29,5 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReviewMapper> {
     // 新增插入方法
     @Insert("INSERT INTO annual_review (review_year, status, phd_id, student_id) " +
             "VALUES (#{reviewYear}, #{status}, #{phdId}, #{studentId})")
-    void insert(SchedulingImpl.FinalAssignment finalAssignment);
+    void insertFinalAssignment(SchedulingImpl.FinalAssignment finalAssignment);
 }

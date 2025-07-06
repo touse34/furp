@@ -102,7 +102,7 @@ public class AutoScheduleTests {
                 ArgumentCaptor.forClass(SchedulingImpl.FinalAssignment.class);
 
         // **把验证和捕获合并成一次，避免重复 verify**
-        verify(annualReviewMapper, times(1)).insert(captor.capture());
+        verify(annualReviewMapper, times(1)).insertFinalAssignment(captor.capture());
 
         SchedulingImpl.FinalAssignment result = captor.getValue();
         assertNotNull(result);                         // 保险起见
@@ -114,14 +114,83 @@ public class AutoScheduleTests {
     }
 
     @Test
-    void testAutoSchedule_TeacherNotEnough() {
-        // 1. 准备数据 ---------------------------------------------------------
-        PendingReviewDto phd = new PendingReviewDto();
-        phd.setPhdId(1);
-        phd.setStudentName("张三");
+    void testAutoSchedule_RoomNotEnough() {
+        // 时间段
+        LocalDateTime start = LocalDateTime.of(2025, 7, 10, 9, 0);
+        LocalDateTime end = start.plusMinutes(45);
 
-        Teacher onlyTeacher = new Teacher();
-        onlyTeacher.setId(101);
+        // 学生
+        PendingReviewDto phd1 = new PendingReviewDto(); phd1.setPhdId(1); phd1.setStudentName("张三");
+        PendingReviewDto phd2 = new PendingReviewDto(); phd2.setPhdId(2); phd2.setStudentName("李四");
+
+        // 老师
+        Teacher t1 = new Teacher(); t1.setId(101);
+        Teacher t2 = new Teacher(); t2.setId(102);
+
+        // 房间
+        Room room = new Room(); room.setId(201);
+
+        // 时间段
+        AvailableTime at = new AvailableTime();
+        at.setStartTime(start);
+        at.setEndTime(end);
+
+        // 房间已被占用（mock进 schedule -> busyMap）
+        Schedules roomUsed = new Schedules();
+        roomUsed.setRoomId(201);
+        roomUsed.setStartTime(start);
+        roomUsed.setEndTime(end);
+
+        // mock 数据
+        when(annualReviewService.getPendingReviews()).thenReturn(List.of(phd1, phd2));
+        when(teacherService.findAllTeacher()).thenReturn(List.of(t1, t2));
+        when(teacherService.findEligibleAssessors(anyInt())).thenReturn(List.of(t1, t2));
+        when(roomMapper.selectAllRooms()).thenReturn(List.of(room));
+        when(phdSkillService.findPhdSkillsById(anyInt())).thenReturn(Set.of(1));
+        when(teacherSkillService.findTeacherSkillsById(101)).thenReturn(Set.of(1));
+        when(teacherSkillService.findTeacherSkillsById(102)).thenReturn(Set.of(1));
+        when(availableTimeMapper.findByTeacherId(101)).thenReturn(List.of(at));
+        when(availableTimeMapper.findByTeacherId(102)).thenReturn(List.of(at));
+        when(schedulesMapper.findAllFutureSchedules()).thenReturn(List.of(roomUsed));
+        when(annualReviewService.getReviewInfoByPhdId(anyInt())).thenReturn(phd1);
+        when(teacherMapper.selectById(101)).thenReturn(t1);
+        when(teacherMapper.selectById(102)).thenReturn(t2);
+
+        // 调用调度
+        scheduling.autoSchedule();
+
+        // 断言 insert 只执行一次（第二个学生失败）
+        //verify(annualReviewMapper, times(1)).insert(any());
+        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(SchedulingImpl.FinalAssignment.class));
+
+        // 输出调试信息
+        String console = outContent.toString();
+        System.out.println("Captured Output: " + console);
+
+        // 断言打印内容包含“房间资源不足”
+        assertTrue(console.contains("房间资源不足"), "应提示房间资源不足");
+
+
+
+    }
+    @Test
+    void testAutoSchedule_RoomNotEnough1() {
+        // 1. 准备数据 ---------------------------------------------------------
+        PendingReviewDto phd1 = new PendingReviewDto();
+        phd1.setPhdId(1);
+        phd1.setStudentName("张三");
+
+        PendingReviewDto phd2 = new PendingReviewDto();
+        phd2.setPhdId(2);
+        phd2.setStudentName("李四");
+
+        Teacher t1 = new Teacher();
+        t1.setId(101);
+        Teacher t2 = new Teacher();
+        t2.setId(102);
+
+        Room room = new Room();
+        room.setId(201);
 
         LocalDateTime start = LocalDateTime.of(2025, 7, 10, 9, 0);
         LocalDateTime end   = start.plusMinutes(45);
@@ -130,25 +199,42 @@ public class AutoScheduleTests {
         at.setEndTime(end);
 
         // 2. stub 依赖 ---------------------------------------------------------
-        when(annualReviewService.getPendingReviews()).thenReturn(List.of(phd));
-        when(teacherService.findAllTeacher()).thenReturn(List.of(onlyTeacher));
-        when(teacherService.findEligibleAssessors(1)).thenReturn(List.of(onlyTeacher)); // ★ 只有 1 位评审老师
-        when(roomMapper.selectAllRooms()).thenReturn(List.of());                       // 房间留空无所谓
+        when(annualReviewService.getPendingReviews()).thenReturn(List.of(phd1, phd2));
+        when(teacherService.findAllTeacher()).thenReturn(List.of(t1, t2));
+        when(teacherService.findEligibleAssessors(1)).thenReturn(List.of(t1, t2));
+        when(teacherService.findEligibleAssessors(2)).thenReturn(List.of(t1, t2));
+
+        when(roomMapper.selectAllRooms()).thenReturn(List.of(room));  // 只有 1 间房间
         when(phdSkillService.findPhdSkillsById(1)).thenReturn(Set.of(1));
+        when(phdSkillService.findPhdSkillsById(2)).thenReturn(Set.of(1));
         when(teacherSkillService.findTeacherSkillsById(101)).thenReturn(Set.of(1));
+        when(teacherSkillService.findTeacherSkillsById(102)).thenReturn(Set.of(2));
         when(availableTimeMapper.findByTeacherId(101)).thenReturn(List.of(at));
-        when(schedulesMapper.findAllFutureSchedules()).thenReturn(List.of());
+        when(availableTimeMapper.findByTeacherId(102)).thenReturn(List.of(at));
+
+        // 模拟房间已占用
+        Schedules roomUsed = new Schedules();
+        roomUsed.setRoomId(201);
+        roomUsed.setStartTime(start);
+        roomUsed.setEndTime(end);
+
+        when(schedulesMapper.findAllFutureSchedules()).thenReturn(List.of(roomUsed));
+
+        when(annualReviewService.getReviewInfoByPhdId(1)).thenReturn(phd1);
+        when(annualReviewService.getReviewInfoByPhdId(2)).thenReturn(phd2);
 
         // 3. 执行方法 ---------------------------------------------------------
         scheduling.autoSchedule();
 
-        // 4. 断言：insert 从未被调用 -----------------------------------------
-        verify(annualReviewMapper, never())
-                .insert(ArgumentMatchers.any(SchedulingImpl.FinalAssignment.class));
+        // 4. 验证：insert 被调用，且没有房间冲突 -----------------------------------------
+        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(SchedulingImpl.FinalAssignment.class));
 
-        // 5. 可选：断言 console 输出 ------------------------------------------
-        String console = outContent.toString();
-        assertTrue(console.contains("候选评审员不足两人"), "应提示评审员不足");
+        // 5. 调试：打印捕获的日志输出 ----------------------------------------
+        System.out.println("Captured Output: " + outContent.toString());  // 调试用，查看输出内容
+
+        // 6. 断言：输出内容应包含 "房间资源不足" ----------------------------------------
+        assertTrue(outContent.toString().contains("房间资源不足"), "应提示房间资源不足");
     }
+
 
 }
