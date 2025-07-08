@@ -1,12 +1,10 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.furp.DTO.response.PendingReviewDto;
-import com.furp.service.impl.SchedulingImpl;
+import com.furp.DTO.PendingReviewDto;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-
+import com.furp.DTO.FinalAssignment;
 import java.util.List;
 
 public interface AnnualReviewMapper extends BaseMapper<AnnualReviewMapper> {
@@ -29,5 +27,5 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReviewMapper> {
     // 新增插入方法
     @Insert("INSERT INTO annual_review (review_year, status, phd_id, student_id) " +
             "VALUES (#{reviewYear}, #{status}, #{phdId}, #{studentId})")
-    void insertFinalAssignment(SchedulingImpl.FinalAssignment finalAssignment);
+    void insertFinalAssignment(FinalAssignment finalAssignment);
 }

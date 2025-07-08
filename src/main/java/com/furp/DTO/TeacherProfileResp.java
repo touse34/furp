@@ -1,4 +1,4 @@
-package com.furp.DTO.response;
+package com.furp.DTO;
 
 public class TeacherProfileResp {
 

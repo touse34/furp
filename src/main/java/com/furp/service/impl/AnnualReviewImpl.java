@@ -1,6 +1,6 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.response.PendingReviewDto;
+import com.furp.DTO.PendingReviewDto;
 import com.furp.mapper.AnnualReviewMapper;
 import com.furp.service.AnnualReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

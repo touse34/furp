@@ -1,6 +1,6 @@
 package com.furp.service;
 
-import com.furp.DTO.response.PendingReviewDto;
+import com.furp.DTO.PendingReviewDto;
 
 import java.util.List;
 

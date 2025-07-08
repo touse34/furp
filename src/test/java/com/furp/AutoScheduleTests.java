@@ -1,6 +1,7 @@
 package com.furp;
 
-import com.furp.DTO.response.PendingReviewDto;
+import com.furp.DTO.FinalAssignment;
+import com.furp.DTO.PendingReviewDto;
 import com.furp.entity.*;
 import com.furp.mapper.*;
 import com.furp.service.*;
@@ -98,13 +99,13 @@ public class AutoScheduleTests {
         scheduling.autoSchedule();
 
         // ---------- 4. 捕获并断言插入的数据 ----------
-        ArgumentCaptor<SchedulingImpl.FinalAssignment> captor =
-                ArgumentCaptor.forClass(SchedulingImpl.FinalAssignment.class);
+        ArgumentCaptor<FinalAssignment> captor =
+                ArgumentCaptor.forClass(FinalAssignment.class);
 
         // **把验证和捕获合并成一次，避免重复 verify**
         verify(annualReviewMapper, times(1)).insertFinalAssignment(captor.capture());
 
-        SchedulingImpl.FinalAssignment result = captor.getValue();
+        FinalAssignment result = captor.getValue();
         assertNotNull(result);                         // 保险起见
         assertEquals(101, result.getTeacher1().getId());
         assertEquals(102, result.getTeacher2().getId());
@@ -161,7 +162,7 @@ public class AutoScheduleTests {
 
         // 断言 insert 只执行一次（第二个学生失败）
         //verify(annualReviewMapper, times(1)).insert(any());
-        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(SchedulingImpl.FinalAssignment.class));
+        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(FinalAssignment.class));
 
         // 输出调试信息
         String console = outContent.toString();
@@ -227,7 +228,7 @@ public class AutoScheduleTests {
         scheduling.autoSchedule();
 
         // 4. 验证：insert 被调用，且没有房间冲突 -----------------------------------------
-        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(SchedulingImpl.FinalAssignment.class));
+        verify(annualReviewMapper, times(1)).insertFinalAssignment(any(FinalAssignment.class));
 
         // 5. 调试：打印捕获的日志输出 ----------------------------------------
         System.out.println("Captured Output: " + outContent.toString());  // 调试用，查看输出内容

@@ -1,19 +1,21 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.response.PendingReviewDto;
+
+import com.furp.DTO.FinalAssignment;
+import com.furp.DTO.PendingReviewDto;
+import com.furp.DTO.PotentialAssignment;
+import com.furp.DTO.TimeSlot;
 import com.furp.entity.*;
 import com.furp.mapper.*;
 import com.furp.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.*;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
 
 import java.util.stream.Collectors;
 
@@ -29,11 +31,10 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private TeacherSkillService teacherSkillService;
     @Autowired private AvailableTimeMapper availableTimeMapper;
     @Autowired private SchedulesMapper schedulesMapper;
-    @Autowired
-    private AnnualReviewMapper annualReviewMapper;
+    @Autowired private AnnualReviewMapper annualReviewMapper;
 
 
-    // TimeSlot class
+   /* // TimeSlot class
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -55,9 +56,9 @@ public class SchedulingImpl implements SchedulingService {
             //这个逻辑是处理时间或区间重叠问题的标准方法之一
         }
 
-    }
+    }*/
 
-    // PotentialAssignment class
+    /*// PotentialAssignment class
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
@@ -67,9 +68,9 @@ public class SchedulingImpl implements SchedulingService {
         private int teacher2Id;
         private TimeSlot timeSlot;
         private int skillScore;
-    }
+    }*/
 
-    @Data
+    /*@Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class FinalAssignment {
@@ -78,7 +79,7 @@ public class SchedulingImpl implements SchedulingService {
         private Teacher teacher2;
         private Room room;
         private TimeSlot timeSlot;
-    }
+    }*/
 
 
     public void autoSchedule() {
