@@ -11,6 +11,8 @@ import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -48,6 +50,9 @@ public class SchedulingImpl implements SchedulingService {
             return;  // 没有房间则提前退出
         }
 
+        // autoSchedule() 顶部（初始化变量处）添加
+        Map<Integer, LocalDateTime> roomLastEnd = new HashMap<>();
+
         Map<Integer, Integer> teacherWorkload = initWorkloadMap(teachers);
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots(); //busymap:一个资源名对应一个timeslot的set集合
         Set<Integer> usedRooms = new HashSet<>();
@@ -57,8 +62,12 @@ public class SchedulingImpl implements SchedulingService {
 
         while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
             PotentialAssignment best = selectBest(pool, teacherWorkload);
-            Room assignedRoom = allocateRoom(best.getTimeSlot(), usedRooms, allRooms, busyMap);
-
+            //Room assignedRoom = allocateRoom(best.getTimeSlot(), usedRooms, allRooms, busyMap);
+            Room assignedRoom = allocateRoom(best.getTimeSlot(),
+                    usedRooms,
+                    allRooms,
+                    busyMap,
+                    roomLastEnd);
             if (assignedRoom == null) {
                 // 房间不足，跳过此任务并输出提示信息
                 System.out.println("房间资源不足,跳过学生" + best.getPhdId());
@@ -85,7 +94,10 @@ public class SchedulingImpl implements SchedulingService {
                     .orElseThrow(() -> new IllegalStateException("致命错误: 在待办列表中找不到phdId为 " + best.getPhdId() + " 的评审任务"));
             finalResult.add(new FinalAssignment(scheduledReviewInfo, t1, t2, assignedRoom, best.getTimeSlot()));
 
-            updateBusy(busyMap, best, assignedRoom);
+
+
+
+            updateBusy(busyMap, best, assignedRoom,roomLastEnd);
             updateWorkload(teacherWorkload, best);
             usedRooms.add(assignedRoom.getId());
 
@@ -112,8 +124,8 @@ public class SchedulingImpl implements SchedulingService {
                         "%d. 学生: %-20s | 时间: %s - %s | 地点: %s | 评审员: %s, %s",
                         count++,
                         assignment.getReviewInfo().getStudentName(), // 学生姓名
-                        assignment.getTimeSlot().getStartTime().toLocalTime(), // 开始时间
-                        assignment.getTimeSlot().getEndTime().toLocalTime(),   // 结束时间
+                        assignment.getTimeSlot().getStartTime(), // 开始时间
+                        assignment.getTimeSlot().getEndTime(),   // 结束时间
                         assignment.getRoom().getLocation(), // 房间名
                         assignment.getTeacher1().getName(), // 老师1姓名
                         assignment.getTeacher2().getName()  // 老师2姓名
@@ -269,7 +281,7 @@ public class SchedulingImpl implements SchedulingService {
         // 遍历 pool 中的每一个元素，使用 calculateFinalScore 方法为每个元素计算一个分数，然后找出这些元素中分数最高的那个元素。
     }
 
-    private Room allocateRoom(TimeSlot slot, Set<Integer> usedRooms, List<Room> allRooms, Map<String, Set<TimeSlot>> busyMap) {
+    private Room allocateRoom(TimeSlot slot, Set<Integer> usedRooms, List<Room> allRooms, Map<String, Set<TimeSlot>> busyMap,Map<Integer, LocalDateTime> roomLastEnd) {
 
         // --- 新增：方法入口提示 ---
         System.out.println(String.format("  -> [分配房间] 正在为时间段 %s 寻找可用房间...", slot));
@@ -305,6 +317,39 @@ public class SchedulingImpl implements SchedulingService {
             }
         }
 
+        // ① 尝试找“上一次刚好连着结束”的房间
+        Optional<Integer> bestFit = usedRooms.stream()
+                .filter(id -> isFree("room-" + id, slot, busyMap))
+                .filter(id ->  slot.getStartTime().equals(roomLastEnd.get(id)))   // 无缝衔接
+                .findFirst();
+        if (bestFit.isPresent()) {
+            return allRooms.stream()
+                    .filter(r -> r.getId().equals(bestFit.get()))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        // ② 如果没有无缝房，再找“有空闲但不冲突”的已用房，按 idle 长度升序
+        Optional<Integer> closeFit = usedRooms.stream()
+                .filter(id -> isFree("room-" + id, slot, busyMap))
+                .sorted(Comparator.comparing(id ->
+                        Duration.between(roomLastEnd.get(id), slot.getStartTime()).abs()))
+                .findFirst();
+        if (closeFit.isPresent()) {
+            return allRooms.stream()
+                    .filter(r -> r.getId().equals(closeFit.get()))
+                    .findFirst()
+                    .orElse(null);
+        }
+
+        // ③ 仍然不行就启用全新房
+        for (Room r : allRooms) {
+            if (!usedRooms.contains(r.getId()) &&
+                    isFree("room-" + r.getId(), slot, busyMap)) {
+                return r;
+            }
+        }
+
         // --- 第三部分：处理无可用房间的情况 ---
         // --- 新增：分配失败的最终提示 ---
         System.out.println("  -> [分配失败] 找不到任何可用的房间。");
@@ -322,7 +367,7 @@ public class SchedulingImpl implements SchedulingService {
         // TODO: 根据 TimeSlot 比较逻辑判断冲突
     }
 
-    private void updateBusy(Map<String, Set<TimeSlot>> busyMap, PotentialAssignment p, Room room) {
+    private void updateBusy(Map<String, Set<TimeSlot>> busyMap, PotentialAssignment p, Room room, Map<Integer, LocalDateTime> roomLastEnd) {
         // TODO: 将 slot 写入 teacher1, teacher2 和 room 的 busyMap
         TimeSlot newBusySlot = p.getTimeSlot();
         System.out.println(String.format("  > 更新日程图: 锁定 %s, 老师 %d, 老师 %d, 房间 %d",
@@ -337,6 +382,8 @@ public class SchedulingImpl implements SchedulingService {
         busyMap.computeIfAbsent(teacher2Key, k -> new HashSet<>()).add(newBusySlot);
         busyMap.computeIfAbsent(roomKey, k -> new HashSet<>()).add(newBusySlot);
         //
+        // 新增：记录该房间最新结束时间
+        roomLastEnd.put(room.getId(), newBusySlot.getEndTime());
     }
 
     private void updateWorkload(Map<Integer, Integer> workload, PotentialAssignment p) {
