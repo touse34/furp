@@ -15,8 +15,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class TeacherImpl implements TeacherService {
+
 @Autowired
 private TeacherMapper teacherMapper;
+@Autowired
 private SupervisorMapper supervisorMapper;
 
     public List<Teacher> findAllTeacher(){

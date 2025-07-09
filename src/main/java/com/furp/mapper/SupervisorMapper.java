@@ -17,7 +17,7 @@ public interface SupervisorMapper extends BaseMapper<Supervisor>{
      * @return 该学生的所有导师列表
      */
 
-    @Select("select t.* from teachers t join supervisor s ON t.id = s.teacher_id where s.phd_id = #{phdId}")
+    @Select("select t.* from teacher t join supervisor s ON t.id = s.teacher_id where s.phd_id = #{phdId}")
     List<Supervisor> findSupervisorsByPhdId(@Param("phdId") Integer phdId) ;
 
 
