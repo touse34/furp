@@ -29,6 +29,7 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private AvailableTimeMapper availableTimeMapper;
     @Autowired private SchedulesMapper schedulesMapper;
     @Autowired private AnnualReviewMapper annualReviewMapper;
+    @Autowired private AvailableTimeService availableTimeService;
 
 
     public void autoSchedule() {
@@ -148,7 +149,7 @@ public class SchedulingImpl implements SchedulingService {
 
         // 2. 一次性获取所有老师的所有意愿时间，并存入Map
         // Key: teacherId, Value: List of AvailableTime
-        Map<Integer, List<AvailableTime>> allTeacherAvailabilities = availableTimeMapper.findAllAsMap();
+        Map<Integer, List<AvailableTime>> allTeacherAvailabilities = availableTimeService.findAllAsMap();
 
         for (PendingReviewDto review : students) {
 
@@ -167,8 +168,8 @@ public class SchedulingImpl implements SchedulingService {
                     Teacher t1 = eligibleAssessors.get(i);
                     Teacher t2 = eligibleAssessors.get(j);
 
-                    Set<Integer> t1Skill = teacherSkillService.findTeacherSkillsById(t1.getId());
-                    Set<Integer> t2Skill = teacherSkillService.findTeacherSkillsById(t2.getId());
+                    Set<Integer> t1Skill = allTeacherSkills.get(t1.getId());
+                    Set<Integer> t2Skill = allTeacherSkills.get(t2.getId());
 
                     long t1MatchCount = t1Skill.stream().filter(phdSkills::contains).count();
                     long t2MatchCount = t2Skill.stream().filter(phdSkills::contains).count();
@@ -178,8 +179,8 @@ public class SchedulingImpl implements SchedulingService {
                         continue;
                     }
 
-                    List<AvailableTime> t1AvailableTime = availableTimeMapper.findByTeacherId(t1.getId());
-                    List<AvailableTime> t2AvailableTime = availableTimeMapper.findByTeacherId(t2.getId());
+                    List<AvailableTime> t1AvailableTime = allTeacherAvailabilities.get(t1.getId());
+                    List<AvailableTime> t2AvailableTime = allTeacherAvailabilities.get(t2.getId());
 
                     List<TimeSlot> commonTimeSlots = findCommonTimeSlots(t1AvailableTime, t2AvailableTime);
 

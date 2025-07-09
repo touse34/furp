@@ -11,7 +11,7 @@ import java.util.List;
 public interface TeacherMapper extends BaseMapper<Teacher> {
 
     // 使用注解方式查询所有教师
-    @Select("SELECT id, user_id, is_accessor FROM teacher")
+    @Select("SELECT id, user_id, is_assessor FROM teacher")
     List<Teacher> selectAll();
 }
     // 更高效的方式：直接JOIN查询，返回包含教师姓名的结果 (推荐)
