@@ -435,6 +435,10 @@ public class SchedulingImpl implements SchedulingService {
     }
 
     private static final double W_CONTINUITY = 3.0;   // 连续性奖励权重，可自行调大/调小
+    private static final int  ADJ_MINUTES      = 15;     // 紧邻阈值：≤15 min 视为“连续”
+    private static final int  LONG_GAP_MINUTES = 60;     // 空档阈值：≥60 min 算“太大”
+    private static final double LONG_GAP_PENALTY = -0.5; // 每出现一次大空档扣 0.5（轻惩罚）
+
 
     private double calculateFinalScore(PotentialAssignment p, Map<Integer, Integer> workload, Map<String, Set<TimeSlot>> busyMap){
         final double W_SKILL = 10.0;
@@ -469,21 +473,36 @@ public class SchedulingImpl implements SchedulingService {
                                             Map<String, Set<TimeSlot>> busyMap) {
 
         TimeSlot cur = p.getTimeSlot();
-        double bonus = 0.0;
+        double score = 0.0;
 
         for (int tid : List.of(p.getTeacher1Id(), p.getTeacher2Id())) {
             Set<TimeSlot> busy = busyMap.getOrDefault("teacher-" + tid, Set.of());
 
-            boolean hasAdjacent = busy.stream().anyMatch(b -> {
+            // 寻找与当前 slot 最近的已排 slot
+            long bestGap = Long.MAX_VALUE;
+            for (TimeSlot b : busy) {
                 long gapFront = Duration.between(b.getEndTime(), cur.getStartTime()).toMinutes();
                 long gapBack  = Duration.between(cur.getEndTime(), b.getStartTime()).toMinutes();
-                return (gapFront >= 0 && gapFront <= 15)   // 前后相差不超过 15 分钟
-                        || (gapBack  >= 0 && gapBack  <= 15);
-            });
 
-            if (hasAdjacent) bonus += 1.0;
+                long gap = Long.MAX_VALUE;
+                if (gapFront >= 0) gap = Math.min(gap, gapFront); // cur 在 b 之后
+                if (gapBack  >= 0) gap = Math.min(gap, gapBack);  // cur 在 b 之前
+
+                bestGap = Math.min(bestGap, gap);
+                if (bestGap == 0) break; // 已经无缝衔接，不用再算
+            }
+
+            // ① 奖励：无缝或近邻
+            if (bestGap <= ADJ_MINUTES) {
+                score += 1.0;
+            }
+            // ② 惩罚：空档太大（但老师确实有排程）
+            else if (bestGap != Long.MAX_VALUE && bestGap >= LONG_GAP_MINUTES) {
+                score += LONG_GAP_PENALTY;   // -0.5 默认
+            }
+            // ③ 其余情况（gap 在 15~60 min 或老师完全没排程）记 0 分
         }
-        return bonus;   // 0, 1, or 2
+        return score;   // 可能是正，也可能微负
     }
 
 
