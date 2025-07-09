@@ -61,7 +61,7 @@ public class SchedulingImpl implements SchedulingService {
         List<FinalAssignment> finalResult = new ArrayList<>();
 
         while (!pendingPhdIds.isEmpty() && !pool.isEmpty()) {
-            PotentialAssignment best = selectBest(pool, teacherWorkload);
+            PotentialAssignment best = selectBest(pool, teacherWorkload, busyMap);
             //Room assignedRoom = allocateRoom(best.getTimeSlot(), usedRooms, allRooms, busyMap);
             Room assignedRoom = allocateRoom(best.getTimeSlot(),
                     usedRooms,
@@ -249,9 +249,6 @@ public class SchedulingImpl implements SchedulingService {
                 }
             }
 
-
-
-
         }
         System.out.println("共生成"+pool.size()+"总可行方案");
         System.out.println("共生成"+pool.size()+"总可行方案");
@@ -270,13 +267,13 @@ public class SchedulingImpl implements SchedulingService {
         return pool;
     }
 
-    private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Integer, Integer> workload) {
+    private PotentialAssignment selectBest(List<PotentialAssignment> pool, Map<Integer, Integer> workload, Map<String, Set<TimeSlot>> busyMap) {
 
         if (pool == null || pool.isEmpty()) {
             return null;
         }
         return pool.stream()
-                .max(Comparator.comparingDouble(p -> calculateFinalScore(p, workload)))
+                .max(Comparator.comparingDouble(p -> calculateFinalScore(p, workload,busyMap)))
                 .orElse(null);
         // 遍历 pool 中的每一个元素，使用 calculateFinalScore 方法为每个元素计算一个分数，然后找出这些元素中分数最高的那个元素。
     }
@@ -437,7 +434,9 @@ public class SchedulingImpl implements SchedulingService {
 
     }
 
-    private double calculateFinalScore(PotentialAssignment p, Map<Integer, Integer> workload){
+    private static final double W_CONTINUITY = 3.0;   // 连续性奖励权重，可自行调大/调小
+
+    private double calculateFinalScore(PotentialAssignment p, Map<Integer, Integer> workload, Map<String, Set<TimeSlot>> busyMap){
         final double W_SKILL = 10.0;
         final double W_WORKLOAD = 5.0;
         // final double W_CONTINUITY = 3.0; // 时间连续性奖励权重 (此项较复杂，可后续添加)
@@ -450,11 +449,43 @@ public class SchedulingImpl implements SchedulingService {
 
         // 3. 计算时间连续性奖励
         // double continuityBonus = calculateContinuityBonus(p, finalResult);
-        double continuityBonus = 0.0;
+        //double continuityBonus = 0.0;
+
+        double continuityBonus = calculateContinuityBonus(p, busyMap);   //  新增
+
 
         // 返回最终加权分数
-        return (W_SKILL * skillScore) - (W_WORKLOAD * workloadPenalty);
+        //return (W_SKILL * skillScore) - (W_WORKLOAD * workloadPenalty);
+        return (W_SKILL * skillScore)
+                - (W_WORKLOAD * workloadPenalty)
+                + (W_CONTINUITY * continuityBonus);          //  把连贯分加进去
     }
+
+    /**
+     * 若老师在 busyMap 里已有时间段与 p 的 slot 紧邻（前后相差 ≤15 分钟），
+     * 就奖励 1 分；两位老师最多各加 1 分，返回 0~2 之间的值。
+     */
+    private double calculateContinuityBonus(PotentialAssignment p,
+                                            Map<String, Set<TimeSlot>> busyMap) {
+
+        TimeSlot cur = p.getTimeSlot();
+        double bonus = 0.0;
+
+        for (int tid : List.of(p.getTeacher1Id(), p.getTeacher2Id())) {
+            Set<TimeSlot> busy = busyMap.getOrDefault("teacher-" + tid, Set.of());
+
+            boolean hasAdjacent = busy.stream().anyMatch(b -> {
+                long gapFront = Duration.between(b.getEndTime(), cur.getStartTime()).toMinutes();
+                long gapBack  = Duration.between(cur.getEndTime(), b.getStartTime()).toMinutes();
+                return (gapFront >= 0 && gapFront <= 15)   // 前后相差不超过 15 分钟
+                        || (gapBack  >= 0 && gapBack  <= 15);
+            });
+
+            if (hasAdjacent) bonus += 1.0;
+        }
+        return bonus;   // 0, 1, or 2
+    }
+
 
 
 }
