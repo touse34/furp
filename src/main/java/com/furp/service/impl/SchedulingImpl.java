@@ -437,7 +437,7 @@ public class SchedulingImpl implements SchedulingService {
     private static final double W_CONTINUITY = 3.0;   // 连续性奖励权重，可自行调大/调小
     private static final int  ADJ_MINUTES      = 15;     // 紧邻阈值：≤15 min 视为“连续”
     private static final int  LONG_GAP_MINUTES = 60;     // 空档阈值：≥60 min 算“太大”
-    private static final double LONG_GAP_PENALTY = -0.5; // 每出现一次大空档扣 0.5（轻惩罚）
+    private static final double LONG_GAP_PENALTY = -10; // 每出现一次大空档扣 0.5（轻惩罚）
 
 
     private double calculateFinalScore(PotentialAssignment p, Map<Integer, Integer> workload, Map<String, Set<TimeSlot>> busyMap){
