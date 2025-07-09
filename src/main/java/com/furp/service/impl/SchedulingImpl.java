@@ -141,6 +141,15 @@ public class SchedulingImpl implements SchedulingService {
     private List<PotentialAssignment> generatePotentialAssignments(List<PendingReviewDto> students, List<Teacher> teachers, Map<String, Set<TimeSlot>> busyMap) {
 
         List<PotentialAssignment> pool = new ArrayList<>(); // TODO: 实现组合生成逻辑
+
+        // 1. 一次性获取所有老师的所有技能，并存入Map
+        // Key: teacherId, Value: Set of skillIds
+        Map<Integer, Set<Integer>> allTeacherSkills = teacherSkillService.findAllTeacherSkillsAsMap();
+
+        // 2. 一次性获取所有老师的所有意愿时间，并存入Map
+        // Key: teacherId, Value: List of AvailableTime
+        Map<Integer, List<AvailableTime>> allTeacherAvailabilities = availableTimeMapper.findAllAsMap();
+
         for (PendingReviewDto review : students) {
 
             Integer phdId = review.getPhdId();

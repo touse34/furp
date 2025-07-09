@@ -5,7 +5,7 @@ import com.furp.service.TeacherSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,5 +18,15 @@ public class TeacherSkillImpl implements TeacherSkillService {
                 .stream()
                 .map(teacherSkill -> teacherSkill.getSkillId())
                 .collect(Collectors.toSet());
+    }
+
+    public Map<Integer, Set<Integer>> findAllTeacherSkillsAsMap(){
+        List<Integer> distinctTeacherId = teacherSkillMapper.selectDistinctId();
+        Map<Integer, Set<Integer>> theMap = new HashMap<>();
+        for(Integer teacherId : distinctTeacherId){
+            Set<Integer> teacherSkills = findTeacherSkillsById(teacherId);
+            theMap.put(teacherId, teacherSkills);
+        }
+        return theMap;
     }
 }
