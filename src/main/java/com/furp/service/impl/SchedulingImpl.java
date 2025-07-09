@@ -148,7 +148,7 @@ public class SchedulingImpl implements SchedulingService {
             TimeSlot busySlot = new TimeSlot(schedule.getStartTime(), schedule.getEndTime());
 
             if(schedule.getTeacherId()!=null){
-                String teacherKey = "Teacher-" + schedule.getTeacherId();
+                String teacherKey = "teacher-" + schedule.getTeacherId();
                 busyMap.computeIfAbsent(teacherKey, k -> new HashSet<>()).add(busySlot);
                 /**
                  * 对于给定的 teacherKey：
