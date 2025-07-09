@@ -37,7 +37,7 @@ public class SchedulingImpl implements SchedulingService {
         List<Integer> pendingPhdIds = pendingReviews.stream()
                 .map(PendingReviewDto::getPhdId)
                 .collect(Collectors.toList());   //获取等待分配的phdId
-
+        List<PendingReviewDto> pendingReviewsCopy = new ArrayList<>(pendingReviews);
 
         List<Teacher> teachers = teacherService.findAllTeacher();
         List<Room> allRooms = roomMapper.selectAllRooms();
@@ -50,7 +50,7 @@ public class SchedulingImpl implements SchedulingService {
 
         Map<Integer, Integer> teacherWorkload = initWorkloadMap(teachers);
         Map<String, Set<TimeSlot>> busyMap = loadBusySlots(); //busymap:一个资源名对应一个timeslot的set集合
-        Set<Long> usedRooms = new HashSet<>();
+        Set<Integer> usedRooms = new HashSet<>();
 
         List<PotentialAssignment> pool = generatePotentialAssignments(pendingReviews, teachers, busyMap); // 方案池
         List<FinalAssignment> finalResult = new ArrayList<>();
@@ -62,38 +62,71 @@ public class SchedulingImpl implements SchedulingService {
             if (assignedRoom == null) {
                 // 房间不足，跳过此任务并输出提示信息
                 System.out.println("房间资源不足,跳过学生" + best.getPhdId());
+                System.out.println("还有"+pool.size());
                 pool.remove(best);
                 continue;
             }
 
 
-            finalResult.add(toAnnualReview(best, assignedRoom));
+            Teacher t1 = teachers.stream()
+                    .filter(t -> t.getId().equals(best.getTeacher1Id()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("致命错误: 在allTeachers列表中找不到ID为 " + best.getTeacher1Id() + " 的老师"));
+
+            Teacher t2 = teachers.stream()
+                    .filter(t -> t.getId().equals(best.getTeacher2Id()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("致命错误: 在allTeachers列表中找不到ID为 " + best.getTeacher2Id() + " 的老师"));
+
+// 2. 从预加载的 pendingReviewsCopy 列表中查找学生评审信息 (这也是内存操作，极快)
+            PendingReviewDto scheduledReviewInfo = pendingReviewsCopy.stream()
+                    .filter(r -> r.getPhdId().equals(best.getPhdId()))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("致命错误: 在待办列表中找不到phdId为 " + best.getPhdId() + " 的评审任务"));
+            finalResult.add(new FinalAssignment(scheduledReviewInfo, t1, t2, assignedRoom, best.getTimeSlot()));
+
             updateBusy(busyMap, best, assignedRoom);
             updateWorkload(teacherWorkload, best);
-            usedRooms.add((long)assignedRoom.getId());
+            usedRooms.add(assignedRoom.getId());
 
             pendingPhdIds.removeIf(s -> s.equals(best.getPhdId()));
             pool = removeConflicts(pool, best, assignedRoom);
         }
 
-        // TODO: Replace with your mapper method
-        finalResult.forEach(annualReviewMapper::insertFinalAssignment);
+
+
+        System.out.println("\n==============================================");
+        System.out.println("          最终排程结果预览");
+        System.out.println("==============================================");
+
+        if (finalResult.isEmpty()) {
+            System.out.println("未能生成任何有效的排程。");
+        } else {
+            System.out.println(String.format("成功生成 %d 条排程记录：", finalResult.size()));
+            int count = 1;
+
+            // 遍历每一个最终确定的排程方案
+            for (FinalAssignment assignment : finalResult) {
+                // 使用 String.format 来构建一个格式优美的字符串
+                String output = String.format(
+                        "%d. 学生: %-20s | 时间: %s - %s | 地点: %s | 评审员: %s, %s",
+                        count++,
+                        assignment.getReviewInfo().getStudentName(), // 学生姓名
+                        assignment.getTimeSlot().getStartTime().toLocalTime(), // 开始时间
+                        assignment.getTimeSlot().getEndTime().toLocalTime(),   // 结束时间
+                        assignment.getRoom().getLocation(), // 房间名
+                        assignment.getTeacher1().getName(), // 老师1姓名
+                        assignment.getTeacher2().getName()  // 老师2姓名
+                );
+                System.out.println(output);
+            }
+        }
+        System.out.println("==============================================\n");
+
     }
 
     // 将 PotentialAssignment 转换为 FinalAssignment
-    private FinalAssignment toAnnualReview(PotentialAssignment best, Room assignedRoom) {
 
-        // 通过潜在的评审分配（PotentialAssignment）获取相应的信息
-        PendingReviewDto reviewInfo = annualReviewService.getReviewInfoByPhdId(best.getPhdId());
-
-        Teacher teacher1 = teacherMapper.selectById(best.getTeacher1Id());
-        Teacher teacher2 = teacherMapper.selectById(best.getTeacher2Id());
-
-        TimeSlot timeSlot = best.getTimeSlot();
-
-        // 创建 FinalAssignment 对象并返回
-        return new FinalAssignment(reviewInfo, teacher1, teacher2, assignedRoom, timeSlot);
-    }
 
     private Map<Integer, Integer> initWorkloadMap(List<Teacher> teachers) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -208,7 +241,19 @@ public class SchedulingImpl implements SchedulingService {
 
 
         }
-
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
+        System.out.println("共生成"+pool.size()+"总可行方案");
         // 返回所有的潜在评审分配方案
         return pool;
     }
@@ -224,17 +269,45 @@ public class SchedulingImpl implements SchedulingService {
         // 遍历 pool 中的每一个元素，使用 calculateFinalScore 方法为每个元素计算一个分数，然后找出这些元素中分数最高的那个元素。
     }
 
-    private Room allocateRoom(TimeSlot slot, Set<Long> used, List<Room> allRooms, Map<String, Set<TimeSlot>> busyMap) {
-        for (Long id : used) {
-            if (isFree("room-" + id, slot, busyMap)) {
-                return allRooms.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
+    private Room allocateRoom(TimeSlot slot, Set<Integer> usedRooms, List<Room> allRooms, Map<String, Set<TimeSlot>> busyMap) {
+
+        // --- 新增：方法入口提示 ---
+        System.out.println(String.format("  -> [分配房间] 正在为时间段 %s 寻找可用房间...", slot));
+
+        // --- 第一部分：优先重用已占用的房间 ---
+        if (!usedRooms.isEmpty()) {
+            System.out.println("    - 阶段1: 尝试重用已占用的房间...");
+            for (Integer id : usedRooms) {
+                // --- 新增：尝试重用的提示 ---
+                System.out.println(String.format("      - 检查已用房间 ID: %d...", id));
+                if (isFree("room-" + id, slot, busyMap)) {
+                    // --- 新增：重用成功的提示 ---
+                    System.out.println(String.format("      - [成功] 房间 %d 可用，将重用此房间。", id));
+                    return allRooms.stream().filter(r -> r.getId().equals(id)).findFirst().orElse(null);
+                }
             }
+            // --- 新增：重用失败的提示 ---
+            System.out.println("    - 阶段1结束: 所有已占用的房间在该时段都不可用。");
         }
+
+        // --- 第二部分：启用一个新房间 ---
+        System.out.println("    - 阶段2: 尝试寻找一个全新的空闲房间...");
         for (Room r : allRooms) {
-            if (!used.contains(r.getId()) && isFree("room-" + r.getId(), slot, busyMap)) {
-                return r;
+            // --- 新增：检查新房间的提示 ---
+            // System.out.println(String.format("      - 检查新房间 '%s' (ID: %d)...", r.getName(), r.getId()));
+
+            if (!usedRooms.contains(r.getId())) { // 条件1：必须是还未被使用过的新房间
+                if (isFree("room-" + r.getId(), slot, busyMap)) { // 条件2：这个新房间在该时段确实空闲
+                    // --- 新增：启用新房间成功的提示 ---
+                    System.out.println(String.format("      - [成功] 新房间 '%s' (ID: %d) 可用，将启用此房间。", r.getLocation(), r.getId()));
+                    return r;
+                }
             }
         }
+
+        // --- 第三部分：处理无可用房间的情况 ---
+        // --- 新增：分配失败的最终提示 ---
+        System.out.println("  -> [分配失败] 找不到任何可用的房间。");
         return null;
     }
 
