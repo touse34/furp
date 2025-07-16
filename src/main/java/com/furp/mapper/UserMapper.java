@@ -18,5 +18,10 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
     // 如果有复杂的、自定义的 SQL 查询，可以在这里定义方法，并在 XML 文件中实现
     // 但对于基础的 CRUD, 这里已经完全足够了，无需任何代码。
+
+    @Select("SELECT * from user where name = #{username}")
+    User getUserByName(String username);
+
+
 }
 // 注意：这里已经删除了末尾多余的大括号
