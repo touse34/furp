@@ -462,7 +462,7 @@ public class SchedulingImpl implements SchedulingService {
         //return (W_SKILL * skillScore) - (W_WORKLOAD * workloadPenalty);
         return (W_SKILL * skillScore)
                 - (W_WORKLOAD * workloadPenalty)
-                + (W_CONTINUITY * continuityBonus);          //  把连贯分加进去
+                + (W_CONTINUITY * continuityBonus);
     }
 
     /**
