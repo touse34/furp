@@ -13,6 +13,9 @@ public interface TeacherMapper extends BaseMapper<Teacher> {
     // 使用注解方式查询所有教师
     @Select("SELECT id, user_id, name, is_assessor FROM teacher")
     List<Teacher> selectAll();
+
+    @Select("SELECT * from teacher where user_id = #{userId}")
+    Teacher selectTeacherByUserId(int userId);
 }
     // 更高效的方式：直接JOIN查询，返回包含教师姓名的结果 (推荐)
     // 这需要一个DTO来接收结果，这里为了简单先返回Teacher实体

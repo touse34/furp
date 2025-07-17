@@ -20,6 +20,8 @@ public class LoginVo {
 
     private String role;
 
+    private String token;
+
 
 
 
