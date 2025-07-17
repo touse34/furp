@@ -10,5 +10,8 @@ public class PendingReviewDto {
     private Integer studentId;
     private String studentName;
     private Integer phdId; // 把phd表的主键也加上
+
+    public void setSupervisorId(int i) {
+    }
 }
 
