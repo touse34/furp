@@ -12,6 +12,7 @@ public class PendingReviewDto {
     private Integer phdId; // 把phd表的主键也加上
 
     public void setSupervisorId(int i) {
+
     }
 }
 
