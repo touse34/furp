@@ -31,7 +31,7 @@ public interface PhdInfoMapper {
             "FROM    phd         AS p\n" +
             "LEFT JOIN phd_skill AS ps ON ps.phd_id = p.id\n" +
             "LEFT JOIN skill     AS s  ON s.id      = ps.skill_id\n" +
-            "WHERE   p.student_id = #{studentId}        -- 只查给定学号\n" +
+            "WHERE   p.student_id = #{user_id}        -- 只查给定学号\n" +
             "ORDER BY p.student_id;\n")
     PhdInfo getById(Integer studentId);
 }
