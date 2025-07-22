@@ -21,4 +21,14 @@ public class PhdInfoImpl implements PhdInfoService {
     public List<PhdInfo> findAll() {
         return phdInfoMapper.findAll();
     }
+
+    @Override
+    public void update(PhdInfo phdInfo) {
+        phdInfoMapper.updateStudentSkill(phdInfo);
+    }
+
+    @Override
+    public PhdInfo getById(Integer studentId) {
+        return phdInfoMapper.getById(studentId);
+    }
 }

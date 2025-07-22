@@ -6,8 +6,7 @@ import com.furp.entity.Result;
 import com.furp.service.PhdInfoService;
 import com.furp.service.PhdService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,8 +14,10 @@ import java.util.List;
 public class PhdController {
     @Autowired
     private PhdInfoService phdinfoService;
+    @Autowired
+    private PhdInfoService phdInfoService;
 
-    @RequestMapping("/phd/student/info")
+    @GetMapping("/phd/student/info")
     public Result list(){
         System.out.println("Student info");
         List<PhdInfo> phdInfoList =  phdinfoService.findAll();
@@ -24,4 +25,33 @@ public class PhdController {
         return Result.success(phdInfoList);
 
     }
+
+    /**
+     * 根据ID查询phd
+     * @param
+     * @return
+     */
+    @GetMapping("/phd/student/info/{id}")
+    public Result getInfo(@PathVariable("id") Integer studentId){
+        System.out.println("根据studentId查询phdinfo  " + studentId);
+
+        PhdInfo phdInfo = phdInfoService.getById(studentId);
+
+        return Result.success(phdInfo);
+
+
+    }
+    /*
+    修改技能
+     */
+    @PutMapping("/phd/student/research-areas")
+    public Result update(@RequestBody PhdInfo phdInfo){
+        System.out.println("修改学生专业" + phdInfo);
+        phdInfoService.update(phdInfo);
+        return Result.success();
+
+
+    }
+
+
 }
