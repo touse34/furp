@@ -2,6 +2,7 @@ package com.furp.service;
 
 import com.furp.DTO.PhdInfo;
 import com.furp.entity.Phd;
+import com.furp.entity.PhdSkill;
 
 import java.util.List;
 
@@ -12,11 +13,7 @@ public interface PhdInfoService {
      */
     List<PhdInfo> findAll();
 
-    /**
-     * 修改phdskill
-     * @param phdInfo
-     */
-    void update(PhdInfo phdInfo);
+
 
 
     /**

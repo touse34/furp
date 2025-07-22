@@ -2,9 +2,11 @@ package com.furp.controller;
 
 import com.furp.DTO.PhdInfo;
 import com.furp.entity.Phd;
+import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
 import com.furp.service.PhdInfoService;
 import com.furp.service.PhdService;
+import com.furp.service.PhdSkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,8 @@ public class PhdController {
     private PhdInfoService phdinfoService;
     @Autowired
     private PhdInfoService phdInfoService;
+    @Autowired
+    private PhdSkillService phdSkillService;
 
     @GetMapping("/phd/student/info")
     public Result list(){
@@ -45,9 +49,9 @@ public class PhdController {
     修改技能
      */
     @PutMapping("/phd/student/research-areas")
-    public Result update(@RequestBody PhdInfo phdInfo){
-        System.out.println("修改学生专业" + phdInfo);
-        phdInfoService.update(phdInfo);
+    public Result updatePhdSkill(@RequestBody PhdSkill phdSkill){
+        System.out.println("修改学生专业" + phdSkill);
+        phdSkillService.updatestudentSkill(phdSkill);
         return Result.success();
 
 

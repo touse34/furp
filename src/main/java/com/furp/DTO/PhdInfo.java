@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PhdInfo {
+    private Integer id;
     private Integer studentId;
     private String name;
     private LocalDateTime enrollmentDate;

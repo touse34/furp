@@ -1,6 +1,7 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.PhdInfo;
+import com.furp.entity.PhdSkill;
 import com.furp.mapper.PhdInfoMapper;
 import com.furp.mapper.PhdMapper;
 import com.furp.service.PhdInfoService;
@@ -22,10 +23,7 @@ public class PhdInfoImpl implements PhdInfoService {
         return phdInfoMapper.findAll();
     }
 
-    @Override
-    public void update(PhdInfo phdInfo) {
-        phdInfoMapper.update(phdInfo);
-    }
+
 
     @Override
     public PhdInfo getById(Integer studentId) {
