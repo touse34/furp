@@ -52,7 +52,7 @@ public class PhdController {
     public Result updatePhdSkill(@RequestBody PhdSkill phdSkill){
         System.out.println("修改学生专业" + phdSkill);
         phdSkillService.updatestudentSkill(phdSkill);
-        return Result.success();
+        return Result.success(phdSkill);
 
 
     }
