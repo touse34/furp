@@ -4,9 +4,11 @@ import com.furp.DTO.PhdInfo;
 import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
+import com.furp.entity.User;
 import com.furp.service.PhdInfoService;
 import com.furp.service.PhdService;
 import com.furp.service.PhdSkillService;
+import com.furp.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ public class PhdController {
     private PhdInfoService phdInfoService;
     @Autowired
     private PhdSkillService phdSkillService;
+    @Autowired
+    private UserService userService;
 
 //    @GetMapping("/phd/student/info")
 //    public Result list(){
@@ -37,12 +41,17 @@ public class PhdController {
      * @return
      */
     @GetMapping("/phd/student/info")
-    public Result<PhdInfo> getInfo(@RequestAttribute("currentUserId") Integer studentId){
+    public Result<PhdInfo> getInfo(@RequestAttribute("currentUserId") Integer userId){
 
 
-        System.out.println("根据studentId查询phdinfo  " + studentId);
+        System.out.println("当前登录者 userId = " + userId);
 
-        PhdInfo phdInfo = phdInfoService.getById(studentId);
+        // 直接通过 userId 查 phd 表
+        PhdInfo phdInfo = phdInfoService.getByUserId(userId);
+
+        if (phdInfo == null) {
+            return Result.success(null);  // 或 Result.error("未绑定PhD信息")
+        }
 
         return Result.success(phdInfo);
 

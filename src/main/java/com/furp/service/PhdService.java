@@ -1,5 +1,6 @@
 package com.furp.service;
 
+import com.furp.DTO.PhdInfo;
 import com.furp.entity.Phd;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,7 @@ public interface PhdService {
      * @return
      */
     List<Phd> findAll();
+
+
+
 }

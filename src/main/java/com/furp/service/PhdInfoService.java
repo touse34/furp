@@ -13,6 +13,9 @@ public interface PhdInfoService {
      */
     List<PhdInfo> findAll();
 
+    PhdInfo getByUserId(Integer userId);
+
+
 
 
 

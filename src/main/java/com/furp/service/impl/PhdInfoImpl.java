@@ -23,6 +23,10 @@ public class PhdInfoImpl implements PhdInfoService {
         return phdInfoMapper.findAll();
     }
 
+    @Override
+    public PhdInfo getByUserId(Integer userId) {
+        return phdInfoMapper.getByUserId(userId);
+    }
 
 
     @Override

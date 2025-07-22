@@ -4,6 +4,7 @@ import com.furp.DTO.PhdInfo;
 import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -34,4 +35,9 @@ public interface PhdInfoMapper {
             "WHERE   p.student_id = #{user_id}        -- 只查给定学号\n" +
             "ORDER BY p.student_id;\n")
     PhdInfo getById(Integer studentId);
+
+
+    @Select("SELECT * FROM phd WHERE user_id = #{userId}")
+    PhdInfo getByUserId(@Param("userId") Integer userId);
+
 }

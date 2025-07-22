@@ -44,4 +44,5 @@ public class User {
     private String wechatId;    // 用户的微信ID（可能为null）
     private String name;        // 用户的姓名
     private String password;    // 用户的密码（假设数据库中有此字段）
+    private Integer phdId;
 }
