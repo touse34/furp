@@ -37,7 +37,13 @@ public interface PhdInfoMapper {
     PhdInfo getById(Integer studentId);
 
 
-    @Select("SELECT * FROM phd WHERE user_id = #{userId}")
+    //@Select("SELECT * FROM phd WHERE user_id = #{userId}")
+    @Select("SELECT p.*, s.skill_name AS skillName\n" +
+            "    FROM phd p\n" +
+            "    LEFT JOIN phd_skill ps ON p.id = ps.phd_id\n" +
+            "    LEFT JOIN skill s ON ps.skill_id = s.id\n" +
+            "    WHERE p.user_id = #{userId}\n" +
+            "    LIMIT 1")
     PhdInfo getByUserId(@Param("userId") Integer userId);
 
 }
