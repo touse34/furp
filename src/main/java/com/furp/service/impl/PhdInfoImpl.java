@@ -24,7 +24,7 @@ public class PhdInfoImpl implements PhdInfoService {
 
     @Override
     public void update(PhdInfo phdInfo) {
-        phdInfoMapper.updateStudentSkill(phdInfo);
+        phdInfoMapper.update(phdInfo);
     }
 
     @Override
