@@ -42,6 +42,11 @@ public class PhdSkillImpl implements PhdSkillService {
         return phdSkill;
     }
 
+    @Override
+    public String getSkillNameById(Integer skillId) {
+        return phdSkillMapper.getSkillNameById(skillId);
+    }
+
     public Set<Integer> findPhdSkillsById(Integer phdId){
         return phdSkillMapper.selectSkill(phdId).stream().map(phdSkill -> phdSkill.getSkillId()).collect(Collectors.toSet());
     }

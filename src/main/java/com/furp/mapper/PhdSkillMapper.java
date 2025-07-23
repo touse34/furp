@@ -26,5 +26,8 @@ public interface PhdSkillMapper {
     @Insert("INSERT INTO phd_skill (phd_id, skill_id) VALUES (#{phdId}, #{skillId})")
     int insertPhdSkill(@Param("phdId") Integer phdId, @Param("skillId") Integer skillId);
 
+    @Select("SELECT skill.skill_name FROM skill WHERE id = #{skillId}")
+    String getSkillNameById(@Param("skillId") Integer skillId);
+
 
 }
