@@ -29,4 +29,10 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
 //    @Insert("INSERT INTO annual_review (review_year, status, phd_id, student_id) " +
 //            "VALUES (#{reviewYear}, #{status}, #{phdId}, #{studentId})")
 //    void insertFinalAssignment(FinalAssignment finalAssignment);
+
+    @Select("SELECT ar.status, ar.review_year, s.start_time, s.end_time, m.location " +
+            "FROM annual_review ar " +
+            "JOIN schedules s ON ar.id = s.annual_review_id " +
+            "JOIN meeting_room m ON m.id = s.room_id ")
+    public void aa();
 }

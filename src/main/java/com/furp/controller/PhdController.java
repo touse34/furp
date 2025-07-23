@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import com.furp.DTO.CurrentReviewVo;
 import com.furp.DTO.PhdInfo;
 import com.furp.DTO.SkillUpdateRequest;
 import com.furp.entity.Phd;
@@ -74,6 +75,15 @@ public class PhdController {
         String skillName=phdSkillService.getSkillNameById(skillId);
         phdSkill.setSkillName(skillName);
         return Result.success(phdSkill);
+    }
+
+    /**
+     * 获取当前年审状态
+     */
+    @GetMapping("/phd/review/current")
+    public Result<CurrentReviewVo> findCurrentReview(@RequestAttribute("currentUserId") Integer userId){
+        return null;
+
     }
 
 

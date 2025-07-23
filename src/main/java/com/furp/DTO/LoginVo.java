@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginVo {
-    private int userId;
+    private Integer userId;
 
     private String name;
 
-    private int teacherId;
+    private Integer teacherId;
 
-    private int phdId;
+    private Integer phdId;
 
     private String role;
 
