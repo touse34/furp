@@ -31,9 +31,9 @@ public class Knife4jConfig {
                 // 分组名称，会显示在UI上
                 .group("default")
                 // 匹配所有以 /api/ 开头的路径
-                .pathsToMatch("/api/**")
+                .pathsToMatch("/**")
                 // 指定要扫描的 Controller 包
-                .packagesToScan("com.example.project.controller")
+                .packagesToScan("com.furp.controller")
                 .build();
     }
 
