@@ -1,6 +1,7 @@
 package com.furp.controller;
 
 import com.furp.DTO.PhdInfo;
+import com.furp.DTO.SkillUpdateRequest;
 import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
@@ -61,12 +62,16 @@ public class PhdController {
     修改技能
      */
     @PutMapping("/phd/student/research-areas")
-    public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId, @RequestBody Integer skillId){
-        System.out.println("修改学生专业" );
+    public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId,
+                                           @RequestBody SkillUpdateRequest request) { // <-- 修改点在这里
+
+        // 从请求对象中获取 skillId
+        Integer skillId = request.getSkillId();
+
+        System.out.println("修改学生专业，学生ID: " + userId + ", 技能ID: " + skillId);
+
         PhdSkill phdSkill = phdSkillService.updatestudentSkill(userId, skillId);
         return Result.success(phdSkill);
-
-
     }
 
 
