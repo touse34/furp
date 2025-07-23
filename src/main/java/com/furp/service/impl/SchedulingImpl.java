@@ -32,6 +32,8 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private SchedulesMapper schedulesMapper;
     @Autowired private AnnualReviewMapper annualReviewMapper;
     @Autowired private AvailableTimeService availableTimeService;
+    @Autowired private ReviewAssessorMapper reviewAssessorMapper;
+    @Autowired private SchedulingPersistenceService SchedulingPersistenceService;
 
 
     public void autoSchedule() {
@@ -135,9 +137,16 @@ public class SchedulingImpl implements SchedulingService {
         }
         System.out.println("==============================================\n");
 
+        if (!finalResult.isEmpty()) {
+            SchedulingPersistenceService.persistSchedule(finalResult);
+        }
+
+        if (!pendingReviewsCopy.isEmpty()) {
+            System.out.println("警告：调度完成后，仍有 " + pendingReviewsCopy.size() + " 位学生未能安排评审。");
+        }
+
     }
 
-    // 将 PotentialAssignment 转换为 FinalAssignment
 
 
     private Map<Integer, Integer> initWorkloadMap(List<Teacher> teachers) {
@@ -505,7 +514,54 @@ public class SchedulingImpl implements SchedulingService {
         return score;   // 可能是正，也可能微负
     }
 
+//    @Transactional
+//    public void persistSchedule(List<FinalAssignment> finalAssignments){
+//        if (finalAssignments == null || finalAssignments.isEmpty()) {
+//            System.out.println("没有需要写入数据库的排程结果。");
+//            return;
+//        }
+//
+//        System.out.println("\n--- 阶段四：开始将最终排程结果写入数据库 ---");
+//
+//        // 遍历每一个确定的排程方案
+//        for (FinalAssignment assignment : finalAssignments) {
+//
+//            PendingReviewDto reviewInfo = assignment.getReviewInfo();
+//            Integer reviewId = reviewInfo.getReviewId();
+//            TimeSlot slot = assignment.getTimeSlot();
+//            // --- 步骤一：更新 annual_review 表的状态 ---
+//            // 1. 创建一个与数据库 annual_review 表完全对应的实体对象
+//            AnnualReview reviewToUpdate = new AnnualReview();
+//
+//            // 2. 从 FinalAssignment 对象中提取数据并填充到实体中
+//            reviewToUpdate.setId(reviewId);
+//            reviewToUpdate.setStatus("scheduled"); // 更新状态为“已安排”
+//
+//            // 3. 调用 Mapper 的标准方法来更新数据库 (mybatis-plus)
+//            annualReviewMapper.updateById(reviewToUpdate);
+//
+//
+//            // --- 步骤二：向 review_assessor 表插入两位评审员 ---
+//            reviewAssessorMapper.insert(new ReviewAssessor(null, reviewId, assignment.getTeacher1().getId()));
+//            reviewAssessorMapper.insert(new ReviewAssessor(null, reviewId, assignment.getTeacher2().getId()));
+//
+//            // 为老师1创建日程
+//            Schedules scheduleForT1 = new Schedules(null, reviewId, assignment.getTeacher1().getId(), null, slot.getStartTime(), slot.getEndTime());
+//            schedulesMapper.insert(scheduleForT1);
+//
+//            // 为老师2创建日程
+//            Schedules scheduleForT2 = new Schedules(null, reviewId, assignment.getTeacher2().getId(), null, slot.getStartTime(), slot.getEndTime());
+//            schedulesMapper.insert(scheduleForT2);
+//
+//            // 为会议室创建日程
+//            Schedules scheduleForRoom = new Schedules(null, reviewId, null, assignment.getRoom().getId(),  slot.getStartTime(), slot.getEndTime());
+//            schedulesMapper.insert(scheduleForRoom);
+//            System.out.println(String.format("  > 已为评审 [ID: %d] 成功写入数据库记录。", reviewId));
+//        }
+//
+//
+//        System.out.println(String.format("✅ 操作成功！共将 %d 条排程结果持久化到数据库。", finalAssignments.size()));
+//    }
 
 
 }
-

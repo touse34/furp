@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 @Mapper
-public interface PhdMapper extends BaseMapper<PhdMapper> {
+public interface PhdMapper extends BaseMapper<Phd> {
     @Select("SELECT * from phd where user_id = #{userId}")
     Phd selectPhdByUserId(int userId);
     /*

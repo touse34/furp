@@ -25,6 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
         excludePatterns.add("/swagger-resources/**");  // Swagger 资源
         excludePatterns.add("/v3/api-docs/**");        // OpenAPI 规范数据 (非常重要!)
         excludePatterns.add("/favicon.ico");           // 网站图标
+        excludePatterns.add("/api/scheduling/run");           // 网站图标
         registry.addInterceptor(jwtUserTokenInterceptor).addPathPatterns("/**").excludePathPatterns(excludePatterns);
     }
 }

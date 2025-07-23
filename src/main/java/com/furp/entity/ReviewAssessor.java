@@ -1,21 +1,17 @@
 package com.furp.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@TableName("annual_review")
+@TableName("review_assessor")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnnualReview {
-    @TableId
+public class ReviewAssessor {
     private Integer id;
-
-    private Integer phdId;
-    private Integer reviewYear;
-    private String status;
-
+    private Integer annualReviewId;
+    private Integer teacherId;
 }
+
