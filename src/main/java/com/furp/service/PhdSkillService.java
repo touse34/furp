@@ -12,4 +12,6 @@ public interface PhdSkillService {
      * @param phdSkill
      */
     PhdSkill updatestudentSkill(Integer userId, Integer skillId);
+
+    String getSkillNameById(Integer skillId);
 }

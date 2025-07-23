@@ -13,8 +13,9 @@ import org.apache.ibatis.annotations.Select;
 @AllArgsConstructor
 public class PhdSkill {
     @TableId
-    private Integer id;
+    //private Integer id;
 
     private Integer phdId;
     private Integer skillId;
+    private String skillName;
 }

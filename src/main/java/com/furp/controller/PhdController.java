@@ -71,6 +71,8 @@ public class PhdController {
         System.out.println("修改学生专业，学生ID: " + userId + ", 技能ID: " + skillId);
 
         PhdSkill phdSkill = phdSkillService.updatestudentSkill(userId, skillId);
+        String skillName=phdSkillService.getSkillNameById(skillId);
+        phdSkill.setSkillName(skillName);
         return Result.success(phdSkill);
     }
 
