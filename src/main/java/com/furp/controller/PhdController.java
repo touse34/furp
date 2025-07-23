@@ -61,9 +61,9 @@ public class PhdController {
     修改技能
      */
     @PutMapping("/phd/student/research-areas")
-    public Result<PhdSkill> updatePhdSkill(@RequestBody PhdSkill phdSkill){
-        System.out.println("修改学生专业" + phdSkill);
-        phdSkillService.updatestudentSkill(phdSkill);
+    public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId, @RequestBody Integer skillId){
+        System.out.println("修改学生专业" );
+        PhdSkill phdSkill = phdSkillService.updatestudentSkill(userId, skillId);
         return Result.success(phdSkill);
 
 

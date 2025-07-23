@@ -1,8 +1,7 @@
 package com.furp.mapper;
 
 import com.furp.entity.PhdSkill;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,6 +17,14 @@ public interface PhdSkillMapper {
 
     @Select("select * from phd_skill where phd_id = #{phdId}")
     List<PhdSkill> selectSkill(Integer phdId);
+
+    // 1. 删除学生现有的所有研究方向
+    @Delete("DELETE FROM phd_skill WHERE phd_id = #{phdId}")
+    int deletePhdSkillsByPhdId(@Param("phdId") Integer phdId);
+
+    // 2. 插入新的研究方向
+    @Insert("INSERT INTO phd_skill (phd_id, skill_id) VALUES (#{phdId}, #{skillId})")
+    int insertPhdSkill(@Param("phdId") Integer phdId, @Param("skillId") Integer skillId);
 
 
 }

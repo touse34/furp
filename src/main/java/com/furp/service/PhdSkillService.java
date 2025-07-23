@@ -11,5 +11,5 @@ public interface PhdSkillService {
     /*
      * @param phdSkill
      */
-    void updatestudentSkill(PhdSkill phdSkill);
+    PhdSkill updatestudentSkill(Integer userId, Integer skillId);
 }
