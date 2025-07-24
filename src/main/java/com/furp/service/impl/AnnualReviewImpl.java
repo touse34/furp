@@ -1,6 +1,6 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.CurrentReviewVo;
+import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PendingReviewDto;
 import com.furp.mapper.AnnualReviewMapper;
 import com.furp.service.AnnualReviewService;
@@ -25,14 +25,14 @@ public class AnnualReviewImpl implements AnnualReviewService {
         return annualReviewMapper.getReviewInfoByPhdId(phdId);
     }
 
-    public CurrentReviewVo findCurrentReviewById(Integer phdId){
+    public ReviewInfoVo findCurrentReviewById(Integer phdId){
         return annualReviewMapper.findCurrentReviewById(phdId);
     }
 
-    public CurrentReviewVo getCurrentReviewDetails(Integer phdId) {
+    public ReviewInfoVo getCurrentReviewDetails(Integer phdId) {
 
         // 1. 先获取评审的基本信息
-        CurrentReviewVo reviewDetails = annualReviewMapper.findCurrentReviewById(phdId);
+        ReviewInfoVo reviewDetails = annualReviewMapper.findCurrentReviewById(phdId);
 
         // 如果找不到任何已安排的评审，直接返回 null
         if (reviewDetails == null) {

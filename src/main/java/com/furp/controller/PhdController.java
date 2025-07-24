@@ -1,21 +1,15 @@
 package com.furp.controller;
 
-import com.furp.DTO.CurrentReviewVo;
+import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PhdInfo;
 import com.furp.DTO.SkillUpdateRequest;
-import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
-import com.furp.entity.User;
 import com.furp.mapper.AnnualReviewMapper;
 import com.furp.mapper.PhdMapper;
 import com.furp.service.*;
-import io.swagger.v3.oas.models.security.SecurityScheme;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 public class PhdController {
@@ -44,7 +38,7 @@ public class PhdController {
 //    }
 
     /**
-     * 根据ID查询phd
+     * 根据ID查询phd 3.1.1
      * @param
      * @return
      */
@@ -65,8 +59,8 @@ public class PhdController {
 
 
     }
-    /*
-    修改技能
+    /**
+    修改技能 3.1.2
      */
     @PutMapping("/phd/student/research-areas")
     public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId,
@@ -84,16 +78,19 @@ public class PhdController {
     }
 
     /**
-     * 获取当前年审状态
+     * 获取当前年审状态 3.2.1
      */
     @GetMapping("/phd/review/current")
-    public Result<CurrentReviewVo> findCurrentReview(@RequestAttribute("currentUserId") Integer userId){
+    public Result<ReviewInfoVo> findCurrentReview(@RequestAttribute("currentUserId") Integer userId){
         Integer phdId = phdMapper.selectPhdByUserId(userId).getId();
-        CurrentReviewVo vo = annualReviewService.getCurrentReviewDetails(phdId);
+        ReviewInfoVo vo = annualReviewService.getCurrentReviewDetails(phdId);
         return Result.success(vo);
 
 
     }
+//
+//    @GetMapping("/phd/review/history")
+//    public Result<>
 
 
 

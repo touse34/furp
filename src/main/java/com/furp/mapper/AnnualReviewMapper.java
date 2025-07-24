@@ -1,13 +1,12 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.furp.DTO.CurrentReviewVo;
+import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PendingReviewDto;
 import com.furp.entity.AnnualReview;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import com.furp.DTO.FinalAssignment;
+
 import java.util.List;
 
 public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
@@ -37,7 +36,7 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
             "JOIN schedules s ON ar.id = s.annual_review_id " +
             "JOIN meeting_room m ON m.id = s.room_id " +
             "WHERE ar.phd_id = #{phdId}")
-    CurrentReviewVo findCurrentReviewById(Integer phdId);
+    ReviewInfoVo findCurrentReviewById(Integer phdId);
 
     /**
      * 【查询二】：根据 annual_review_id 获取所有评审员的姓名列表

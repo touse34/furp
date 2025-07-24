@@ -1,6 +1,5 @@
 package com.furp.DTO;
 
-import com.furp.entity.ReviewAssessor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrentReviewVo {
+public class ReviewInfoVo {
     private String status;
 
     private Integer reviewYear;
