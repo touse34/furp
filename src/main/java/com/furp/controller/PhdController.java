@@ -7,10 +7,10 @@ import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
 import com.furp.entity.User;
-import com.furp.service.PhdInfoService;
-import com.furp.service.PhdService;
-import com.furp.service.PhdSkillService;
-import com.furp.service.UserService;
+import com.furp.mapper.AnnualReviewMapper;
+import com.furp.mapper.PhdMapper;
+import com.furp.service.*;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +27,12 @@ public class PhdController {
     private PhdSkillService phdSkillService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AnnualReviewMapper annualReviewMapper;
+    @Autowired
+    private PhdMapper phdMapper;
+    @Autowired
+    private AnnualReviewService annualReviewService;
 
 //    @GetMapping("/phd/student/info")
 //    public Result list(){
@@ -82,7 +88,10 @@ public class PhdController {
      */
     @GetMapping("/phd/review/current")
     public Result<CurrentReviewVo> findCurrentReview(@RequestAttribute("currentUserId") Integer userId){
-        return null;
+        Integer phdId = phdMapper.selectPhdByUserId(userId).getId();
+        CurrentReviewVo vo = annualReviewService.getCurrentReviewDetails(phdId);
+        return Result.success(vo);
+
 
     }
 

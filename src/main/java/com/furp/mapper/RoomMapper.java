@@ -11,6 +11,9 @@ public interface RoomMapper {
     @Select("SELECT * from meeting_room")
     List<Room> selectAllRooms();
 
+    @Select("SELECT location from meeting_room where id = #{roomId}")
+    String selectLocationByRoomId(Integer roonId);
+
 
 
 }
