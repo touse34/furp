@@ -26,6 +26,13 @@ public class WebConfig implements WebMvcConfigurer {
         excludePatterns.add("/v3/api-docs/**");        // OpenAPI 规范数据 (非常重要!)
         excludePatterns.add("/favicon.ico");           // 网站图标
         excludePatterns.add("/api/scheduling/run");           // 网站图标
+
+        excludePatterns.add("/admin/users");
+
         registry.addInterceptor(jwtUserTokenInterceptor).addPathPatterns("/**").excludePathPatterns(excludePatterns);
+
+
+
+
     }
 }

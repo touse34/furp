@@ -1,7 +1,10 @@
 package com.furp.service;
 
 import com.furp.DTO.LoginDTO;
+import com.furp.DTO.UserInfo;
 import com.furp.entity.User;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -9,4 +12,9 @@ public interface UserService {
 
     User getById(Integer id);
 
+    /**
+     * 查询所有用户信息
+     * @return
+     */
+    List<UserInfo> findAll();
 }

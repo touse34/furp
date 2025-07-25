@@ -2,6 +2,7 @@ package com.furp.controller;
 
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.LoginVo;
+import com.furp.DTO.UserInfo;
 import com.furp.entity.Phd;
 import com.furp.entity.Result;
 import com.furp.entity.Teacher;
@@ -13,6 +14,7 @@ import com.furp.service.UserService;
 import com.furp.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,13 @@ public class UserController {
     @Autowired
     private PhdMapper phdMapper;
 
+    @GetMapping("/admin/users")
+    public Result getUsersInfo(){
+        System.out.println("查询全部用户信息");
+        List<UserInfo> userList = userService.findAll();
+        return Result.success(userList);
+
+    }
 
 
 

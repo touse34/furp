@@ -1,6 +1,7 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.LoginDTO;
+import com.furp.DTO.UserInfo;
 import com.furp.entity.User;
 import com.furp.exception.AccountNotFoundException;
 import com.furp.exception.PasswordErrorException;
@@ -9,6 +10,8 @@ import com.furp.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,5 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Integer id) {
         return userMapper.selectById(id);
+    }
+
+    @Override
+    public List<UserInfo> findAll() {
+        return userMapper.findAll();
     }
 }

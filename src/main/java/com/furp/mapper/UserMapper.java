@@ -1,6 +1,7 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.furp.DTO.UserInfo;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,5 +24,10 @@ public interface UserMapper extends BaseMapper<User> {
     User getUserByName(String username);
 
 
+    /*
+    查询所有的userInfo
+     */
+    @Select("SELECT id, role_id, `name` FROM `user`")
+    List<UserInfo> findAll();
 }
 // 注意：这里已经删除了末尾多余的大括号
