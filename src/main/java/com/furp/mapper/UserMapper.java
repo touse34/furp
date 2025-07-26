@@ -29,5 +29,10 @@ public interface UserMapper extends BaseMapper<User> {
      */
     @Select("SELECT id, role_id, `name` FROM `user`")
     List<UserInfo> findAll();
+
+
+
+    @Select("SELECT id, role_id, `name` FROM `user` where role_id= #{roleId}")
+    List<UserInfo> findByRole(Integer roleId);
 }
 // 注意：这里已经删除了末尾多余的大括号

@@ -45,6 +45,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserInfo> findByRole(Integer roleId) {
+        return userMapper.findByRole(roleId);
+    }
+
+    @Override
     public List<UserInfo> findAll() {
         return userMapper.findAll();
     }

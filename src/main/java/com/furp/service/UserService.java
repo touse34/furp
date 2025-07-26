@@ -17,4 +17,11 @@ public interface UserService {
      * @return
      */
     List<UserInfo> findAll();
+
+    /**
+     * 根据角色查询用户信息
+     * @param roleId
+     * @return
+     */
+    List<UserInfo> findByRole(Integer roleId);
 }

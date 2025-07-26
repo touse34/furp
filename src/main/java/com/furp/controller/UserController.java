@@ -2,22 +2,22 @@ package com.furp.controller;
 
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.LoginVo;
+import com.furp.DTO.PhdUserInfo;
 import com.furp.DTO.UserInfo;
 import com.furp.entity.Phd;
 import com.furp.entity.Result;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
 import com.furp.mapper.PhdMapper;
+import com.furp.mapper.PhdUserInfoMapper;
 import com.furp.mapper.TeacherMapper;
 import com.furp.properties.JwtProperties;
+import com.furp.service.PhdUserInfoService;
 import com.furp.service.UserService;
 import com.furp.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,12 +35,34 @@ public class UserController {
     private TeacherMapper teacherMapper;
     @Autowired
     private PhdMapper phdMapper;
+    @Autowired
+    private PhdUserInfoService phdUserInfoService;
 
-    @GetMapping("/admin/users")
+
+/*    @GetMapping("/admin/users")
     public Result getUsersInfo(){
         System.out.println("查询全部用户信息");
         List<UserInfo> userList = userService.findAll();
         return Result.success(userList);
+
+    }*/
+
+    @GetMapping("/admin/users/{roleId}")
+    public Result listUsers(@PathVariable Integer roleId){
+       /* System.out.println("根据roleId来查询用户");
+        List<UserInfo> userInfoList = userService.findByRole(roleId);
+        return Result.success(userInfoList);*/
+
+        if(roleId==1){
+            List<UserInfo> teachers = userService.findByRole(1);
+            return Result.success(teachers);
+        } else if (roleId==2) {
+            List<PhdUserInfo> phds = phdUserInfoService.getAllPhdWithSupervisors();
+            return Result.success(phds);
+
+        }else{
+            return Result.error("暂不支持的 roleId = " + roleId);
+        }
 
     }
 

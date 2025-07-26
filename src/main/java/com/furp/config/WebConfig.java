@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
         excludePatterns.add("/favicon.ico");           // 网站图标
         excludePatterns.add("/api/scheduling/run");           // 网站图标
 
-        excludePatterns.add("/admin/users");
+        excludePatterns.add("/admin/users/{roleId}");
 
         registry.addInterceptor(jwtUserTokenInterceptor).addPathPatterns("/**").excludePathPatterns(excludePatterns);
 
