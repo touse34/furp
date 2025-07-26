@@ -17,7 +17,7 @@ public class PhdUserInfoImpl implements PhdUserInfoService{
     private PhdUserInfoMapper phdUserInfoMapper;
 
 
-    @Override
+    /*@Override
     public List<PhdUserInfo> getAllPhdWithSupervisors() {
 
         List<Map<String,Object>> raw = phdUserInfoMapper.getAllPhdWithSupervisors();
@@ -25,7 +25,7 @@ public class PhdUserInfoImpl implements PhdUserInfoService{
 
         for (Map<String,Object> row : raw) {
 
-            /* —— 安全转成 int —— */
+            *//* —— 安全转成 int —— *//*
             Integer userId = ((Number) row.get("userId")).intValue();
             Integer phdId  = ((Number) row.get("phdId")).intValue();
 
@@ -39,7 +39,7 @@ public class PhdUserInfoImpl implements PhdUserInfoService{
                 return dto;
             });
 
-            /* ➊ 接住返回值 */
+            *//* ➊ 接住返回值 *//*
             PhdUserInfo phd = merged.computeIfAbsent(userId, k -> {
                 PhdUserInfo dto = new PhdUserInfo();
                 dto.setUserId(userId);
@@ -65,6 +65,57 @@ public class PhdUserInfoImpl implements PhdUserInfoService{
 
         }
         return new ArrayList<>(merged.values());
+    }
+*/
+
+    @Override
+    public List<PhdUserInfo> getAllPhdWithSupervisors() {
+
+        List<Map<String,Object>> raw = phdUserInfoMapper.getAllPhdWithSupervisors();
+        Map<Integer, PhdUserInfo> merged = new LinkedHashMap<>();
+
+        for (Map<String,Object> row : raw) {
+
+            Integer userId = toInt(row.get("userId"));
+            Integer phdId  = toInt(row.get("phdId"));
+
+            // 只创建一次
+            PhdUserInfo dto = merged.computeIfAbsent(userId, k -> {
+                PhdUserInfo x = new PhdUserInfo();
+                x.setUserId(userId);
+                x.setPhdId(phdId);
+                x.setName((String) row.get("name"));
+                x.setRoleId(toInt(row.get("roleId")));
+                x.setEmail((String) row.get("email"));
+                x.setSupervisorIds(new ArrayList<>());
+                x.setSupervisorNames(new ArrayList<>());
+                return x;
+            });
+
+            // 解析两个 GROUP_CONCAT 字段
+            addIntCsv(dto.getSupervisorIds(),   row.get("supervisorIds"));
+            addStrCsv(dto.getSupervisorNames(), row.get("supervisorNames"));
+        }
+        return new ArrayList<>(merged.values());
+    }
+
+    /* ---------- 小工具方法 ---------- */
+    private Integer toInt(Object o) {
+        return o == null ? null : ((Number) o).intValue();
+    }
+
+    private void addIntCsv(List<Integer> target, Object csvObj) {
+        if (csvObj == null) return;
+        for (String s : csvObj.toString().split(",")) {
+            if (!s.isBlank()) target.add(Integer.valueOf(s.trim()));
+        }
+    }
+
+    private void addStrCsv(List<String> target, Object csvObj) {
+        if (csvObj == null) return;
+        for (String s : csvObj.toString().split(",")) {
+            if (!s.isBlank()) target.add(s.trim());
+        }
     }
 
 

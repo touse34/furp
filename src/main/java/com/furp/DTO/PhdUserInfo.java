@@ -19,4 +19,6 @@ public class PhdUserInfo {
     private String email;
     private List<Integer> supervisorIds = new ArrayList<>(); // 一个学生可能有多个导师
 
+    // 新增：导师的姓名列表
+    private List<String> supervisorNames = new ArrayList<>(); // 每个导师的姓名
 }
