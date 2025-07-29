@@ -46,25 +46,25 @@ public class UserController {
         return Result.success(userList);
 
     }*/
-
-    @GetMapping("/admin/users/{roleId}")
-    public Result listUsers(@PathVariable Integer roleId){
+@GetMapping("/admin/users/{roleId}")
+public Result listUsers(@PathVariable Integer roleId){
        /* System.out.println("根据roleId来查询用户");
         List<UserInfo> userInfoList = userService.findByRole(roleId);
         return Result.success(userInfoList);*/
 
-        if(roleId==1){
-            List<UserInfo> teachers = userService.findByRole(1);
-            return Result.success(teachers);
-        } else if (roleId==2) {
-            List<PhdUserInfo> phds = phdUserInfoService.getAllPhdWithSupervisors();
-            return Result.success(phds);
+    if(roleId==1){
+        List<UserInfo> teachers = userService.findByRole(1);
+        return Result.success(teachers);
+    } else if (roleId==2) {
+        List<PhdUserInfo> phds = phdUserInfoService.getAllPhdWithSupervisors();
+        return Result.success(phds);
 
-        }else{
-            return Result.error("暂不支持的 roleId = " + roleId);
-        }
-
+    }else{
+        return Result.error("暂不支持的 roleId = " + roleId);
     }
+
+}
+
 
 
 
