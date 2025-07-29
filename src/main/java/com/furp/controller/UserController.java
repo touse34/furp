@@ -74,11 +74,7 @@ public class UserController {
 
         User user = userService.login(loginDTO);
 
-        Map<String, Object> claim = new HashMap<>();
-        claim.put("user_id", user.getId());
-        String token = JwtUtil.createJWT(jwtProperties.getSecretKey(),
-                jwtProperties.getTtl(),
-                claim);
+        Map<String, Object> claims = new HashMap<>();
 //初版
 //        switch (user.getRoleId()){
 //            case 1 :
@@ -118,6 +114,13 @@ public class UserController {
         LoginVo loginVo = switch (user.getRoleId()) {
             case 1 -> {
                 Teacher teacher = teacherMapper.selectTeacherByUserId(user.getId());
+                if (teacher == null) throw new RuntimeException("教师信息不存在");
+
+                claims.put("userId", user.getId());
+                claims.put("name", teacher.getName());
+                claims.put("role", "teacher");
+                claims.put("teacherId", teacher.getId());
+
                 yield LoginVo.builder().userId(user.getId())
                         .role("teacher")
                         .name(teacher.getName())
@@ -126,23 +129,34 @@ public class UserController {
             }
             case 2 -> {
                 Phd phd = phdMapper.selectPhdByUserId(user.getId());
+                if (phd == null) throw new RuntimeException("博士生信息不存在");
+                claims.put("userId", user.getId());
+                claims.put("name", phd.getName());
+                claims.put("role", "phd");
+                claims.put("phdId", phd.getId());
+
                 yield LoginVo.builder().userId(user.getId())
                         .role("phd")
                         .name(phd.getName())
                         .phdId(phd.getId())
                         .build();
             }
-            case 3 -> LoginVo.builder().userId(user.getId())
+            case 3 -> {
+                claims.put("userId", user.getId());
+                claims.put("name", "Admin"); // 管理员姓名可以从user表获取或写死
+                claims.put("role", "admin");
+                yield LoginVo.builder().userId(user.getId())
                     .role("admin")
                     .name("admin")
                     .build();
-            default -> null; // 或者抛出异常 throw new RuntimeException("无效角色");
+            }
+            default -> throw new RuntimeException("无效的用户角色: " + user.getRoleId());
         };
 
-        // 3. 统一处理返回结果
-        if (loginVo == null) {
-            return Result.error("无效的用户角色");
-        }
+        String token = JwtUtil.createJWT(
+                jwtProperties.getSecretKey(),
+                jwtProperties.getTtl(),
+                claims);
 
         // 4. 将 token 设置到 vo 中 (见下方说明)
         loginVo.setToken(token);

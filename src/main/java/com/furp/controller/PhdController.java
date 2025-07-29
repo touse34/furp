@@ -3,6 +3,7 @@ package com.furp.controller;
 import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PhdInfo;
 import com.furp.DTO.SkillUpdateRequest;
+import com.furp.VO.SkillSelectionVO;
 import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
 import com.furp.mapper.AnnualReviewMapper;
@@ -84,8 +85,7 @@ public class PhdController {
      * 获取当前年审状态 3.2.1
      */
     @GetMapping("/phd/review/current")
-    public Result<ReviewInfoVo> findCurrentReview(@RequestAttribute("currentUserId") Integer userId){
-        Integer phdId = phdMapper.selectPhdByUserId(userId).getId();
+    public Result<ReviewInfoVo> findCurrentReview(@RequestAttribute("phdId") Integer phdId){
         ReviewInfoVo vo = annualReviewService.getCurrentReviewDetails(phdId);
         return Result.success(vo);
 
@@ -95,13 +95,20 @@ public class PhdController {
      * 3.2.2 获取年审历史记录
      */
     @GetMapping("/phd/review/history")
-    public Result<PageResult<ReviewInfoVo>> findHistoryReview(@RequestAttribute("currentUserId") Integer userId,
+    public Result<PageResult<ReviewInfoVo>> findHistoryReview(@RequestAttribute("phdId") Integer phdId,
                                                         @RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "0") int size) {
-        Integer phdId = phdMapper.selectPhdByUserId(userId).getId();
+
         PageResult<ReviewInfoVo> vo = annualReviewService.getHistoryReviewDetails(phdId, page, size);
         return Result.success(vo);
     }
+
+    /**
+     * 3.2.2 查询该学生技能
+     */
+    //@GetMapping("/phd/research-areas")
+    //public Result<List<SkillSelectionVO>> getStudentSkillOptions(@RequestAttribute("currentUserId") Integer userId)
+
 
 
 
