@@ -106,8 +106,11 @@ public class PhdController {
     /**
      * 3.2.2 查询该学生技能
      */
-    //@GetMapping("/phd/research-areas")
-    //public Result<List<SkillSelectionVO>> getStudentSkillOptions(@RequestAttribute("currentUserId") Integer userId)
+    @GetMapping("/phd/research-areas")
+    public Result<List<SkillSelectionVO>> getStudentSkillOptions(@RequestAttribute("phdId") Integer phdId){
+        List<SkillSelectionVO> skillOptions = phdSkillService.getSkillSelectionForPhd(phdId);
+        return Result.success(skillOptions);
+    }
 
 
 

@@ -1,16 +1,19 @@
 package com.furp.service.impl;
 
+import com.furp.VO.SkillSelectionVO;
 import com.furp.entity.Phd;
 import com.furp.entity.PhdSkill;
+import com.furp.entity.Skill;
 import com.furp.mapper.PhdMapper;
 import com.furp.mapper.PhdSkillMapper;
-import com.furp.service.PhdService;
+import com.furp.mapper.SkillMapper;
 import com.furp.service.PhdSkillService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,6 +25,8 @@ public class PhdSkillImpl implements PhdSkillService {
     private PhdSkillMapper phdSkillMapper;
     @Autowired
     private PhdMapper phdMapper;
+    @Autowired
+    private SkillMapper skillMapper;
 
     @Override
     @Transactional
@@ -47,8 +52,25 @@ public class PhdSkillImpl implements PhdSkillService {
         return phdSkillMapper.getSkillNameById(skillId);
     }
 
+    @Override
+    public List<SkillSelectionVO> getSkillSelectionForPhd(Integer phdId) {
+        List<Skill> allSkills = skillMapper.selectList(null);
+        Set<Integer> selectedSkillIds = new HashSet<>(skillMapper.selectSkillIdByPhdId(phdId));
+
+        // 3. 在内存中进行组装
+        // 遍历所有技能，为每个技能创建一个 SkillSelectionVO，并设置其 selected 状态
+        return allSkills.stream()
+                .map(skill -> new SkillSelectionVO(
+                        skill.getId(),
+                        skill.getSkillName(),
+                        // 核心逻辑：如果学生的已选技能ID集合中包含当前技能的ID，则 selected 为 true
+                        selectedSkillIds.contains(skill.getId())
+                ))
+                .collect(Collectors.toList());
+    }
+
     public Set<Integer> findPhdSkillsById(Integer phdId){
-        return phdSkillMapper.selectSkill(phdId).stream().map(phdSkill -> phdSkill.getSkillId()).collect(Collectors.toSet());
+        return phdSkillMapper.selectSkillByPhdId(phdId).stream().map(phdSkill -> phdSkill.getSkillId()).collect(Collectors.toSet());
     }
 
 

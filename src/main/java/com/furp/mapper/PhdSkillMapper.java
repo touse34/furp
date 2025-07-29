@@ -16,8 +16,7 @@ public interface PhdSkillMapper {
     void updatestudentSkill(PhdSkill phdSkill);
 
     @Select("select * from phd_skill where phd_id = #{phdId}")
-    List<PhdSkill> selectSkill(Integer phdId);
-
+    List<PhdSkill> selectSkillByPhdId(Integer phdId);
     // 1. 删除学生现有的所有研究方向
     @Delete("DELETE FROM phd_skill WHERE phd_id = #{phdId}")
     int deletePhdSkillsByPhdId(@Param("phdId") Integer phdId);
