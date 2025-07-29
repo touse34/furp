@@ -7,9 +7,12 @@ import com.furp.entity.PhdSkill;
 import com.furp.entity.Result;
 import com.furp.mapper.AnnualReviewMapper;
 import com.furp.mapper.PhdMapper;
+import com.furp.response.PageResult;
 import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class PhdController {
@@ -86,11 +89,19 @@ public class PhdController {
         ReviewInfoVo vo = annualReviewService.getCurrentReviewDetails(phdId);
         return Result.success(vo);
 
-
     }
-//
-//    @GetMapping("/phd/review/history")
-//    public Result<>
+
+    /**
+     * 3.2.2 获取年审历史记录
+     */
+    @GetMapping("/phd/review/history")
+    public Result<PageResult<ReviewInfoVo>> findHistoryReview(@RequestAttribute("currentUserId") Integer userId,
+                                                        @RequestParam(defaultValue = "1") int page,
+                                                        @RequestParam(defaultValue = "0") int size) {
+        Integer phdId = phdMapper.selectPhdByUserId(userId).getId();
+        PageResult<ReviewInfoVo> vo = annualReviewService.getHistoryReviewDetails(phdId, page, size);
+        return Result.success(vo);
+    }
 
 
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.furp.mapper.AnnualReviewMapper">
+<resultMap id="HistoryReviewWithAssessors" type="com.furp.DTO.ReviewInfoVo">
+    <id property="id" column="id"/>
+    <result property="reviewYear" column="review_year"/>
+    <result property="startTime" column="start_time"/>
+    <result property="endTime" column="end_time"/>
+    <result property="location" column="location"/>
+    <result property="comment" column="comment"/>
+    <collection property="assessors" column="id"
+                select="findAssessorsByReviewId"/>
+
+</resultMap>
+
+    <select id="findHistoryReviewById" resultMap="HistoryReviewWithAssessors" >
+        SELECT ar.id, ar.review_year, ar.status, s.start_time, s.end_time,
+               m.location, ar.comment
+        FROM annual_review ar
+                 LEFT JOIN schedules s ON ar.id = s.annual_review_id
+                 LEFT JOIN meeting_room m ON m.id = s.room_id
+        WHERE ar.phd_id = #{phdId} AND ar.status = 'completed'
+        ORDER BY ar.review_year DESC
+    </select>
+
+</mapper>

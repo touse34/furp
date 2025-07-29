@@ -35,7 +35,8 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
             "FROM annual_review ar " +
             "JOIN schedules s ON ar.id = s.annual_review_id " +
             "JOIN meeting_room m ON m.id = s.room_id " +
-            "WHERE ar.phd_id = #{phdId}")
+            "WHERE ar.phd_id = #{phdId} " +
+            "AND ar.status = 'scheduled'")
     ReviewInfoVo findCurrentReviewById(Integer phdId);
 
     /**
@@ -54,4 +55,7 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
      */
     @Select("SELECT id FROM annual_review WHERE phd_id = #{phdId} AND status = 'scheduled' LIMIT 1")
     Integer findReviewIdByPhdId(@Param("phdId") Integer phdId);
+
+
+    List<ReviewInfoVo> findHistoryReviewById(Integer phdId);
 }
