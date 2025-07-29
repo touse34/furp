@@ -25,4 +25,6 @@ public class ReviewInfoVo {
 
     private List<String> assessors;
 
+    private String comments;
+
 }

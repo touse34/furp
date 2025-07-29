@@ -3,7 +3,10 @@ package com.furp.service.impl;
 import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PendingReviewDto;
 import com.furp.mapper.AnnualReviewMapper;
+import com.furp.response.PageResult;
 import com.furp.service.AnnualReviewService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +56,22 @@ public class AnnualReviewImpl implements AnnualReviewService {
 
         // 5. 返回组装完毕的完整对象
         return reviewDetails;
+    }
+
+    @Override
+    public PageResult<ReviewInfoVo> getHistoryReviewDetails(Integer phdId, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<ReviewInfoVo> historyReview = annualReviewMapper.findHistoryReviewById(phdId);
+        Page<ReviewInfoVo> page = (Page<ReviewInfoVo>) historyReview;
+
+        PageResult<ReviewInfoVo> pageResult = new PageResult<>(
+                page.getResult(),
+                page.getTotal(),
+                page.getPageNum(),
+                page.getPageSize());
+
+
+        return pageResult;
     }
 }

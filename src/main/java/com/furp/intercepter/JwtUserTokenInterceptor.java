@@ -76,9 +76,13 @@ public class JwtUserTokenInterceptor implements HandlerInterceptor {
 
         try {
             Claims claims = JwtUtil.parseJWT(jwtProperties.getSecretKey(), token);
-            Integer userId = (Integer) claims.get("user_id");  // 或 "userId"，视你生成 JWT 时写的 key
+            Integer userId = (Integer) claims.get("userId");  // 或 "userId"，视你生成 JWT 时写的 key
+            Integer teacherId = (Integer) claims.get("teacherId");
+            Integer phdId = (Integer) claims.get("phdId");
             System.out.println("id是：" + userId);
             request.setAttribute("currentUserId", userId);
+            request.setAttribute("phdId", phdId);
+            request.setAttribute("teacherId", teacherId);
         } catch (Exception e) {
             log.info("令牌验证不通过: {}", e.getMessage());
             response.setStatus(401);
