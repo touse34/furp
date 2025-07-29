@@ -134,7 +134,7 @@ public class PhdController {
      * 对应接口: PUT /phd/notices/{noticeId}/read
      */
     @PutMapping("/notices/{noticeId}/read")
-    public Result markAsRead(
+    public Result<Void> markAsRead( //对于一个不返回任何具体业务数据、只返回成功或失败状态的接口，最佳实践是使用 Void 作为泛型类型。
             @PathVariable Integer noticeId,
             @RequestAttribute("phdId") Integer phdId) { // 从Token解析出的phdId
 
