@@ -18,6 +18,8 @@ import com.furp.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,8 @@ import java.util.Map;
 
 @Slf4j
 @RestController
+@RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
     @Autowired
