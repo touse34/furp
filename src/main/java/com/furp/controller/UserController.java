@@ -164,5 +164,12 @@ public class UserController {
         return Result.success(loginVo);
     }
 
+    @PostMapping("/logout")
+    public Result<String> logout() {
+        // 这里可以实现登出逻辑，比如清除用户的会话等
+        // 但通常 JWT 的登出是无状态的，前端只需删除本地存储的 token 即可
+        return Result.success("登出成功");
+    }
+
 }
 
