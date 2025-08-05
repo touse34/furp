@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.furp.mapper.AnnualReviewMapper">
+
+    <insert id="batchInsert" parameterType="com.furp.DTO.TimeSlot">
+        INSERT INTO time_slots (start_time, end_time, is_active)
+        VALUES
+        <foreach collection="slots" item="item" separator=",">
+            (#{item.startTime}, #{item.endTime}, 1)
+        </foreach>
+    </insert>
+</mapper>
