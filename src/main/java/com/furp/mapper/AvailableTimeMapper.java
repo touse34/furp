@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper
 public interface AvailableTimeMapper extends BaseMapper<AvailableTime> {
@@ -24,4 +25,7 @@ public interface AvailableTimeMapper extends BaseMapper<AvailableTime> {
     void deleteByTeacherAndYear(@Param("teacherId") Integer teacherId, @Param("academicYear") String academicYear);
 
     public void batchInsertFromTimeSlots(Integer teacherId, List<Integer> timeSlotIds);
+
+    @Select("SELECT time_slot_id FROM available_time WHERE teacher_id = #{teacherId} AND academic_year = #{academicYear}")
+    public Set<Integer> findSelectedSlotIdsByTeacherAndYear(@Param("teacherId")Integer teacherId, @Param("academicYear") String academicYear);
 }

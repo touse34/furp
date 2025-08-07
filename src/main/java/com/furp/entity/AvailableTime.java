@@ -15,8 +15,10 @@ import java.time.LocalDateTime;
 public class AvailableTime {
     @TableId
     private Integer id;
+    private String academicYear; // 学年
 
     private Integer teacherId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private Integer timeSlotId; // 时间段ID
 }
