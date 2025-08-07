@@ -29,7 +29,7 @@ public class AdminController {
      */
     @PostMapping("/date-configs")
     public Result upDateDateConfigs(@RequestBody UpdateTimeSlotsDTO updateTimeSlots) {
-        Integer year = updateTimeSlots.getAcademicYear();
+        String year = updateTimeSlots.getAcademicYear();
         List<TimeSlot> slots= updateTimeSlots.getSlots();
         int updatedCount = timeSlotsService.updateDateConfigs(year, slots);
         return Result.success("成功创建/更新了" + updatedCount + "个可用时间段。");

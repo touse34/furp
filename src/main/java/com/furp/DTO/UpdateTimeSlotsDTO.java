@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class UpdateTimeSlotsDTO {
 
-    private Integer academicYear; // 学年
+    private String academicYear; // 学年
 
     private List<TimeSlot> Slots; // 时间段列表
 }

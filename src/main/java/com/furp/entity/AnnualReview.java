@@ -15,7 +15,7 @@ public class AnnualReview {
     private Integer id;
 
     private Integer phdId;
-    private Integer reviewYear;
+    private String reviewYear;
     private String status;
 
 }

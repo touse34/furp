@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PendingReviewDto {
     private Integer reviewId;
-    private Integer reviewYear;
+    private String reviewYear;
     private String status;
     private Integer studentId;
     private String studentName;

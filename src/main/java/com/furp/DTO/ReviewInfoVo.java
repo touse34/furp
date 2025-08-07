@@ -15,7 +15,7 @@ import java.util.List;
 public class ReviewInfoVo {
     private String status;
 
-    private Integer reviewYear;
+    private String reviewYear;
 
     private LocalDateTime startTime;
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.furp.mapper.AvailableTimeMapper">
+    <insert id="batchInsertFromTimeSlots">
+        INSERT INTO available_time (teacher_id, academic_year, start_time, end_time)
+        SELECT
+        #{teacherId},
+        ts.academic_year, -- 新增：从 time_slots 表获取学年
+        ts.start_time,
+        ts.end_time
+        FROM
+        time_slots ts
+        WHERE
+        ts.id IN
+        <foreach collection="timeSlotIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </insert>
+
+</mapper>
