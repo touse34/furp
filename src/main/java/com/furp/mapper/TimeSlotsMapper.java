@@ -3,6 +3,7 @@ package com.furp.mapper;
 import com.furp.DTO.TimeSlot;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.AvailableTime;
+import com.furp.entity.TimeSlots;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -29,5 +30,7 @@ public interface TimeSlotsMapper {
             "    END DESC") // 4. 然后按季节的代表数字降序
     public List<String> findDistinctAcademicYears();
 
+    @Select("SELECT * FROM time_slots WHERE is_active = 1 AND academic_year = #{academicYear}")
+    public List<TimeSlots> findActiveSlotsByYear(String academicYear);
 
 }

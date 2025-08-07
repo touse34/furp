@@ -14,7 +14,7 @@ public interface TimeSlotsService {
 
     int updateDateConfigs(String year, List<TimeSlot> slots);
 
-    public List<TimeConfigVO> getTeacherAvailableTimeSlots(String year, Long teacherId);
+    public List<TimeConfigVO> getTeacherAvailableTimeSlots(String year, Integer teacherId);
 
     public List<AcademicTermVO> getAvailableAcademicTerms();
 

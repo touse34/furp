@@ -14,6 +14,6 @@ public class TimeConfigVO {
     private LocalDateTime startTime; // 开始时间
     private LocalDateTime endTime;   // 结束时间
 
-    private int selected; // 是否选中，1表示选中，0表示未选中
+    private Boolean selected; // 是否选中
 
 }

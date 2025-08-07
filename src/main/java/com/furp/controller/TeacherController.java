@@ -35,15 +35,24 @@ public class TeacherController {
     }
 
 
-
+    /**
+     * ### 3.1 获取教师时间选择
+     * @param academicYear
+     * @return
+     */
     @GetMapping("/teacher/time-selection")
     public Result<List<TimeConfigVO>> getTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
                                                               @RequestParam String academicYear) {
-        List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots("year", 9L);
+        List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots(academicYear, teacherId);
 
         return Result.success(list);
     }
 
+    /**
+     * ### 3.2 保存教师时间选择
+     * @param selectedTime
+     * @return
+     */
     @PutMapping("/teacher/time-selection-confirm")
     public Result updateTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
                                               @RequestBody TeacherTimeSelectionDTO selectedTime) {

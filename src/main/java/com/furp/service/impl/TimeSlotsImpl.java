@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,8 +46,26 @@ public class TimeSlotsImpl implements TimeSlotsService {
     }
 
     @Override
-    public List<TimeConfigVO> getTeacherAvailableTimeSlots(String year, Long teacherId) {
-        return List.of();
+    public List<TimeConfigVO> getTeacherAvailableTimeSlots(String year, Integer teacherId) {
+        List<TimeSlots> allAvailableSlots = timeSlotsMapper.findActiveSlotsByYear(year);
+        if (allAvailableSlots.isEmpty()) {
+            return Collections.emptyList(); // 如果管理员没配置，直接返回空列表
+        }
+
+        // 2. 获取该老师“已选”的时间段ID集合
+        Set<Integer> selectedSlotIds = availableTimeMapper.findSelectedSlotIdsByTeacherAndYear(teacherId, year);
+
+        // 3. 在内存中进行组装，生成最终的VO列表
+        return allAvailableSlots.stream()
+                .map(slot -> new TimeConfigVO(
+                        slot.getId(),
+                        slot.getStartTime(),
+                        slot.getEndTime(),
+                        // 核心逻辑：如果老师的“已选”集合中包含当前时间段的ID，则'selected'为true
+                        selectedSlotIds.contains(slot.getId())
+                ))
+                .collect(Collectors.toList());
+
     }
 
     public List<AcademicTermVO> getAvailableAcademicTerms(){
