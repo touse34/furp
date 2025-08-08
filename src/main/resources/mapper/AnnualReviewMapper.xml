@@ -17,7 +17,7 @@
         SELECT ar.id, ar.review_year, ar.status, s.start_time, s.end_time,
                m.location, ar.comment
         FROM annual_review ar
-                 LEFT JOIN schedules s ON ar.id = s.annual_review_id
+                 LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL
                  LEFT JOIN meeting_room m ON m.id = s.room_id
         WHERE ar.phd_id = #{phdId} AND ar.status = 'completed'
         ORDER BY ar.review_year DESC
