@@ -70,7 +70,7 @@ public class PhdController {
     /**
     修改技能 3.1.2
      */
-    @PutMapping("/student/research-areas")
+    @PutMapping("/student/research-area")
     public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId,
                                            @RequestBody SkillUpdateRequest request) { // <-- 修改点在这里
 
