@@ -50,7 +50,7 @@ public class UserController {
         return Result.success(userList);
 
     }*/
-@GetMapping("/admin/users/{roleId}")
+@GetMapping("/admin/{roleId}")
 public Result listUsers(@PathVariable Integer roleId){
        /* System.out.println("根据roleId来查询用户");
         List<UserInfo> userInfoList = userService.findByRole(roleId);
