@@ -13,7 +13,8 @@ public interface TeacherProfileMapper {
      * @param teacherId 教师ID
      * @return 教师信息
      */
-    @Select("select t.user_id as 'userId',t.name,s.skill_name as researchAreas " +
+    @Select("select t.user_id as 'userId',t.name," +
+            "s.skill_name as researchAreaName,s.id as researchAreaId " +
             "from teacher t " +
             "LEFT JOIN teacher_skill ts ON t.id = ts.teacher_id " +
             "LEFT JOIN skill s ON ts.skill_id = s.id " +

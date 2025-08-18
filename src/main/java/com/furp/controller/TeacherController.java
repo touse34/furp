@@ -76,6 +76,10 @@ public class TeacherController {
 
         TeacherProfileDTO teacherProfileDTO = teacherProfileService.getById(teacherId);
 
+        if (teacherProfileDTO == null) {
+            return Result.success(null);  // 或 Result.error("未绑定PhD信息")
+        }
+
         return Result.success(teacherProfileDTO);
     }
 
