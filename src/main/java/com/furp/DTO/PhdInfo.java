@@ -1,11 +1,18 @@
 package com.furp.DTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+
+@JsonPropertyOrder({
+        "id", "name", "studentId", "totalReviews", "currentYear", "avatar", "researchArea"
+})
 
 @Data
 @NoArgsConstructor
@@ -15,7 +22,17 @@ public class PhdInfo {
     private String name;
     private Integer studentId;
     private Integer totalReviews;
+
+    @JsonProperty("currentYear")
+    public String getCurrentYear() {
+        if (enrollmentDate == null) return null;
+        int year = LocalDateTime.now().getYear() - enrollmentDate.getYear() + 1;
+        return "Year " + year; // 或者根据你的业务规则拼接
+    }
+
+    @JsonIgnore
     private LocalDateTime enrollmentDate;  //由这个来计算currentyear
+
     private String avatar;//数据库中暂时还没有
 
     // 改为对象格式，单个研究方向

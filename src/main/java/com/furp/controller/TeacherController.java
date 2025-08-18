@@ -1,9 +1,11 @@
 package com.furp.controller;
 
+import com.furp.DTO.TeacherProfileDTO;
 import com.furp.DTO.TeacherTimeSelectionDTO;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
+import com.furp.service.TeacherProfileService;
 import com.furp.service.TimeSlotsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ public class TeacherController {
 
     @Autowired
     private TimeSlotsService timeSlotsService;
+    @Autowired
+    private TeacherProfileService teacherProfileService;
 
     /**
      *  2.1 获取当前时间配置
@@ -59,5 +63,22 @@ public class TeacherController {
         int updatedCount = timeSlotsService.updateTeacherTimeSelection(teacherId, selectedTime);
         return Result.success("成功更新了" + updatedCount + "个可用时间段。");
     }
+
+    /**
+     * 获取教师基本信息
+     * @param teacherId
+     * @return
+     */
+
+    @GetMapping("/v1/teacher/profile/{id}")
+    public Result<TeacherProfileDTO> getTeacherProfile(@PathVariable("id") Integer teacherId) {
+        System.out.println("根据id查询老师信息："+teacherId);
+
+        TeacherProfileDTO teacherProfileDTO = teacherProfileService.getById(teacherId);
+
+        return Result.success(teacherProfileDTO);
+    }
+
+
 
 }
