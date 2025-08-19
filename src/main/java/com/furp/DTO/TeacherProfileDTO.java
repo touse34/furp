@@ -36,7 +36,9 @@ public class TeacherProfileDTO {
     @JsonIgnore
     private String status;
     @JsonIgnore
-    private String createdAt;
+    private LocalDateTime createdAt;
+    @JsonIgnore
+    private LocalDateTime updateTime;
 
     // 手动设置 researchArea 对象
     public void setResearchAreaId(Long researchAreaId) {
@@ -64,7 +66,7 @@ public class TeacherProfileDTO {
         private Long id;
         private String name;
         private String status;
-        private String createdAt;
+        private LocalDateTime createdAt;
     }
 
 

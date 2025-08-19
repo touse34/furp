@@ -66,15 +66,15 @@ public class TeacherController {
 
     /**
      * 获取教师基本信息
-     * @param teacherId
+     * @param userId
      * @return
      */
 
-    @GetMapping("/v1/teacher/profile/{id}")
-    public Result<TeacherProfileDTO> getTeacherProfile(@PathVariable("id") Integer teacherId) {
-        System.out.println("根据id查询老师信息："+teacherId);
+    @GetMapping("/v1/teacher/profile")
+    public Result<TeacherProfileDTO> getTeacherProfile(@RequestAttribute("currentUserId") Integer userId) {
+        System.out.println("当前登录者 userId = " + userId);
 
-        TeacherProfileDTO teacherProfileDTO = teacherProfileService.getById(teacherId);
+        TeacherProfileDTO teacherProfileDTO = teacherProfileService.getById(userId);
 
         if (teacherProfileDTO == null) {
             return Result.success(null);  // 或 Result.error("未绑定PhD信息")
@@ -83,6 +83,23 @@ public class TeacherController {
         return Result.success(teacherProfileDTO);
     }
 
+    /**
+     * 修改教师信息
+     * @param
+     * @return
+     */
+    @PutMapping("/v1/teacher/profile")
+    public Result updateTeacherProfile(@RequestBody TeacherProfileDTO teacherProfileDTO,
+                                       @RequestAttribute("currentUserId") Integer currentUserId) {
+        System.out.println("修改教师信息：" + teacherProfileDTO);
+        System.out.println("当前用户ID：" + currentUserId);
+
+        // 设置userId为当前用户ID（从JWT获取）
+        teacherProfileDTO.setUserId(String.valueOf(currentUserId));
+
+        teacherProfileService.update(teacherProfileDTO);
+        return Result.success();
+    }
 
 
 }

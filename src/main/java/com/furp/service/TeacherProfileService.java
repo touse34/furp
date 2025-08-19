@@ -11,5 +11,9 @@ public interface TeacherProfileService {
      */
     TeacherProfileDTO getById(Integer teacherId);
 
-
+    /**
+     * 更新教师信息
+     * @param teacherProfileDTO 教师信息（包含id用作更新条件）
+     */
+    void update(TeacherProfileDTO teacherProfileDTO);
 }
