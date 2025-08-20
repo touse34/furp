@@ -117,10 +117,6 @@ public class TeacherController {
         // 假设有一个方法 getReviewTasksByUserId(userId)
         List<ReviewInfoVo> reviewInfo = teacherService.findReviewScheduleByTeacherId(teacherId);
 
-        if (reviewInfo == null || reviewInfo.isEmpty()) {
-            return Result.error("没有找到评审任务");
-        }
-
         return Result.success(reviewInfo);
     }
 
