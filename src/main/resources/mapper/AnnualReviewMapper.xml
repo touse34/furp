@@ -22,5 +22,28 @@
         WHERE ar.phd_id = #{phdId} AND ar.status = 'completed'
         ORDER BY ar.review_year DESC
     </select>
+    
+    <select id="findScheduledReviewByTeacherId" resultType="com.furp.DTO.ReviewInfoVo">
+        SELECT
+            ar.id AS reviewId,
+            p.name AS phdName,
+            ar.review_year AS reviewYear,
+            (SELECT GROUP_CONCAT(sk.skill_name SEPARATOR ',') FROM phd_skill ps JOIN skill sk ON ps.skill_id = sk.id WHERE ps.phd_id = ar.phd_id) AS researchField,
+            s.start_time AS startTime,
+            s.end_time AS endTime,
+            m.location AS location,
+            ar.status
+        FROM
+            annual_review ar
+                JOIN review_assessor ra ON ar.id = ra.annual_review_id
+                JOIN phd p ON ar.phd_id = p.id
+                JOIN user u ON p.user_id = u.id
+                LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL
+                LEFT JOIN meeting_room m ON s.room_id = m.id
+        WHERE
+            ra.teacher_id = #{teacherId} AND ar.status = 'scheduled'
+        GROUP BY
+            ar.id
+    </select>
 
 </mapper>

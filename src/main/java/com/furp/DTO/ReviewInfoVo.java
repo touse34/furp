@@ -27,4 +27,8 @@ public class ReviewInfoVo {
 
     private String comments;
 
+    private String researchField;
+
+    private String phdName;
+
 }

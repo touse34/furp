@@ -1,12 +1,15 @@
 package com.furp.controller;
 
+import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.TeacherProfileDTO;
 import com.furp.DTO.TeacherTimeSelectionDTO;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
 import com.furp.service.TeacherProfileService;
+import com.furp.service.TeacherService;
 import com.furp.service.TimeSlotsService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +23,8 @@ public class TeacherController {
     private TimeSlotsService timeSlotsService;
     @Autowired
     private TeacherProfileService teacherProfileService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      *  2.1 获取当前时间配置
@@ -100,6 +105,26 @@ public class TeacherController {
         teacherProfileService.update(teacherProfileDTO);
         return Result.success();
     }
+
+    /**
+     * 4.1获取用户评审任务
+     * @param
+     * @return
+     */
+    @GetMapping("/v1/teacher/review-tasks")
+    public Result<List<ReviewInfoVo>> getReviewTasks(@RequestAttribute("teacherId") Integer teacherId) {
+        // 这里可以调用相应的服务方法获取评审任务
+        // 假设有一个方法 getReviewTasksByUserId(userId)
+        List<ReviewInfoVo> reviewInfo = teacherService.findReviewScheduleByTeacherId(teacherId);
+
+        if (reviewInfo == null || reviewInfo.isEmpty()) {
+            return Result.error("没有找到评审任务");
+        }
+
+        return Result.success(reviewInfo);
+    }
+
+
 
 
 }
