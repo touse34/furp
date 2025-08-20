@@ -72,17 +72,15 @@ public class PhdController {
      */
     @PutMapping("/student/research-area")
     public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId,
-                                           @RequestBody SkillUpdateRequest request) { // <-- 修改点在这里
+                                           @RequestBody List<Integer> skillIds) { // <-- 修改点在这里
 
-        // 从请求对象中获取 skillId
-        Integer skillId = request.getSkillId();
 
-        System.out.println("修改学生专业，学生ID: " + userId + ", 技能ID: " + skillId);
 
-        PhdSkill phdSkill = phdSkillService.updatestudentSkill(userId, skillId);
-        String skillName=phdSkillService.getSkillNameById(skillId);
-        phdSkill.setSkillName(skillName);
-        return Result.success(phdSkill);
+        System.out.println("修改学生专业，学生ID: " + userId + ", 技能ID: " + skillIds);
+
+        int count = phdSkillService.updatestudentSkill(userId, skillIds);
+
+        return Result.success("成功修改了" + count + "个技能。");
     }
 
     /**

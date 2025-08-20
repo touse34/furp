@@ -1,7 +1,9 @@
 package com.furp.service.impl;
 
+import com.furp.DTO.ReviewInfoVo;
 import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
+import com.furp.mapper.AnnualReviewMapper;
 import com.furp.mapper.SupervisorMapper;
 import com.furp.mapper.TeacherMapper;
 
@@ -20,6 +22,8 @@ public class TeacherImpl implements TeacherService {
 private TeacherMapper teacherMapper;
 @Autowired
 private SupervisorMapper supervisorMapper;
+@Autowired
+private AnnualReviewMapper annualReviewMapper;
 
     public List<Teacher> findAllTeacher(){
         return teacherMapper.selectAll();
@@ -47,5 +51,10 @@ private SupervisorMapper supervisorMapper;
 
 
 
+    }
+
+    @Override
+    public List<ReviewInfoVo> findReviewScheduleByTeacherId(Integer teacherId) {
+        return annualReviewMapper.findScheduledReviewByTeacherId(teacherId);
     }
 }

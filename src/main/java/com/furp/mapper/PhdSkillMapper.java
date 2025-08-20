@@ -22,8 +22,7 @@ public interface PhdSkillMapper {
     int deletePhdSkillsByPhdId(@Param("phdId") Integer phdId);
 
     // 2. 插入新的研究方向
-    @Insert("INSERT INTO phd_skill (phd_id, skill_id) VALUES (#{phdId}, #{skillId})")
-    int insertPhdSkill(@Param("phdId") Integer phdId, @Param("skillId") Integer skillId);
+    int insertPhdSkill(@Param("phdId") Integer phdId, @Param("skillIds") List<Integer> skillIds);
 
     @Select("SELECT skill.skill_name FROM skill WHERE id = #{skillId}")
     String getSkillNameById(@Param("skillId") Integer skillId);

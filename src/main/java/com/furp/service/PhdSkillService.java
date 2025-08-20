@@ -12,7 +12,7 @@ public interface PhdSkillService {
     /*
      * @param phdSkill
      */
-    PhdSkill updatestudentSkill(Integer userId, Integer skillId);
+    int updatestudentSkill(Integer userId, List<Integer> skillIds);
 
     String getSkillNameById(Integer skillId);
 

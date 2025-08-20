@@ -30,7 +30,7 @@ public class PhdSkillImpl implements PhdSkillService {
 
     @Override
     @Transactional
-    public PhdSkill updatestudentSkill(Integer userId, Integer newSkillId) {
+    public int updatestudentSkill(Integer userId, List<Integer> newSkillId) {
         Phd phd = phdMapper.selectPhdByUserId(userId);
         if (phd == null) {
             throw new RuntimeException("学生未找到或未关联PhD信息");
@@ -39,12 +39,12 @@ public class PhdSkillImpl implements PhdSkillService {
         // 2. 删除该学生所有旧的研究方向
         phdSkillMapper.deletePhdSkillsByPhdId(phdId);
         // 3. 插入新的研究方向
-        phdSkillMapper.insertPhdSkill(phdId, newSkillId);
+        int count = phdSkillMapper.insertPhdSkill(phdId, newSkillId);
 
-        PhdSkill phdSkill = new PhdSkill();
-        phdSkill.setPhdId(phdId);
-        phdSkill.setSkillId(newSkillId);
-        return phdSkill;
+        if (count <= 0) {
+            throw new RuntimeException("更新学生研究方向失败");
+        }
+        return count;
     }
 
     @Override

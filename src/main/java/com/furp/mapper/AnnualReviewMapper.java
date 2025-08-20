@@ -58,4 +58,7 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
 
 
     List<ReviewInfoVo> findHistoryReviewById(Integer phdId);
+
+
+    List<ReviewInfoVo> findScheduledReviewByTeacherId(Integer teacherId);
 }
