@@ -1,11 +1,13 @@
 package com.furp.controller;
 
 import com.furp.DTO.TeacherProfileDTO;
+import com.furp.DTO.TeacherResearchAreasResponseDTO;
 import com.furp.DTO.TeacherTimeSelectionDTO;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
 import com.furp.service.TeacherProfileService;
+import com.furp.service.TeacherResearchAreasResponseService;
 import com.furp.service.TimeSlotsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,8 @@ public class TeacherController {
     private TimeSlotsService timeSlotsService;
     @Autowired
     private TeacherProfileService teacherProfileService;
+    @Autowired
+    private TeacherResearchAreasResponseService teacherResearchAreasResponseService;
 
     /**
      *  2.1 获取当前时间配置
@@ -95,11 +99,26 @@ public class TeacherController {
         System.out.println("当前用户ID：" + currentUserId);
 
         // 设置userId为当前用户ID（从JWT获取）
-        teacherProfileDTO.setUserId(String.valueOf(currentUserId));
+        teacherProfileDTO.setUserId(currentUserId);
 
         teacherProfileService.update(teacherProfileDTO);
         return Result.success();
     }
+
+    /**
+     * 7.1获取教师研究领域
+     * @param teacherId
+     * @return
+     */
+    @GetMapping("/v1/teacher/research-areas")
+    public Result<TeacherResearchAreasResponseDTO> getTeacherResearchAreas(@RequestAttribute("teacherId") Integer teacherId) {
+        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+
+        TeacherResearchAreasResponseDTO responseDTO = teacherResearchAreasResponseService.getTeacherResearchAreas(teacherId);
+
+        return Result.success(responseDTO);
+    }
+
 
 
 }

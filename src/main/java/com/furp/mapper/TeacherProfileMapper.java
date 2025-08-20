@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 @Mapper
 public interface TeacherProfileMapper {
 
@@ -20,7 +22,7 @@ public interface TeacherProfileMapper {
             "LEFT JOIN teacher_skill ts ON t.id = ts.teacher_id " +
             "LEFT JOIN skill s ON ts.skill_id = s.id " +
             "where t.user_id = #{userId}")
-    TeacherProfileDTO getById(Integer userId);
+    List<TeacherProfileDTO> getByIdWithResearchAreas(Integer userId);
 
 
     /**
