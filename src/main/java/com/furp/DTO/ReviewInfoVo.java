@@ -31,4 +31,6 @@ public class ReviewInfoVo {
 
     private String phdName;
 
+    private String coAssessor;
+
 }

@@ -28,20 +28,35 @@
             ar.id AS reviewId,
             p.name AS phdName,
             ar.review_year AS reviewYear,
+            t_partner.name AS coAssessor,
             (SELECT GROUP_CONCAT(sk.skill_name SEPARATOR ',') FROM phd_skill ps JOIN skill sk ON ps.skill_id = sk.id WHERE ps.phd_id = ar.phd_id) AS researchField,
             s.start_time AS startTime,
             s.end_time AS endTime,
             m.location AS location,
             ar.status
         FROM
-            annual_review ar
-                JOIN review_assessor ra ON ar.id = ra.annual_review_id
-                JOIN phd p ON ar.phd_id = p.id
-                JOIN user u ON p.user_id = u.id
-                LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL
-                LEFT JOIN meeting_room m ON s.room_id = m.id
+            review_assessor ra_self
+-- 关键步骤：将 review_assessor 表与自身连接，寻找同一场评审的记录
+                JOIN
+            review_assessor ra_partner ON ra_self.annual_review_id = ra_partner.annual_review_id
+-- 关键步骤：排除掉自己，只保留搭档的记录
+                AND
+                                          ra_self.teacher_id != ra_partner.teacher_id
+-- 连接其他表以获取详细信息
+                JOIN
+            teacher t_self ON ra_self.teacher_id = t_self.id
+                JOIN
+            teacher t_partner ON ra_partner.teacher_id = t_partner.id
+                JOIN
+            annual_review ar ON ra_self.annual_review_id = ar.id
+                JOIN
+            phd p ON ar.phd_id = p.id
+                LEFT JOIN
+            schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL
+                LEFT JOIN
+            meeting_room m ON s.room_id = m.id
         WHERE
-            ra.teacher_id = #{teacherId} AND ar.status = 'scheduled'
+            ra_self.teacher_id = #{teacherId} AND ar.status = 'scheduled'
         GROUP BY
             ar.id
     </select>

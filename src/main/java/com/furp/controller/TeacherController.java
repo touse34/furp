@@ -116,8 +116,7 @@ public class TeacherController {
      */
     @GetMapping("/v1/teacher/review-tasks")
     public Result<List<ReviewInfoVo>> getReviewTasks(@RequestAttribute("teacherId") Integer teacherId) {
-        // 这里可以调用相应的服务方法获取评审任务
-        // 假设有一个方法 getReviewTasksByUserId(userId)
+
         List<ReviewInfoVo> reviewInfo = teacherService.findReviewScheduleByTeacherId(teacherId);
 
         return Result.success(reviewInfo);
