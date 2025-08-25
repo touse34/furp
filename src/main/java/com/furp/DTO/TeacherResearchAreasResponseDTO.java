@@ -40,21 +40,21 @@ public class TeacherResearchAreasResponseDTO {
     }
 
     /** 内部类：研究方向详细信息 */
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class ResearchAreaDetail {
-
-        private Long id;
-
-        private String name;
-
-        private String status; // approved, pending, rejected
-
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
-        private LocalDateTime createdAt;
-
-        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
-        private LocalDateTime approvedAt; // 可能为null
-    }
+//    @Data
+//    @NoArgsConstructor
+//    @AllArgsConstructor
+//    public static class ResearchAreaDetail {
+//
+//        private Long id;
+//
+//        private String name;
+//
+//        private String status; // approved, pending, rejected
+//
+//        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+//        private LocalDateTime createdAt;
+//
+//        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+//        private LocalDateTime approvedAt; // 可能为null
+//    }
 }

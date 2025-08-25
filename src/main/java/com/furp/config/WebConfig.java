@@ -30,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
         excludePatterns.add("/admin/users/{roleId}");
         //excludePatterns.add("/api/v1/teacher/profile/{id}");//记得要删掉
         //excludePatterns.add("/api/v1/teacher/profile");
+        excludePatterns.add("/teacher/research-areas");
 
         registry.addInterceptor(jwtUserTokenInterceptor).addPathPatterns("/**").excludePathPatterns(excludePatterns);
 

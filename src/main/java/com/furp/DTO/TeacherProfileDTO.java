@@ -37,6 +37,7 @@ public class TeacherProfileDTO {
     }
 
     @Data
+    @NoArgsConstructor
     @AllArgsConstructor
     public static class ResearchArea {
         private Integer id;

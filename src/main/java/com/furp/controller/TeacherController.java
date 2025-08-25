@@ -1,23 +1,17 @@
 package com.furp.controller;
 
-import com.furp.DTO.ReviewInfoVo;
-import com.furp.DTO.TeacherProfileDTO;
-import com.furp.DTO.TeacherResearchAreasResponseDTO;
-import com.furp.DTO.TeacherTimeSelectionDTO;
+import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
-import com.furp.service.TeacherProfileService;
-import com.furp.service.TeacherResearchAreasResponseService;
-import com.furp.service.TeacherService;
-import com.furp.service.TimeSlotsService;
+import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/teacher")
 public class TeacherController {
 
     @Autowired
@@ -28,6 +22,8 @@ public class TeacherController {
     private TeacherService teacherService;
     @Autowired
     private TeacherResearchAreasResponseService teacherResearchAreasResponseService;
+    @Autowired
+    private TeacherSkillService teacherSkillService;
 
     /**
      *  2.1 获取当前时间配置
@@ -52,7 +48,7 @@ public class TeacherController {
      * @param academicYear
      * @return
      */
-    @GetMapping("/teacher/time-selection")
+    @GetMapping("/user/time-selection")
     public Result<List<TimeConfigVO>> getTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
                                                               @RequestParam String academicYear) {
         List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots(academicYear, teacherId);
@@ -65,7 +61,7 @@ public class TeacherController {
      * @param selectedTime
      * @return
      */
-    @PutMapping("/teacher/time-selection-confirm")
+    @PutMapping("/user/time-selection-confirm")
     public Result updateTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
                                               @RequestBody TeacherTimeSelectionDTO selectedTime) {
         int updatedCount = timeSlotsService.updateTeacherTimeSelection(teacherId, selectedTime);
@@ -92,7 +88,7 @@ public class TeacherController {
     }
 
     /**
-     * 修改教师信息
+     * 修改教师姓名，这个功能已删除
      * @param
      * @return
      */
@@ -114,7 +110,7 @@ public class TeacherController {
      * @param
      * @return
      */
-    @GetMapping("/v1/teacher/review-tasks")
+    @GetMapping("/user/review-tasks")
     public Result<List<ReviewInfoVo>> getReviewTasks(@RequestAttribute("teacherId") Integer teacherId) {
 
         List<ReviewInfoVo> reviewInfo = teacherService.findReviewScheduleByTeacherId(teacherId);
@@ -128,7 +124,7 @@ public class TeacherController {
      * @param teacherId
      * @return
      */
-    @GetMapping("/v1/teacher/research-areas")
+    @GetMapping("/research-areas")
     public Result<TeacherResearchAreasResponseDTO> getTeacherResearchAreas(@RequestAttribute("teacherId") Integer teacherId) {
         System.out.println("获取教师研究方向,教师Id: "+ teacherId);
 
@@ -136,6 +132,19 @@ public class TeacherController {
 
         return Result.success(responseDTO);
     }
+
+    /*
+        7.2添加某个老师的研究方向
+     */
+    @PostMapping("/research-areas")
+    public Result addNewResearchArea(@RequestBody ResearchAreaDetail researchAreaDetail){
+        System.out.println("添加研究方向: " + researchAreaDetail);
+        teacherSkillService.addResearchArea(researchAreaDetail);
+        return Result.success();
+    }
+
+
+
 
 
 
