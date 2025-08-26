@@ -74,7 +74,7 @@ public class TeacherController {
      * @return
      */
 
-    @GetMapping("/v1/teacher/profile")
+    @GetMapping("/profile")
     public Result<TeacherProfileDTO> getTeacherProfile(@RequestAttribute("currentUserId") Integer userId) {
         System.out.println("当前登录者 userId = " + userId);
 
@@ -92,7 +92,7 @@ public class TeacherController {
      * @param
      * @return
      */
-    @PutMapping("/v1/teacher/profile")
+    @PutMapping("/profile")
     public Result updateTeacherProfile(@RequestBody TeacherProfileDTO teacherProfileDTO,
                                        @RequestAttribute("currentUserId") Integer currentUserId) {
         System.out.println("修改教师信息：" + teacherProfileDTO);
@@ -133,6 +133,24 @@ public class TeacherController {
         return Result.success(responseDTO);
     }
 
+
+
+    /*
+    7.2给某一个老师增添他的研究方向, 一次只能添加一个
+     */
+    @PostMapping("/research-areas")
+    public Result<ResearchAreaDetail> addTeacherResearchArea(@RequestAttribute("teacherId") Integer teacherId,
+                                                             @RequestBody ResearchAreaDetail researchAreaDetail){
+
+        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+
+        ResearchAreaDetail insertedResearchArea = teacherResearchAreasResponseService.addResearchArea(teacherId,researchAreaDetail);
+
+        return Result.success(insertedResearchArea);
+    }
+
+
+
     /*
         8.3申请自定义研究方向
      */
@@ -143,15 +161,9 @@ public class TeacherController {
         if (customResearchDirection.getStatus() == null) {
             customResearchDirection.setStatus("pending");
         }
-
-
         //teacherSkillService.addResearchArea(customResearchDirection);
-
-
         // 插入操作并返回插入后的数据（包含id）
         CustomResearchDirection insertedDirection = teacherSkillService.addResearchArea(customResearchDirection);
-
-
         return Result.success(insertedDirection);
     }
 

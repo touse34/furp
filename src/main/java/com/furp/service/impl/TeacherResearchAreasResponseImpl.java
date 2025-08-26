@@ -1,12 +1,13 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.TeacherProfileDTO;
+import com.furp.DTO.ResearchAreaDetail;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
 import com.furp.mapper.TeacherResearchAreasResponseMapper;
 import com.furp.service.TeacherResearchAreasResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,6 +15,35 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
 
     @Autowired
     private TeacherResearchAreasResponseMapper teacherResearchAreasResponseMapper;
+
+    /**
+     * 添加某个老师新的研究方向
+     *
+     * @param teacherId
+     * @param researchAreaDetail 新的研究方向信息
+     * @return 添加后的研究方向信息
+     */
+    @Override
+    public ResearchAreaDetail addResearchArea(Integer teacherId, ResearchAreaDetail researchAreaDetail) {
+        System.out.println("=== 开始添加新研究方向，teacherId: " + teacherId + ", 研究方向: " + researchAreaDetail.getName() + " ===");
+        //1.补全CreatedAt
+        researchAreaDetail.setCreatedAt(LocalDateTime.now());
+        //2.其他字段
+        String skillName = researchAreaDetail.getName();
+        int rows = teacherResearchAreasResponseMapper.addResearchArea(teacherId, skillName);
+        if (rows == 0) {
+            throw new IllegalArgumentException("技能不存在: " + skillName);
+        }
+
+        // 2) 查 skill，拿到 id/status/createdAt/approvedAt
+        ResearchAreaDetail skill = teacherResearchAreasResponseMapper.findSkillByName(skillName);
+        if (skill == null) {
+            throw new IllegalStateException("插入后未能查询到技能: " + skillName);
+        }
+        // 3) 直接把 skill 返回（其中 id/status 来自 skill 表）
+        return skill;
+
+    }
 
     @Override
     public TeacherResearchAreasResponseDTO getTeacherResearchAreas(Integer teacherId) {
@@ -85,40 +115,5 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
             throw e;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

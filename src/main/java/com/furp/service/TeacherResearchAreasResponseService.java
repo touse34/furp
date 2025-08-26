@@ -1,5 +1,6 @@
 package com.furp.service;
 
+import com.furp.DTO.ResearchAreaDetail;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
 
 public interface TeacherResearchAreasResponseService {
@@ -10,4 +11,13 @@ public interface TeacherResearchAreasResponseService {
      * @return 教师所选研究领域列表
      */
     TeacherResearchAreasResponseDTO getTeacherResearchAreas(Integer teacherId);
+
+    /**
+     * 添加某个教师研究领域，一次只添加一个
+     *
+     * @param teacherId
+     * @param researchAreaDetail 教师研究领域信息
+     * @return 添加后的教师研究领域信息
+     */
+    ResearchAreaDetail addResearchArea(Integer teacherId, ResearchAreaDetail researchAreaDetail);
 }
