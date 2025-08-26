@@ -139,10 +139,20 @@ public class TeacherController {
     @PostMapping("/custom-research-direction")
     public Result addNewResearchArea(@RequestBody CustomResearchDirection customResearchDirection){
         System.out.println("添加研究方向: " + customResearchDirection);
+        // 如果前端没有传递 status，设置为默认值 'pending'
+        if (customResearchDirection.getStatus() == null) {
+            customResearchDirection.setStatus("pending");
+        }
 
 
-        teacherSkillService.addResearchArea(customResearchDirection);
-        return Result.success();
+        //teacherSkillService.addResearchArea(customResearchDirection);
+
+
+        // 插入操作并返回插入后的数据（包含id）
+        CustomResearchDirection insertedDirection = teacherSkillService.addResearchArea(customResearchDirection);
+
+
+        return Result.success(insertedDirection);
     }
 
 

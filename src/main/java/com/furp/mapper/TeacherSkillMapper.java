@@ -5,6 +5,7 @@ import com.furp.DTO.ResearchAreaDetail;
 import com.furp.entity.Teacher;
 import com.furp.entity.TeacherSkill;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -20,5 +21,6 @@ public interface TeacherSkillMapper {
      * @param customResearchDirection
      */
     @Insert("insert into skill(skill_name,submittedAt,status) values(#{name},#{submittedAt},'pending')")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(CustomResearchDirection customResearchDirection);
 }

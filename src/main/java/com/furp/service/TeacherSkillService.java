@@ -13,6 +13,6 @@ public interface TeacherSkillService {
     /*
     新增部门
      */
-    void addResearchArea(CustomResearchDirection customResearchDirection);
+    CustomResearchDirection addResearchArea(CustomResearchDirection customResearchDirection);
 
 }

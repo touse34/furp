@@ -24,11 +24,13 @@ public class TeacherSkillImpl implements TeacherSkillService {
     }
 
     @Override
-    public void addResearchArea(CustomResearchDirection customResearchDirection) {
+    public CustomResearchDirection addResearchArea(CustomResearchDirection customResearchDirection) {
         //1.补全CreatedAt
         customResearchDirection.setSubmittedAt(LocalDateTime.now());
         //保存
         teacherSkillMapper.insert(customResearchDirection);
+
+        return customResearchDirection;
 
     }
 
