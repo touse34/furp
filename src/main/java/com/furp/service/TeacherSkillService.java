@@ -1,5 +1,6 @@
 package com.furp.service;
 
+import com.furp.DTO.CustomResearchDirection;
 import com.furp.DTO.ResearchAreaDetail;
 
 import java.util.Map;
@@ -12,6 +13,6 @@ public interface TeacherSkillService {
     /*
     新增部门
      */
-    void addResearchArea(ResearchAreaDetail researchAreaDetail);
+    void addResearchArea(CustomResearchDirection customResearchDirection);
 
 }

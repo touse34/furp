@@ -134,12 +134,14 @@ public class TeacherController {
     }
 
     /*
-        7.2添加某个老师的研究方向
+        8.3申请自定义研究方向
      */
-    @PostMapping("/research-areas")
-    public Result addNewResearchArea(@RequestBody ResearchAreaDetail researchAreaDetail){
-        System.out.println("添加研究方向: " + researchAreaDetail);
-        teacherSkillService.addResearchArea(researchAreaDetail);
+    @PostMapping("/custom-research-direction")
+    public Result addNewResearchArea(@RequestBody CustomResearchDirection customResearchDirection){
+        System.out.println("添加研究方向: " + customResearchDirection);
+
+
+        teacherSkillService.addResearchArea(customResearchDirection);
         return Result.success();
     }
 

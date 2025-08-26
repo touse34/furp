@@ -1,5 +1,6 @@
 package com.furp.mapper;
 
+import com.furp.DTO.CustomResearchDirection;
 import com.furp.DTO.ResearchAreaDetail;
 import com.furp.entity.Teacher;
 import com.furp.entity.TeacherSkill;
@@ -16,8 +17,8 @@ public interface TeacherSkillMapper {
     List<Integer> selectDistinctId();
     /**
      * 添加新的研究领域
-     * @param researchAreaDetail
+     * @param customResearchDirection
      */
-    @Insert("insert ignore into skill(skill_name,createdAt,status) values(#{name},#{createdAt},'pending')")
-    void insert(ResearchAreaDetail researchAreaDetail);
+    @Insert("insert into skill(skill_name,submittedAt,status) values(#{name},#{submittedAt},'pending')")
+    void insert(CustomResearchDirection customResearchDirection);
 }

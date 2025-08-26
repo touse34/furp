@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.furp.DTO.CustomResearchDirection;
 import com.furp.DTO.ResearchAreaDetail;
 import com.furp.mapper.TeacherSkillMapper;
 import com.furp.service.TeacherSkillService;
@@ -23,11 +24,11 @@ public class TeacherSkillImpl implements TeacherSkillService {
     }
 
     @Override
-    public void addResearchArea(ResearchAreaDetail researchAreaDetail) {
+    public void addResearchArea(CustomResearchDirection customResearchDirection) {
         //1.补全CreatedAt
-        researchAreaDetail.setCreatedAt(LocalDateTime.now());
+        customResearchDirection.setSubmittedAt(LocalDateTime.now());
         //保存
-        teacherSkillMapper.insert(researchAreaDetail);
+        teacherSkillMapper.insert(customResearchDirection);
 
     }
 
