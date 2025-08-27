@@ -150,6 +150,20 @@ public class TeacherController {
     }
 
 
+    /*
+    7.3删除某个老师的研究方向
+     */
+
+    @DeleteMapping("research-areas/{areaId}")
+    public Result deleteTeacherResearchArea(@PathVariable("areaId") Long areaId,
+                                            @RequestAttribute("teacherId") Integer teacherId ){
+        System.out.println("删除教师研究方向,研究方向Id: "+ areaId);
+        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+
+        teacherResearchAreasResponseService.deleteResearchArea(teacherId,areaId);
+
+        return Result.success();
+    }
 
     /*
         8.3申请自定义研究方向

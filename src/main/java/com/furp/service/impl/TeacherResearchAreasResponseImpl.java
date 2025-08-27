@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+
 import com.furp.DTO.ResearchAreaDetail;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
 import com.furp.mapper.TeacherResearchAreasResponseMapper;
@@ -42,6 +43,20 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
         }
         // 3) 直接把 skill 返回（其中 id/status 来自 skill 表）
         return skill;
+
+    }
+
+    /**
+     * 删除某个老师某个研究方向
+     *
+     * @param teacherId
+     * @param areaId
+     * @return 删除后的研究方向信息
+     */
+    @Override
+    public void deleteResearchArea(Integer teacherId, Long areaId) {
+        teacherResearchAreasResponseMapper.deleteResearchArea(teacherId, areaId);
+
 
     }
 
