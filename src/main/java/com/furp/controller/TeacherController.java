@@ -8,7 +8,9 @@ import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher")
@@ -164,6 +166,23 @@ public class TeacherController {
 
         return Result.success();
     }
+
+    /*
+    7.4 获取可选研究方向列表+标记该技能老师是否已选
+     */
+    @GetMapping("/research-directions")
+    public Result getResearchDirections(@RequestAttribute("teacherId") Integer teacherId) {
+
+        List<ResearchAreas> directions = teacherResearchAreasResponseService.listWithSelection(teacherId);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("directions", directions);
+
+        return Result.success(response);
+    }
+
+
+
 
     /*
         8.3申请自定义研究方向

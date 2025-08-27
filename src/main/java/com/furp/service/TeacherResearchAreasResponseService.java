@@ -2,7 +2,10 @@ package com.furp.service;
 
 
 import com.furp.DTO.ResearchAreaDetail;
+import com.furp.DTO.ResearchAreas;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
+
+import java.util.List;
 
 public interface TeacherResearchAreasResponseService {
     /**
@@ -26,4 +29,12 @@ public interface TeacherResearchAreasResponseService {
     * 删除某个教师研究领域
      */
     void deleteResearchArea(Integer teacherId, Long areaId);
+
+    /**
+     * 获取教师所选研究领域列表，带选中状态
+     *
+     * @param teacherId 教师ID
+     * @return 教师所选研究领域列表
+     */
+    List<ResearchAreas> listWithSelection(Integer teacherId);
 }

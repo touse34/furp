@@ -2,6 +2,7 @@ package com.furp.service.impl;
 
 
 import com.furp.DTO.ResearchAreaDetail;
+import com.furp.DTO.ResearchAreas;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
 import com.furp.mapper.TeacherResearchAreasResponseMapper;
 import com.furp.service.TeacherResearchAreasResponseService;
@@ -58,6 +59,17 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
         teacherResearchAreasResponseMapper.deleteResearchArea(teacherId, areaId);
 
 
+    }
+
+    /**
+     * 列出某个老师所有研究方向，带选择状态
+     *
+     * @param teacherId
+     * @return 某个老师所有研究方向，带选择状态
+     */
+    @Override
+    public List<ResearchAreas> listWithSelection(Integer teacherId) {
+        return teacherResearchAreasResponseMapper.listWithSelection(teacherId);
     }
 
     @Override
