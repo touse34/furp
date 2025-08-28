@@ -33,8 +33,8 @@ public interface TeacherResearchAreasResponseMapper {
 //
 
     @Insert("""
-        INSERT INTO teacher_skill (teacher_id, skill_id, status)
-        SELECT #{teacherId}, s.id, s.status
+        INSERT INTO teacher_skill (teacher_id, skill_id)
+        SELECT #{teacherId}, s.id
         FROM skill s
         WHERE s.skill_name = #{skillName}
     """)
@@ -46,9 +46,10 @@ public interface TeacherResearchAreasResponseMapper {
         SELECT s.id,
                s.skill_name AS name,
                s.status,
-               s.submittedAt AS createdAt,
+               ts.createdAt AS createdAt,
                s.approvedAt
         FROM skill s
+        JOIN furp.teacher_skill ts on s.id = ts.skill_id
         WHERE s.skill_name = #{skillName}
         LIMIT 1
     """)
