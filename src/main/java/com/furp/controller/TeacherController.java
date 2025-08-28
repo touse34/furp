@@ -140,7 +140,7 @@ public class TeacherController {
     /*
     7.2给某一个老师增添他的研究方向, 一次只能添加一个
      */
-    @PostMapping("/research-areas")
+    @PostMapping("/research-areas/no-use")
     public Result<ResearchAreaDetail> addTeacherResearchArea(@RequestAttribute("teacherId") Integer teacherId,
                                                              @RequestBody ResearchAreaDetail researchAreaDetail){
 
@@ -150,6 +150,23 @@ public class TeacherController {
 
         return Result.success(insertedResearchArea);
     }
+
+    /*
+    7.2.1 一次能加很多个研究方向
+     */
+    @PostMapping("/research-areas")
+    public Result addResearchAreas(@RequestAttribute("teacherId") Integer teacherId, @RequestBody ResearchAreaRequest request) {
+        // 假设通过某种方式（如 Sa-Token, Spring Security）获取当前登录的教师ID
+        // 例如: Integer teacherId = StpUtil.getLoginIdAsInt();
+
+
+        List<ResearchAreaDetail> insertedAreas = teacherResearchAreasResponseService.addResearchAreasForTeacher(teacherId, request.getSkillIds());
+
+        // 根据响应示例，我们只返回第一个添加成功的对象
+        // 如果需要返回所有添加的对象，可以将 ApiResponse 的泛型改为 List<Skill>
+        return Result.success(insertedAreas);
+    }
+
 
 
     /*

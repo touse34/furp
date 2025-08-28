@@ -5,6 +5,7 @@ import com.furp.DTO.ResearchAreas;
 import com.furp.DTO.TeacherResearchAreasResponseDTO;
 import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -80,4 +81,34 @@ public interface TeacherResearchAreasResponseMapper {
             "    WHERE s.status = 'approved'\n" +
             "    ORDER BY s.skill_name ASC")
     List<ResearchAreas> listWithSelection(Integer teacherId);
+    /**
+     * 根据 ID 列表批量查询技能详情
+     */
+    @Select("<script>\n" +
+            "        SELECT\n" +
+            "            id,\n" +
+            "            skill_name AS name,\n" +
+            "            status,\n" +
+            "            submittedAt AS createdAt,\n" +
+            "            approvedAt\n" +
+            "        FROM\n" +
+            "            skill\n" +
+            "        WHERE\n" +
+            "            id IN\n" +
+            "            <foreach collection=\"skillIds\" item=\"skillId\" open=\"(\" separator=\",\" close=\")\">\n" +
+            "                #{skillId}\n" +
+            "            </foreach>\n" +
+            "        </script>")
+    List<ResearchAreaDetail> findSkillsByIds(@Param("skillIds") List<Long> skillIds);
+    /**
+     * 查询教师与技能的关联记录数量
+     */
+    @Select("SELECT COUNT(*) FROM teacher_skill WHERE teacher_id = #{teacherId} AND skill_id = #{skillId}")
+    Integer findLinkCount(@Param("teacherId") Integer teacherId,@Param("skillId") Long skillId);
+
+    /**
+     * 插入一条新的教师-技能关联记录
+     */
+    @Insert("INSERT INTO teacher_skill (teacher_id, skill_id, createdAt) VALUES (#{teacherId}, #{skillId}, #{createdAt})")
+    void insertLink(@Param("teacherId") Integer teacherId,@Param("skillId") Long skillId,@Param("createdAt") LocalDateTime now);
 }

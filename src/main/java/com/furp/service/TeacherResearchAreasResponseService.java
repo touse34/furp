@@ -30,11 +30,13 @@ public interface TeacherResearchAreasResponseService {
      */
     void deleteResearchArea(Integer teacherId, Long areaId);
 
-    /**
+    /**Long
      * 获取教师所选研究领域列表，带选中状态
      *
      * @param teacherId 教师ID
      * @return 教师所选研究领域列表
      */
     List<ResearchAreas> listWithSelection(Integer teacherId);
+
+    List<ResearchAreaDetail> addResearchAreasForTeacher(Integer teacherId, List<Long> skillIds);
 }
