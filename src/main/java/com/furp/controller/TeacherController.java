@@ -160,10 +160,10 @@ public class TeacherController {
     7.2.1 一次能加很多个研究方向
      */
     @PostMapping("/research-areas")
-    public Result addResearchAreas(@RequestAttribute("teacherId") Integer teacherId, @RequestBody ResearchAreaRequest request) {
+    public Result addResearchAreas(@RequestBody ResearchAreaRequest request) {
         // 假设通过某种方式（如 Sa-Token, Spring Security）获取当前登录的教师ID
         // 例如: Integer teacherId = StpUtil.getLoginIdAsInt();
-
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         List<ResearchAreaDetail> insertedAreas = teacherResearchAreasResponseService.addResearchAreasForTeacher(teacherId, request.getSkillIds());
 
