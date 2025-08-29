@@ -1,5 +1,7 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.LoginVo;
 import com.furp.DTO.PhdUserInfo;
@@ -9,21 +11,16 @@ import com.furp.entity.Result;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
 import com.furp.mapper.PhdMapper;
-import com.furp.mapper.PhdUserInfoMapper;
 import com.furp.mapper.TeacherMapper;
-import com.furp.properties.JwtProperties;
 import com.furp.service.PhdUserInfoService;
 import com.furp.service.UserService;
-import com.furp.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -33,8 +30,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private JwtProperties jwtProperties;
     @Autowired
     private TeacherMapper teacherMapper;
     @Autowired
@@ -78,41 +73,9 @@ public Result listUsers(@PathVariable Integer roleId){
 
         User user = userService.login(loginDTO);
 
-        Map<String, Object> claims = new HashMap<>();
-//初版
-//        switch (user.getRoleId()){
-//            case 1 :
-//                Teacher teacher = teacherMapper.selectTeacherByUserId(user.getId());
-//
-//                LoginVo vo1 = LoginVo.builder().userId(user.getId())
-//                        .role("teacher")
-//                        .name(teacher.getName())
-//                        .teacherId(teacher.getId())
-//                        .build();
-//
-//                return Result.success(vo1);
-//
-//
-//            case 2 :
-//                Phd phd = phdMapper.selectPhdByUserId(user.getId());
-//                LoginVo vo2 = LoginVo.builder().userId(user.getId())
-//                        .role("phd")
-//                        .name(phd.getName())
-//                        .phdId(phd.getId())
-//                        .build();
-//
-//                return Result.success(vo2);
-//
-//            case 3 :
-//                LoginVo vo3 = LoginVo.builder().userId(user.getId())
-//                        .role("admin")
-//                        .name("admin")
-//                        .build();
-//
-//                return Result.success(vo3);
-//        }
+        StpUtil.login(user.getId());
 
-//ai改进版
+        SaSession session = StpUtil.getSession();
 
         // 2. 使用 switch 表达式来构建 LoginVo 对象
         LoginVo loginVo = switch (user.getRoleId()) {
@@ -120,11 +83,7 @@ public Result listUsers(@PathVariable Integer roleId){
                 Teacher teacher = teacherMapper.selectTeacherByUserId(user.getId());
                 if (teacher == null) throw new RuntimeException("教师信息不存在");
 
-                claims.put("userId", user.getId());
-                claims.put("name", teacher.getName());
-                claims.put("role", "teacher");
-                claims.put("teacherId", teacher.getId());
-
+                session.set("teacherId", teacher.getId());
                 yield LoginVo.builder().userId(user.getId())
                         .role("teacher")
                         .name(teacher.getName())
@@ -134,11 +93,8 @@ public Result listUsers(@PathVariable Integer roleId){
             case 2 -> {
                 Phd phd = phdMapper.selectPhdByUserId(user.getId());
                 if (phd == null) throw new RuntimeException("博士生信息不存在");
-                claims.put("userId", user.getId());
-                claims.put("name", phd.getName());
-                claims.put("role", "phd");
-                claims.put("phdId", phd.getId());
 
+                session.set("phdId", phd.getId());
                 yield LoginVo.builder().userId(user.getId())
                         .role("phd")
                         .name(phd.getName())
@@ -146,9 +102,6 @@ public Result listUsers(@PathVariable Integer roleId){
                         .build();
             }
             case 3 -> {
-                claims.put("userId", user.getId());
-                claims.put("name", "Admin"); // 管理员姓名可以从user表获取或写死
-                claims.put("role", "admin");
                 yield LoginVo.builder().userId(user.getId())
                     .role("admin")
                     .name("admin")
@@ -157,12 +110,8 @@ public Result listUsers(@PathVariable Integer roleId){
             default -> throw new RuntimeException("无效的用户角色: " + user.getRoleId());
         };
 
-        String token = JwtUtil.createJWT(
-                jwtProperties.getSecretKey(),
-                jwtProperties.getTtl(),
-                claims);
+        String token = StpUtil.getTokenValue();
 
-        // 4. 将 token 设置到 vo 中 (见下方说明)
         loginVo.setToken(token);
 
         return Result.success(loginVo);
@@ -170,8 +119,7 @@ public Result listUsers(@PathVariable Integer roleId){
 
     @PostMapping("/logout")
     public Result<String> logout() {
-        // 这里可以实现登出逻辑，比如清除用户的会话等
-        // 但通常 JWT 的登出是无状态的，前端只需删除本地存储的 token 即可
+        StpUtil.logout();
         return Result.success("登出成功");
     }
 

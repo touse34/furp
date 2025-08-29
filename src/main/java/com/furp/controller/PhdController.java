@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PhdInfo;
 import com.furp.DTO.SkillUpdateRequest;
@@ -51,7 +52,8 @@ public class PhdController {
      * @return
      */
     @GetMapping("/student/info")
-    public Result<PhdInfo> getInfo(@RequestAttribute("currentUserId") Integer userId){
+    public Result<PhdInfo> getInfo(){
+        Integer userId = StpUtil.getLoginIdAsInt();
 
 
         System.out.println("当前登录者 userId = " + userId);
@@ -71,10 +73,9 @@ public class PhdController {
     修改技能 3.1.2
      */
     @PutMapping("/student/research-area")
-    public Result<PhdSkill> updatePhdSkill(@RequestAttribute("currentUserId") Integer userId,
-                                           @RequestBody List<Integer> skillIds) { // <-- 修改点在这里
+    public Result<PhdSkill> updatePhdSkill(@RequestBody List<Integer> skillIds) { // <-- 修改点在这里
 
-
+        Integer userId = StpUtil.getLoginIdAsInt();
 
         System.out.println("修改学生专业，学生ID: " + userId + ", 技能ID: " + skillIds);
 
@@ -87,7 +88,8 @@ public class PhdController {
      * 获取当前年审状态 3.2.1
      */
     @GetMapping("/review/current")
-    public Result<ReviewInfoVo> findCurrentReview(@RequestAttribute("phdId") Integer phdId){
+    public Result<ReviewInfoVo> findCurrentReview(){
+        Integer phdId = StpUtil.getSession().getInt("phdId");
         ReviewInfoVo vo = annualReviewService.getCurrentReviewDetails(phdId);
         return Result.success(vo);
 
@@ -97,10 +99,9 @@ public class PhdController {
      * 3.2.2 获取年审历史记录
      */
     @GetMapping("/review/history")
-    public Result<PageResult<ReviewInfoVo>> findHistoryReview(@RequestAttribute("phdId") Integer phdId,
-                                                        @RequestParam(defaultValue = "1") int page,
+    public Result<PageResult<ReviewInfoVo>> findHistoryReview(@RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "0") int size) {
-
+        Integer phdId = StpUtil.getSession().getInt("phdId");
         PageResult<ReviewInfoVo> vo = annualReviewService.getHistoryReviewDetails(phdId, page, size);
         return Result.success(vo);
     }
@@ -109,7 +110,8 @@ public class PhdController {
      * 3.4.1 查询该学生技能
      */
     @GetMapping("/research-areas")
-    public Result<List<SkillSelectionVO>> getStudentSkillOptions(@RequestAttribute("phdId") Integer phdId){
+    public Result<List<SkillSelectionVO>> getStudentSkillOptions(){
+        Integer phdId = StpUtil.getSession().getInt("phdId");
         List<SkillSelectionVO> skillOptions = phdSkillService.getSkillSelectionForPhd(phdId);
         return Result.success(skillOptions);
     }
@@ -119,8 +121,8 @@ public class PhdController {
      */
     @GetMapping("/notices")
     public Result<PageResult<NoticesVO>> getNoticeList (@RequestParam(defaultValue = "1") int page,
-                                                        @RequestParam(defaultValue = "0") int size,
-                                                        @RequestAttribute("phdId") Integer phdId){
+                                                        @RequestParam(defaultValue = "0") int size){
+        Integer phdId = StpUtil.getSession().getInt("phdId");
         PageResult<NoticesVO> notices = noticesService.getNoticeList(page, size, phdId);
         return Result.success(notices);
     }
@@ -133,9 +135,8 @@ public class PhdController {
      */
     @PutMapping("/notices/{noticeId}/read")
     public Result<Void> markAsRead( //对于一个不返回任何具体业务数据、只返回成功或失败状态的接口，最佳实践是使用 Void 作为泛型类型。
-            @PathVariable Integer noticeId,
-            @RequestAttribute("phdId") Integer phdId) { // 从Token解析出的phdId
-
+            @PathVariable Integer noticeId) {
+        Integer phdId = StpUtil.getSession().getInt("phdId");
         boolean success = noticesService.markNoticeAsRead(noticeId, phdId);
 
         if (success) {
