@@ -8,8 +8,11 @@ import com.furp.mapper.TeacherResearchAreasResponseMapper;
 import com.furp.service.TeacherResearchAreasResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -57,6 +60,35 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
     @Override
     public void deleteResearchArea(Integer teacherId, Long areaId) {
         teacherResearchAreasResponseMapper.deleteResearchArea(teacherId, areaId);
+
+
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class) // 建议指定对所有异常都回滚
+    public List<ResearchAreaDetail> addResearchAreasForTeacher(Integer teacherId, List<Long> skillIds) {
+
+        // 1. 处理边界情况：如果传入的列表为空或null，直接返回空列表
+        if (skillIds == null || skillIds.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+
+        // The ID-based logic we discussed
+        List<ResearchAreaDetail> existingSkills = teacherResearchAreasResponseMapper.findSkillsByIds(skillIds);
+
+        if (existingSkills.size() != skillIds.size()) {
+            throw new IllegalArgumentException("操作失败，部分研究方向ID无效或不存在。");
+        }
+
+        for (Long skillId : skillIds) {
+            Integer linkCount = teacherResearchAreasResponseMapper.findLinkCount(teacherId, skillId);
+            if (linkCount == 0) {
+                teacherResearchAreasResponseMapper.insertLink(teacherId, skillId, LocalDateTime.now());
+            }
+        }
+
+        return existingSkills;
 
 
     }
