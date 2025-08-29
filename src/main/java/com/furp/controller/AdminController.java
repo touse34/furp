@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.furp.DTO.TimeSlot;
 import com.furp.DTO.UpdateTimeSlotsDTO;
 import com.furp.entity.AvailableTime;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
+@SaCheckRole("admin")
 public class AdminController {
 
     @Autowired

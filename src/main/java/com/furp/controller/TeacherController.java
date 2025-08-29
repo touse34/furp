@@ -1,5 +1,7 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
@@ -14,6 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher")
+@SaCheckRole("teacher")
 public class TeacherController {
 
     @Autowired
@@ -51,8 +54,8 @@ public class TeacherController {
      * @return
      */
     @GetMapping("/user/time-selection")
-    public Result<List<TimeConfigVO>> getTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
-                                                              @RequestParam String academicYear) {
+    public Result<List<TimeConfigVO>> getTeacherTimeSelection(@RequestParam String academicYear) {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
         List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots(academicYear, teacherId);
 
         return Result.success(list);
@@ -64,20 +67,21 @@ public class TeacherController {
      * @return
      */
     @PutMapping("/user/time-selection-confirm")
-    public Result updateTeacherTimeSelection(@RequestAttribute("teacherId") Integer teacherId,
-                                              @RequestBody TeacherTimeSelectionDTO selectedTime) {
+    public Result updateTeacherTimeSelection(@RequestBody TeacherTimeSelectionDTO selectedTime) {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
         int updatedCount = timeSlotsService.updateTeacherTimeSelection(teacherId, selectedTime);
         return Result.success("成功更新了" + updatedCount + "个可用时间段。");
     }
 
     /**
      * 获取教师基本信息
-     * @param userId
+     * @param
      * @return
      */
 
     @GetMapping("/profile")
-    public Result<TeacherProfileDTO> getTeacherProfile(@RequestAttribute("currentUserId") Integer userId) {
+    public Result<TeacherProfileDTO> getTeacherProfile() {
+        Integer userId = StpUtil.getLoginIdAsInt();
         System.out.println("当前登录者 userId = " + userId);
 
         TeacherProfileDTO teacherProfileDTO = teacherProfileService.getById(userId);
@@ -95,8 +99,8 @@ public class TeacherController {
      * @return
      */
     @PutMapping("/profile")
-    public Result updateTeacherProfile(@RequestBody TeacherProfileDTO teacherProfileDTO,
-                                       @RequestAttribute("currentUserId") Integer currentUserId) {
+    public Result updateTeacherProfile(@RequestBody TeacherProfileDTO teacherProfileDTO) {
+        Integer currentUserId = StpUtil.getLoginIdAsInt();
         System.out.println("修改教师信息：" + teacherProfileDTO);
         System.out.println("当前用户ID：" + currentUserId);
 
@@ -113,7 +117,8 @@ public class TeacherController {
      * @return
      */
     @GetMapping("/user/review-tasks")
-    public Result<List<ReviewInfoVo>> getReviewTasks(@RequestAttribute("teacherId") Integer teacherId) {
+    public Result<List<ReviewInfoVo>> getReviewTasks() {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         List<ReviewInfoVo> reviewInfo = teacherService.findReviewScheduleByTeacherId(teacherId);
 
@@ -123,12 +128,12 @@ public class TeacherController {
 
     /**
      * 7.1获取教师研究领域
-     * @param teacherId
+     * @param
      * @return
      */
     @GetMapping("/research-areas")
-    public Result<TeacherResearchAreasResponseDTO> getTeacherResearchAreas(@RequestAttribute("teacherId") Integer teacherId) {
-        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+    public Result<TeacherResearchAreasResponseDTO> getTeacherResearchAreas() {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         TeacherResearchAreasResponseDTO responseDTO = teacherResearchAreasResponseService.getTeacherResearchAreas(teacherId);
 
@@ -140,11 +145,11 @@ public class TeacherController {
     /*
     7.2给某一个老师增添他的研究方向, 一次只能添加一个
      */
-    @PostMapping("/research-areas/no-use")
-    public Result<ResearchAreaDetail> addTeacherResearchArea(@RequestAttribute("teacherId") Integer teacherId,
-                                                             @RequestBody ResearchAreaDetail researchAreaDetail){
 
-        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+    @PostMapping("/research-areas/no-use")
+    public Result<ResearchAreaDetail> addTeacherResearchArea(@RequestBody ResearchAreaDetail researchAreaDetail){
+
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         ResearchAreaDetail insertedResearchArea = teacherResearchAreasResponseService.addResearchArea(teacherId,researchAreaDetail);
 
@@ -155,10 +160,10 @@ public class TeacherController {
     7.2.1 一次能加很多个研究方向
      */
     @PostMapping("/research-areas")
-    public Result addResearchAreas(@RequestAttribute("teacherId") Integer teacherId, @RequestBody ResearchAreaRequest request) {
+    public Result addResearchAreas(@RequestBody ResearchAreaRequest request) {
         // 假设通过某种方式（如 Sa-Token, Spring Security）获取当前登录的教师ID
         // 例如: Integer teacherId = StpUtil.getLoginIdAsInt();
-
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         List<ResearchAreaDetail> insertedAreas = teacherResearchAreasResponseService.addResearchAreasForTeacher(teacherId, request.getSkillIds());
 
@@ -174,10 +179,8 @@ public class TeacherController {
      */
 
     @DeleteMapping("research-areas/{areaId}")
-    public Result deleteTeacherResearchArea(@PathVariable("areaId") Long areaId,
-                                            @RequestAttribute("teacherId") Integer teacherId ){
-        System.out.println("删除教师研究方向,研究方向Id: "+ areaId);
-        System.out.println("获取教师研究方向,教师Id: "+ teacherId);
+    public Result deleteTeacherResearchArea(@PathVariable("areaId") Long areaId){
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         teacherResearchAreasResponseService.deleteResearchArea(teacherId,areaId);
 
@@ -188,7 +191,8 @@ public class TeacherController {
     7.4 获取可选研究方向列表+标记该技能老师是否已选
      */
     @GetMapping("/research-directions")
-    public Result getResearchDirections(@RequestAttribute("teacherId") Integer teacherId) {
+    public Result getResearchDirections() {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         List<ResearchAreas> directions = teacherResearchAreasResponseService.listWithSelection(teacherId);
 
