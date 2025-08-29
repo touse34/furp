@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PhdInfo;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/phd")
+@SaCheckRole("phd")
 public class PhdController {
     @Autowired
     private PhdInfoService phdinfoService;

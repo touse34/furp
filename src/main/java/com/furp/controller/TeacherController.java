@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher")
+@SaCheckRole("teacher")
 public class TeacherController {
 
     @Autowired

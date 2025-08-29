@@ -82,7 +82,7 @@ public Result listUsers(@PathVariable Integer roleId){
             case 1 -> {
                 Teacher teacher = teacherMapper.selectTeacherByUserId(user.getId());
                 if (teacher == null) throw new RuntimeException("教师信息不存在");
-
+                session.set("role", "teacher");
                 session.set("teacherId", teacher.getId());
                 yield LoginVo.builder().userId(user.getId())
                         .role("teacher")
@@ -93,7 +93,7 @@ public Result listUsers(@PathVariable Integer roleId){
             case 2 -> {
                 Phd phd = phdMapper.selectPhdByUserId(user.getId());
                 if (phd == null) throw new RuntimeException("博士生信息不存在");
-
+                session.set("role", "phd");
                 session.set("phdId", phd.getId());
                 yield LoginVo.builder().userId(user.getId())
                         .role("phd")
@@ -102,6 +102,7 @@ public Result listUsers(@PathVariable Integer roleId){
                         .build();
             }
             case 3 -> {
+                session.set("role", "admin");
                 yield LoginVo.builder().userId(user.getId())
                     .role("admin")
                     .name("admin")
