@@ -160,7 +160,7 @@ public class TeacherController {
     7.2.1 一次能加很多个研究方向
      */
     @PostMapping("/research-areas")
-    public Result addResearchAreas(@RequestBody ResearchAreaRequest request) {
+    public Result<List<ResearchAreaDetail>> addResearchAreas(@RequestBody ResearchAreaRequest request) {
         // 假设通过某种方式（如 Sa-Token, Spring Security）获取当前登录的教师ID
         // 例如: Integer teacherId = StpUtil.getLoginIdAsInt();
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
@@ -179,7 +179,7 @@ public class TeacherController {
      */
 
     @DeleteMapping("research-areas/{areaId}")
-    public Result deleteTeacherResearchArea(@PathVariable("areaId") Long areaId){
+    public Result<Void> deleteTeacherResearchArea(@PathVariable("areaId") Long areaId){
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         teacherResearchAreasResponseService.deleteResearchArea(teacherId,areaId);
@@ -191,15 +191,15 @@ public class TeacherController {
     7.4 获取可选研究方向列表+标记该技能老师是否已选
      */
     @GetMapping("/research-directions")
-    public Result getResearchDirections() {
+    public Result<List<ResearchAreas>> getResearchDirections() {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
         List<ResearchAreas> directions = teacherResearchAreasResponseService.listWithSelection(teacherId);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("directions", directions);
+//        Map<String, Object> response = new HashMap<>();
+//        response.put("directions", directions);
 
-        return Result.success(response);
+        return Result.success(directions);
     }
 
 
@@ -209,7 +209,7 @@ public class TeacherController {
         8.3申请自定义研究方向
      */
     @PostMapping("/custom-research-direction")
-    public Result addNewResearchArea(@RequestBody CustomResearchDirection customResearchDirection){
+    public Result<CustomResearchDirection> addNewResearchArea(@RequestBody CustomResearchDirection customResearchDirection){
         System.out.println("添加研究方向: " + customResearchDirection);
         // 如果前端没有传递 status，设置为默认值 'pending'
         if (customResearchDirection.getStatus() == null) {
