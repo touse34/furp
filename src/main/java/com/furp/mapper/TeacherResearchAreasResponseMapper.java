@@ -111,4 +111,24 @@ public interface TeacherResearchAreasResponseMapper {
      */
     @Insert("INSERT INTO teacher_skill (teacher_id, skill_id, createdAt) VALUES (#{teacherId}, #{skillId}, #{createdAt})")
     void insertLink(@Param("teacherId") Integer teacherId,@Param("skillId") Long skillId,@Param("createdAt") LocalDateTime now);
+
+    /*
+    * 获取教师所选研究领域信息
+     */
+    @Select("SELECT \n" +
+            "s.id\n" +
+            "FROM teacher_skill ts\n" +
+            "JOIN skill s ON ts.skill_id = s.id\n" +
+            "WHERE ts.teacher_id = #{teacherId};")
+    List<Long> findSkillIdsByTeacherId(Integer teacherId);
+
+    /*
+    * 批量删除教师-技能关联记录
+      */
+    void batchDeleteLinks(@Param("teacherId") Integer teacherId, @Param("idsToDelete") List<Long> idsToDelete);
+
+    /**
+     * 批量插入新的教师-技能关联记录
+     */
+    void batchInsertLinks(Integer teacherId, List<Long> idsToAdd, LocalDateTime now);
 }
