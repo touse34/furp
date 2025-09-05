@@ -39,4 +39,12 @@ public interface TeacherResearchAreasResponseService {
     List<ResearchAreas> listWithSelection(Integer teacherId);
 
     List<ResearchAreaDetail> addResearchAreasForTeacher(Integer teacherId, List<Long> skillIds);
+
+    /**
+     * 更新教师所选研究领域列表
+     *
+     * @param teacherId 教师ID
+     * @param finalAreaIds 最终所选研究领域ID列表
+     */
+    void updateTeacherResearchAreas(Integer teacherId, List<Long> finalAreaIds);
 }

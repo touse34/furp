@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasResponseService {
@@ -60,6 +61,50 @@ public class TeacherResearchAreasResponseImpl implements TeacherResearchAreasRes
     @Override
     public void deleteResearchArea(Integer teacherId, Long areaId) {
         teacherResearchAreasResponseMapper.deleteResearchArea(teacherId, areaId);
+
+
+    }
+    /**
+     * 【核心实现】
+     * 更新（同步）教师的研究方向列表。
+     * 此方法会保留未变动研究方向的原始 createdAt 时间。
+     *
+     * @param teacherId    教师ID
+     * @param finalAreaIds 前端传递的最终研究方向ID列表
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class) // 关键！保证所有数据库操作的原子性
+    public void updateTeacherResearchAreas(Integer teacherId, List<Long> finalAreaIds) {
+        // 1. 创建一个新的、事实上的final变量来处理null情况
+        //    使用 Collections.emptyList() 比 new ArrayList<>() 更高效
+        final List<Long> effectiveFinalIds = (finalAreaIds == null) ?
+                Collections.emptyList() : finalAreaIds;
+
+        // 2. 从数据库获取该老师【当前拥有】的研究方向ID列表
+        List<Long> currentDbIds = teacherResearchAreasResponseMapper.findSkillIdsByTeacherId(teacherId);
+
+        // 3. 计算差异
+        // 3.1 【需要新增的ID】：在最终列表(effectiveFinalIds)中，但不在数据库当前列表(currentDbIds)中
+        List<Long> idsToAdd = effectiveFinalIds.stream()
+                .filter(id -> !currentDbIds.contains(id))
+                .collect(Collectors.toList());
+
+        // 3.2 【需要删除的ID】：在数据库当前列表(currentDbIds)中，但不在最终列表(effectiveFinalIds)中
+        //     在 Lambda 表达式中使用这个新的、不会被改变的 effectiveFinalIds 引用
+        List<Long> idsToDelete = currentDbIds.stream()
+                .filter(id -> !effectiveFinalIds.contains(id))
+                .collect(Collectors.toList());
+
+        // 4. 执行数据库操作
+        // 4.1 如果有需要删除的，就执行批量删除
+        if (!idsToDelete.isEmpty()) {
+            teacherResearchAreasResponseMapper.batchDeleteLinks(teacherId, idsToDelete);
+        }
+
+        // 4.2 如果有需要新增的，就执行批量新增
+        if (!idsToAdd.isEmpty()) {
+            teacherResearchAreasResponseMapper.batchInsertLinks(teacherId, idsToAdd, LocalDateTime.now());
+        }
 
 
     }

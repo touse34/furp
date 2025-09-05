@@ -175,7 +175,7 @@ public class TeacherController {
 
 
     /*
-    7.3删除某个老师的研究方向
+    7.3删除某个老师的研究方向 一次只能减一个
      */
 
     @DeleteMapping("research-areas/{areaId}")
@@ -186,6 +186,31 @@ public class TeacherController {
 
         return Result.success();
     }
+
+    /*
+    修改某一个老师的研究方向
+     */
+    @PutMapping("/research-areas")
+    public Result<Void> updateTeacherResearchArea(@RequestBody UpdateResearchAreasRequestDTO request){
+
+        // 2. 从用户会话中安全地获取当前登录的教师ID
+        //    这是为了确保老师A不能修改老师B的研究方向
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
+
+        // 3. 从请求体DTO中获取前端发送过来的最终ID列表
+        List<Long> finalAreaIds = request.getResearchAreaIds();
+
+        // 4. 调用 Service 层，将业务逻辑交给它处理
+        //    Service层会执行我们之前写的“计算差异并更新”的复杂操作
+        teacherResearchAreasResponseService.updateTeacherResearchAreas(teacherId, finalAreaIds);
+
+
+
+        return Result.success();
+    }
+
+
+
 
     /*
     7.4 获取可选研究方向列表+标记该技能老师是否已选

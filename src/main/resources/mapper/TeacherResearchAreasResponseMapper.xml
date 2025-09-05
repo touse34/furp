@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.furp.mapper.TeacherResearchAreasResponseMapper">
+
+    <delete id="batchDeleteLinks">
+        DELETE FROM teacher_skill
+        WHERE teacher_id = #{teacherId}
+        AND skill_id IN
+        <foreach item="id" collection="idsToDelete" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsertLinks">
+        INSERT INTO teacher_skill (teacher_id, skill_id, createdAt)
+        VALUES
+        <foreach collection="idsToAdd" item="skillId" separator=",">
+            (#{teacherId}, #{skillId}, #{now})
+        </foreach>
+    </insert>
+
+
+</mapper>
