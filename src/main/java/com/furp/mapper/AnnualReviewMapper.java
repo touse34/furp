@@ -6,6 +6,7 @@ import com.furp.DTO.PendingReviewDto;
 import com.furp.entity.AnnualReview;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -61,4 +62,7 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
 
 
     List<ReviewInfoVo> findScheduledReviewByTeacherId(Integer teacherId);
+
+    @Update("UPDATE annual_review SET status = #{status} WHERE id = #{id}")
+    int updateReviewStatusById(@Param("id") Integer id, @Param("status") String status);
 }

@@ -1,9 +1,12 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.ReviewInfoVo;
+import com.furp.DTO.StatusUpdateDTO;
 import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
+import com.furp.exception.AccessDeniedException;
 import com.furp.mapper.AnnualReviewMapper;
+import com.furp.mapper.ReviewAssessorMapper;
 import com.furp.mapper.SupervisorMapper;
 import com.furp.mapper.TeacherMapper;
 
@@ -24,6 +27,8 @@ private TeacherMapper teacherMapper;
 private SupervisorMapper supervisorMapper;
 @Autowired
 private AnnualReviewMapper annualReviewMapper;
+    @Autowired
+    private ReviewAssessorMapper reviewAssessorMapper;
 
     public List<Teacher> findAllTeacher(){
         return teacherMapper.selectAll();
@@ -56,5 +61,17 @@ private AnnualReviewMapper annualReviewMapper;
     @Override
     public List<ReviewInfoVo> findReviewScheduleByTeacherId(Integer teacherId) {
         return annualReviewMapper.findScheduledReviewByTeacherId(teacherId);
+    }
+
+    @Override
+    public int updateTaskStatus(Integer taskId, Integer currentTeacherId, StatusUpdateDTO dto) {
+        int count = reviewAssessorMapper.isExist( currentTeacherId, taskId);
+        if(count==0){
+            throw new AccessDeniedException("你无权更新该任务的状态");
+        }
+
+        return annualReviewMapper.updateReviewStatusById(taskId, dto.getStatus());
+
+
     }
 }
