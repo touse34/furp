@@ -4,9 +4,11 @@ import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
+import com.furp.VO.NoticesVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
 import com.furp.exception.AccessDeniedException;
+import com.furp.response.PageResult;
 import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,8 @@ public class TeacherController {
     private TeacherResearchAreasResponseService teacherResearchAreasResponseService;
     @Autowired
     private TeacherSkillService teacherSkillService;
+    @Autowired
+    private NoticesService noticesService;
 
     /**
      *  2.1 获取当前时间配置
@@ -143,6 +147,17 @@ public class TeacherController {
             return Result.error(403, e.getMessage());
         }
 
+    }
+
+    /**
+     *5.1获取用户通知
+     */
+    @GetMapping("/user/notifications")
+    public Result<PageResult<NoticesVO>> getUserNotifications(@RequestParam(defaultValue = "1") int page,
+                                                        @RequestParam(defaultValue = "0") int size) {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
+        PageResult<NoticesVO> notices = noticesService.getNoticeList(page, size, teacherId, "teacher");
+        return Result.success(notices);
     }
 
 
