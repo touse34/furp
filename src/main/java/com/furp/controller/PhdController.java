@@ -125,7 +125,7 @@ public class PhdController {
     public Result<PageResult<NoticesVO>> getNoticeList (@RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "0") int size){
         Integer phdId = StpUtil.getSession().getInt("phdId");
-        PageResult<NoticesVO> notices = noticesService.getNoticeList(page, size, phdId);
+        PageResult<NoticesVO> notices = noticesService.getNoticeList(page, size, phdId, "phd");
         return Result.success(notices);
     }
 
@@ -147,7 +147,6 @@ public class PhdController {
             return Result.error("操作失败，请稍后再试");
         }
     }
-
 
 
 

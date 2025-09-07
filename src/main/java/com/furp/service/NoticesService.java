@@ -10,7 +10,7 @@ public interface NoticesService {
      * 获取所有通知
      * @return 通知列表
      */
-    public PageResult<NoticesVO> getNoticeList(int pageNum, int pageSize, Integer phdId);
+    public PageResult<NoticesVO> getNoticeList(int pageNum, int pageSize, Integer Id, String role);
 
     boolean markNoticeAsRead(Integer noticeId, Integer phdId);
 

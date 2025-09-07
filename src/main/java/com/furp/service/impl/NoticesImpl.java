@@ -11,6 +11,8 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,11 +25,16 @@ public class NoticesImpl implements NoticesService {
     private NoticeReadStatusMapper noticeReadStatusMapper;
 
     @Override
-    public PageResult<NoticesVO> getNoticeList(int pageNum, int pageSize, Integer phdId) {
+    public PageResult<NoticesVO> getNoticeList(int pageNum, int pageSize, Integer Id, String role) {
         PageHelper.startPage(pageNum, pageSize);
-
-        List<NoticesVO> notices = noticesMapper.findAllWithReadStatusByPhdId(phdId);
-
+        List<NoticesVO> notices;
+        if (role.equals("phd")) {
+            notices = noticesMapper.findAllWithReadStatusByPhdId(Id);
+        }else if(role.equals("teacher")){
+            notices = noticesMapper.findAllWithReadStatusByTeacherId(Id);
+        }else{
+            notices = Collections.emptyList();
+        }
         Page<NoticesVO> page = (Page<NoticesVO>) notices;
 
         PageResult<NoticesVO> pageResult = new PageResult<>(
