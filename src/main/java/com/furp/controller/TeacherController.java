@@ -6,6 +6,7 @@ import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
+import com.furp.exception.AccessDeniedException;
 import com.furp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -124,6 +125,22 @@ public class TeacherController {
 
         return Result.success(reviewInfo);
     }
+
+    /**
+     * 4.2更新用户评审状态
+     */
+    @PutMapping("/teacher/user/review-tasks/{taskId}/status")
+    public Result updateReviewTaskStatus(@PathVariable Integer taskId, @RequestBody StatusUpdateDTO statusUpdate) {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
+        try {
+            teacherService.updateTaskStatus(taskId, teacherId, statusUpdate);
+            return Result.success("任务状态更新成功");
+        } catch (AccessDeniedException e) {
+            return Result.error(403, e.getMessage());
+        }
+
+    }
+
 
 
     /**
