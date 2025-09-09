@@ -13,5 +13,5 @@ public interface TeacherService {
 
     public List<ReviewInfoVo> findReviewScheduleByTeacherId(Integer teacherId);
 
-    public int updateTaskStatus(Integer taskId, Integer currentTeacherId, StatusUpdateDTO dto);
+    public void updateTaskStatus(Integer taskId, Integer currentTeacherId, StatusUpdateDTO dto);
 }
