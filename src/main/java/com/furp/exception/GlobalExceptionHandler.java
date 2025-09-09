@@ -29,11 +29,6 @@ public class GlobalExceptionHandler {
         return Result.error(401,"未登录");
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public Result handleAccessDeniedException(AccessDeniedException e) {
-        log.error(e.getMessage(), e);
-        return Result.error(403,"没有权限");
-    }
 
     /**
      * 捕獲所有未被處理的未知異常
