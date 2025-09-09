@@ -10,28 +10,14 @@ public class ServiceException extends RuntimeException {
   @Getter
   private Integer code;
 
-  /**
-   * 错误提示
-   */
-  private String message;
 
-
-
-  public ServiceException(String message)
-  {
-    this.message = message;
+  public ServiceException(String message) {
+    super(message);
+    this.code = 500; // 提供一个默认的错误码
   }
 
-  public ServiceException(String message, Integer code)
-  {
-    this.message = message;
+  public ServiceException(String message, Integer code) {
+    super(message);
     this.code = code;
   }
-
-  public ServiceException setMessage(String message)
-  {
-    this.message = message;
-    return this;
-  }
-
 }
