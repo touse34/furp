@@ -1,7 +1,7 @@
 package com.furp.exception;
 
-public class AccessDeniedException extends RuntimeException {
+public class AccessDeniedException extends ServiceException {
     public AccessDeniedException(String message) {
-        super(message);
+        super(message, 403);
     }
 }
