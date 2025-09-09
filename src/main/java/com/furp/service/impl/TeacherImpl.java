@@ -5,6 +5,7 @@ import com.furp.DTO.StatusUpdateDTO;
 import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
 import com.furp.exception.AccessDeniedException;
+import com.furp.exception.ResourceNotFoundException;
 import com.furp.mapper.AnnualReviewMapper;
 import com.furp.mapper.ReviewAssessorMapper;
 import com.furp.mapper.SupervisorMapper;
@@ -64,13 +65,16 @@ private AnnualReviewMapper annualReviewMapper;
     }
 
     @Override
-    public int updateTaskStatus(Integer taskId, Integer currentTeacherId, StatusUpdateDTO dto) {
+    public void updateTaskStatus(Integer taskId, Integer currentTeacherId, StatusUpdateDTO dto) {
         int count = reviewAssessorMapper.isExist( currentTeacherId, taskId);
         if(count==0){
             throw new AccessDeniedException("你无权更新该任务的状态");
         }
 
-        return annualReviewMapper.updateReviewStatusById(taskId, dto.getStatus());
+        int affectCount = annualReviewMapper.updateReviewStatusById(taskId, dto.getStatus());
+        if (affectCount == 0) {
+            throw new ResourceNotFoundException("任务状态更新失败，可能是任务ID不存在");
+        }
 
 
     }
