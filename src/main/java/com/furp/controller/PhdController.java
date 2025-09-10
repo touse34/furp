@@ -139,7 +139,7 @@ public class PhdController {
     public Result<Void> markAsRead( //对于一个不返回任何具体业务数据、只返回成功或失败状态的接口，最佳实践是使用 Void 作为泛型类型。
             @PathVariable Integer noticeId) {
         Integer phdId = StpUtil.getSession().getInt("phdId");
-        boolean success = noticesService.markNoticeAsRead(noticeId, phdId);
+        boolean success = noticesService.markNoticeAsRead(noticeId, phdId, "phd");
 
         if (success) {
             return Result.success("标记成功"); // 使用一个带消息的 success 方法
