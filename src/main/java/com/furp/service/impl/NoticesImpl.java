@@ -1,6 +1,5 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.ReviewInfoVo;
 import com.furp.VO.NoticesVO;
 import com.furp.mapper.NoticeReadStatusMapper;
 import com.furp.mapper.NoticesMapper;
@@ -11,7 +10,6 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,9 +48,15 @@ public class NoticesImpl implements NoticesService {
     }
 
     @Override
-    public boolean markNoticeAsRead(Integer noticeId, Integer phdId) {
+    public boolean markNoticeAsRead(Integer noticeId, Integer id, String role) {
         // 调用Mapper方法插入记录
-        int rowsAffected = noticeReadStatusMapper.markAsRead(noticeId, phdId);
+        if (role.equals("teacher")) {
+            // 如果是教师角色，调用相应的方法
+            int rowsAffected = noticeReadStatusMapper.markAsReadTeacher(noticeId, id);
+            return true; // 同样返回true表示操作成功
+        }
+        // 如果是博士角色，调用相应的方法
+        int rowsAffected = noticeReadStatusMapper.markAsReadPhd(noticeId, id);
         // 如果影响的行数大于0，说明是新插入的，操作成功
         // 即使原来已存在（返回0），从业务角度看也算是“已读”状态，所以可以直接返回true
         // 或者您可以根据 rowsAffected 的值返回更精确的状态

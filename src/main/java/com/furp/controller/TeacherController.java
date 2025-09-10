@@ -152,15 +152,17 @@ public class TeacherController {
         return Result.success(notices);
     }
 
-//    /**
-//     * 5.2标记通知为已读
-//     */
-//    @PutMapping("/user/notifications/{noticeId}/read")
-//    public Result markNotificationAsRead(@PathVariable Integer noticeId) {
-//        Integer teacherId = StpUtil.getSession().getInt("teacherId");
-//
-//
-//    }
+    /**
+     * 5.2标记通知为已读
+     */
+    @PutMapping("/user/notifications/{noticeId}/read")
+    public Result markNotificationAsRead(@PathVariable Integer noticeId) {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
+
+        noticesService.markNoticeAsRead(noticeId, teacherId, "teacher");
+        return Result.success("通知标记为已读成功");
+
+    }
 
 
     /**

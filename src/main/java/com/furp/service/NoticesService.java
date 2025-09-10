@@ -12,7 +12,8 @@ public interface NoticesService {
      */
     public PageResult<NoticesVO> getNoticeList(int pageNum, int pageSize, Integer Id, String role);
 
-    boolean markNoticeAsRead(Integer noticeId, Integer phdId);
+    boolean markNoticeAsRead(Integer noticeId, Integer phdId, String role);
+
 
 }
 

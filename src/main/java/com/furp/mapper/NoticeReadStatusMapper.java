@@ -18,5 +18,8 @@ public interface NoticeReadStatusMapper extends BaseMapper<NoticeReadStatus>{
      * @return 影响的行数 (插入成功为1, 已存在为0)
      */
     @Insert("INSERT IGNORE INTO notice_read_status (notice_id, phd_id) VALUES (#{noticeId}, #{phdId})")
-    int markAsRead(@Param("noticeId") Integer noticeId, @Param("phdId") Integer phdId);
+    int markAsReadPhd(@Param("noticeId") Integer noticeId, @Param("phdId") Integer phdId);
+
+    @Insert("INSERT IGNORE INTO notice_read_status (notice_id, teacher_id) VALUES (#{noticeId}, #{teacherId})")
+    int markAsReadTeacher(@Param("noticeId") Integer noticeId, @Param("teacherId") Integer teacherId);
 }
