@@ -1,5 +1,6 @@
 package com.furp.service;
 
+import com.furp.DTO.DashboardStatsDTO;
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.UserInfo;
 import com.furp.entity.User;
@@ -24,4 +25,9 @@ public interface UserService {
      * @return
      */
     List<UserInfo> findByRole(Integer roleId);
+    /**
+     * 3.1 admin 获取Dashboard统计信息
+     * @return
+     */
+    DashboardStatsDTO getStats();
 }
