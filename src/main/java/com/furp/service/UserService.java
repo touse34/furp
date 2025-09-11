@@ -3,7 +3,9 @@ package com.furp.service;
 import com.furp.DTO.DashboardStatsDTO;
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.UserInfo;
+import com.furp.DTO.UserPageQueryDTO;
 import com.furp.entity.User;
+import com.furp.response.PageResult;
 
 import java.util.List;
 
@@ -30,4 +32,8 @@ public interface UserService {
      * @return
      */
     DashboardStatsDTO getStats();
+    /**
+     4.1 获取用户列表
+     */
+    PageResult pageQuery(UserPageQueryDTO userPageQueryDTO);
 }

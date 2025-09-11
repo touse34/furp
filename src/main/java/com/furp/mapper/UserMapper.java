@@ -2,8 +2,11 @@ package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.furp.DTO.UserInfo;
+import com.furp.DTO.UserPageQueryDTO;
+import com.furp.VO.UserVO;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -49,5 +52,32 @@ public interface UserMapper extends BaseMapper<User> {
     Long countTotalTimeSlots();
 
     Long countPendingResearchAreaApprovals();
+
+    Page<UserVO> pageQuery(UserPageQueryDTO userPageQueryDTO);
+
+
+    /**
+     * 根据 phd 表的主键 ID 查询其所有导师的 ID 列表 (user.id)
+     * @param phdId phd 表的主键 ID
+     * @return 导师的用户ID列表
+     */
+    @Select("SELECT teacher_id FROM supervisor WHERE phd_id = #{phdId}")
+    List<Integer> getSupervisorIdsByPhdId(Integer phdId);
+    /*
+    获取一个 PHD 的主要导师的 ID
+     */
+    @Select("SELECT teacher_id FROM supervisor WHERE phd_id = #{phdId} and is_lead=1")
+    Integer getMainSupervisorIdByPhdId(Integer phdId);
+
+    @Select("SELECT s.skill_name " +
+            "FROM skill s " +
+            "JOIN phd_skill ps ON s.id = ps.skill_id " +
+            "WHERE ps.phd_id = #{phdId}")
+    List<String> getResearchAreaNamesByPhdId(Integer phdId);
+    @Select("SELECT s.skill_name " +
+            "FROM skill s " +
+            "JOIN teacher_skill ts ON s.id = ts.skill_id " +
+            "WHERE ts.teacher_id = #{phdId}")
+    List<String> getResearchAreaNamesByTeacherId(Integer teacherId);
 }
-// 注意：这里已经删除了末尾多余的大括号
+
