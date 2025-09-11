@@ -30,4 +30,48 @@
         SELECT count(id) FROM skill WHERE status = 'PENDING'
     </select>
 
+    <select id="pageQuery" resultType="com.furp.VO.UserVO">
+        SELECT
+        u.id,
+        u.role_id AS roleId,
+        u.name,
+        u.email,
+        u.status,
+        u.create_time AS createTime,
+        p.id AS phdId,  -- 查询出 phd 表的ID，用于后续关联查询
+        p.student_id AS studentId,
+        p.enrollment_date AS enrollmentDate,
+        -- 如果 teacher 表有额外字段，也可以在这里 LEFT JOIN 并查询，例如: t.title
+        t.id AS teacherId
+        FROM
+        user u
+        LEFT JOIN
+        phd p ON u.id = p.user_id
+        LEFT JOIN
+        teacher t ON u.id = t.user_id
+        -- LEFT JOIN teacher t ON u.id = t.user_id  -- 如果需要查询老师特有信息，放开此行注释
+        <where>
+            <if test="type != null and type != ''">
+                <if test="type == 'phd'">
+                    AND u.role_id = 2
+                </if>
+                <if test="type == 'teacher'">
+                    AND u.role_id = 1
+                </if>
+            </if>
+
+            <if test="keyword != null and keyword != ''">
+                AND (u.name LIKE concat('%', #{keyword}, '%') OR u.email LIKE concat('%', #{keyword}, '%') OR p.student_id LIKE concat('%', #{keyword}, '%'))
+            </if>
+
+            <if test="status != null and status != ''">
+                AND u.status = #{status}
+            </if>
+        </where>
+        ORDER BY
+        u.create_time DESC
+    </select>
+
+
+
 </mapper>

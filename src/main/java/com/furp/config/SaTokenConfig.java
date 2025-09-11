@@ -22,7 +22,9 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         "/v3/api-docs/**",             // OpenAPI 规范数据
                         "/favicon.ico",                // 网站图标
                         "/api/scheduling/run",          // 自动排程接口
-                        "/admin/dashboard/stats"
+                        "/admin/dashboard/stats",
+                        "/admin/users"
+
                 );
     }
 }
