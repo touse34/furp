@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.furp.DTO.DashboardStatsDTO;
 import com.furp.DTO.LoginDTO;
 import com.furp.DTO.UserInfo;
 import com.furp.entity.User;
@@ -42,6 +43,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Integer id) {
         return userMapper.selectById(id);
+    }
+
+    @Override
+    public DashboardStatsDTO getStats() {
+        Long totalPhds = userMapper.countTotalPhds();
+        Long totalTeachers = userMapper.countTotalTeachers();
+        Long confirmedTeachers = userMapper.countConfirmedTeachers();
+        Long pendingTeachers = userMapper.countPendingTeachers();
+        Long totalSchedules = userMapper.countTotalSchedules();
+        Long totalTimeSlots = userMapper.countTotalTimeSlots();
+        Long pendingResearchAreaApprovals = userMapper.countPendingResearchAreaApprovals();
+
+        // 更新 DTO 的构造函数调用
+        DashboardStatsDTO statsDTO = new DashboardStatsDTO(
+                totalPhds,
+                totalTeachers,
+                confirmedTeachers,
+                pendingTeachers,
+                totalSchedules,
+                totalTimeSlots,
+                pendingResearchAreaApprovals
+        );
+
+        return statsDTO;
+
+
     }
 
     @Override
