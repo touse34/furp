@@ -1,14 +1,14 @@
 package com.furp.service.impl;
 
-import com.furp.DTO.DashboardStatsDTO;
-import com.furp.DTO.LoginDTO;
-import com.furp.DTO.UserInfo;
-import com.furp.DTO.UserPageQueryDTO;
+import com.furp.DTO.*;
+import com.furp.VO.UserAddResponseVO;
 import com.furp.VO.UserVO;
+import com.furp.entity.Phd;
+import com.furp.entity.Teacher;
 import com.furp.entity.User;
 import com.furp.exception.AccountNotFoundException;
 import com.furp.exception.PasswordErrorException;
-import com.furp.mapper.UserMapper;
+import com.furp.mapper.*;
 import com.furp.response.PageResult;
 import com.furp.service.UserService;
 import com.github.pagehelper.Page;
@@ -16,7 +16,10 @@ import com.github.pagehelper.PageHelper;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +28,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private PhdMapper phdMapper;
+    @Autowired
+    private TeacherMapper teacherMapper;
+    @Autowired
+    private SupervisorMapper supervisorMapper;
+    @Autowired
+    private SkillMapper skillMapper;
+    @Autowired
+    private PhdSkillMapper phdSkillMapper;
+    @Autowired
+    private TeacherSkillMapper teacherSkillMapper;
 
     public User login(LoginDTO loginDTO){
         String username = loginDTO.getUsername();
@@ -108,6 +122,99 @@ public class UserServiceImpl implements UserService {
                 page.getPageNum(),
                 page.getPageSize()
         );
+    }
+
+    @Override
+    @Transactional // Ensures all database operations below either succeed together or fail together.
+    public UserAddResponseVO addUser(UserAddDTO userAddDTO) {
+
+        UserAddResponseVO responseVO = new UserAddResponseVO();
+
+        // Step 1: Create and insert the common user record
+        User user = new User();
+        user.setName(userAddDTO.getName());
+        user.setEmail(userAddDTO.getEmail());
+
+
+        // For security, never store plain text passwords. Here we use MD5 as a basic example.
+        // In a real project, BCrypt is recommended.
+        user.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+        user.setStatus("active"); // Set a default status
+        user.setCreateTime(LocalDateTime.now()); // Set creation time
+
+        // Step 2: Handle type-specific logic
+        if ("phd".equals(userAddDTO.getType())) {
+            // --- PhD Logic ---
+            user.setRoleId(2); // Set role_id for PhD
+            userMapper.insert(user); // After this, user.getId() will be populated with the new ID
+
+            Phd phd = new Phd();
+            phd.setUserId(user.getId());
+            //phd.setStudentId(userAddDTO.getId()); // The "id" from the DTO
+            phd.setEnrollmentDate(userAddDTO.getEnrollmentDate());
+            phd.setStudentId(userAddDTO.getStudentId());
+            phd.setName(userAddDTO.getName());
+            phdMapper.insert(phd); // After this, phd.getId() will be populated
+
+            // Handle supervisor relationships
+            List<String> supervisorIdStrings = userAddDTO.getSupervisors();
+            if (supervisorIdStrings != null && !supervisorIdStrings.isEmpty()) {
+                for (String idStr : supervisorIdStrings) {
+                    Integer teacherId = Integer.parseInt(idStr.replace("T", ""));
+                    boolean isLead = idStr.equals(userAddDTO.getMainSupervisor());
+                    supervisorMapper.insert(phd.getId(), teacherId, isLead);
+                }
+            }
+
+            // Handle research area (skill) relationships
+            List<String> researchAreaNames = userAddDTO.getResearchAreas();
+            if (researchAreaNames != null && !researchAreaNames.isEmpty()) {
+                for (String areaName : researchAreaNames) {
+                    Integer skillId = skillMapper.getIdByName(areaName);
+                    if (skillId != null) {
+                        phdSkillMapper.insert(phd.getId(), skillId);
+                    }
+                }
+            }
+
+            // Format the response
+            responseVO.setId("PhD" + String.format("%03d", phd.getId()));
+
+        } else if ("teacher".equals(userAddDTO.getType())) {
+            // --- Teacher Logic ---
+            user.setRoleId(1); // Set role_id for Teacher
+            userMapper.insert(user); // After this, user.getId() will be populated
+
+            Teacher teacher = new Teacher();
+            teacher.setUserId(user.getId());
+            teacher.setName(userAddDTO.getName());
+            // You might want to save the business ID ("T2021003") to a specific column
+            // teacher.setEmployeeId(userAddDTO.getId());
+            teacherMapper.insert(teacher); // After this, teacher.getId() will be populated
+
+            // Handle research area (skill) relationships
+            List<String> researchAreaNames = userAddDTO.getResearchAreas();
+            if (researchAreaNames != null && !researchAreaNames.isEmpty()) {
+                for (String areaName : researchAreaNames) {
+                    Integer skillId = skillMapper.getIdByName(areaName);
+                    if (skillId != null) {
+                        teacherSkillMapper.insertskill(teacher.getId(), skillId);
+                    }
+                }
+            }
+
+            // Format the response
+            responseVO.setId("T" + String.format("%03d", teacher.getId()));
+
+        } else {
+            // Handle unknown type
+            throw new IllegalArgumentException("Unsupported user type: " + userAddDTO.getType());
+        }
+
+        // Step 3: Set common response fields and return
+        responseVO.setCreateTime(user.getCreateTime());
+        return responseVO;
+
     }
 
     @Override

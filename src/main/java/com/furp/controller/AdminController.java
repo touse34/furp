@@ -1,10 +1,8 @@
 package com.furp.controller;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
-import com.furp.DTO.DashboardStatsDTO;
-import com.furp.DTO.TimeSlot;
-import com.furp.DTO.UpdateTimeSlotsDTO;
-import com.furp.DTO.UserPageQueryDTO;
+import com.furp.DTO.*;
+import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.AvailableTime;
 import com.furp.entity.Result;
 import com.furp.mapper.TimeSlotsMapper;
@@ -68,8 +66,19 @@ public class AdminController {
 
     }
 
+    /*
+     4.2 添加用户
+     */
+    @PostMapping("/users")
+    public Result<UserAddResponseVO> addUser(@RequestBody UserAddDTO userAddDTO) {
+        log.info("添加用户, 参数: {}", userAddDTO);
 
+        // 2. 调用 service 方法，并接收返回的 VO 对象
+        UserAddResponseVO responseVO = userService.addUser(userAddDTO);
 
+        // 3. 将 VO 对象放入 Result.success() 中返回
+        return Result.success(responseVO);
+    }
 
 
 

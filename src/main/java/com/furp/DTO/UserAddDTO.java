@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -15,7 +16,7 @@ public class UserAddDTO  implements Serializable {
     // --- 通用字段 (博士生和教师都有) ---
     private String type;
     private String name;
-    private String id; // 这个字段将接收 "PhD2021003" 或 "T2021003"
+    //private String id; // 这个字段将接收 "PhD2021003" 或 "T2021003"
     private String email;
     private List<String> researchAreas;
 
@@ -23,7 +24,7 @@ public class UserAddDTO  implements Serializable {
     private LocalDate enrollmentDate;
     private List<String> supervisors;
     private String mainSupervisor;
-
+    private String studentId;
     // --- 教师特有字段 (未来可以扩展) ---
     // private String title; // 例如：职称
 

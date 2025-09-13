@@ -32,6 +32,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,4 +47,7 @@ public class User {
     private String name;        // 用户的姓名
     private String password;    // 用户的密码（假设数据库中有此字段）
     private Integer phdId;
+    private String email;
+    private String status;
+    private LocalDateTime createTime;
 }
