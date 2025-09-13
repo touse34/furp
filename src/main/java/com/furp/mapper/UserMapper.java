@@ -9,6 +9,7 @@ import com.furp.entity.User;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -79,5 +80,8 @@ public interface UserMapper extends BaseMapper<User> {
             "JOIN teacher_skill ts ON s.id = ts.skill_id " +
             "WHERE ts.teacher_id = #{phdId}")
     List<String> getResearchAreaNamesByTeacherId(Integer teacherId);
+
+    @Update("UPDATE user SET status = 'deleted' WHERE id = #{userId}")
+    void softDeleteById(Integer userId);
 }
 

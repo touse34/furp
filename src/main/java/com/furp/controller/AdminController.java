@@ -80,6 +80,18 @@ public class AdminController {
         return Result.success(responseVO);
     }
 
+    /*
+     4.3 删除用户
+     */
+    @DeleteMapping("/users/{userId}")
+    public Result<Void> deleteUser(@PathVariable Integer userId){
+        log.info("删除用户: {}", userId);
+        userService.deleteUserById(userId);
+        return Result.success("用户删除成功");
+
+    }
+
+
 
 
 

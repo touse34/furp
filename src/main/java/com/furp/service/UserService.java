@@ -40,4 +40,8 @@ public interface UserService {
      4.2 添加用户
      */
     UserAddResponseVO addUser(UserAddDTO userAddDTO);
+    /**
+     4.3 删除用户
+     */
+    void deleteUserById(Integer userId);
 }
