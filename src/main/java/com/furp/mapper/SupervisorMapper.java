@@ -3,6 +3,7 @@ package com.furp.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -20,5 +21,10 @@ public interface SupervisorMapper extends BaseMapper<Supervisor>{
     @Select("select t.* from teacher t join supervisor s ON t.id = s.teacher_id where s.phd_id = #{phdId}")
     List<Supervisor> findSupervisorsByPhdId(@Param("phdId") Integer phdId) ;
 
+    @Insert("INSERT INTO supervisor (phd_id, teacher_id, is_lead) " +
+            "VALUES (#{phdId}, #{teacherId}, #{isLead})")
+    void insert(@Param("phdId") Integer phdId,
+                @Param("teacherId") Integer teacherId,
+                @Param("isLead") boolean isLead);
 
 }

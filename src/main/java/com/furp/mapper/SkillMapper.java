@@ -15,4 +15,9 @@ public interface SkillMapper extends BaseMapper<Skill> {
             "where phd_id = #{phdId}")
     List<Integer> selectSkillIdByPhdId(Integer phdId);
 
+    @Select("SELECT id FROM skill WHERE skill_name = #{name}")
+    Integer getIdByName(String name);
+
+
+
 }
