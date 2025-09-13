@@ -125,6 +125,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUserById(Integer userId) {
+        // Step 1: Use the mapper to find the user by their ID.
+        User user = userMapper.selectById(userId);
+
+        // Step 2: Check if the result is null.
+        if (user == null) {
+            // If the user is null, it means no user with that ID was found in the database.
+            // Throw an exception to stop the process immediately and signal an error.
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+        // Now it's safe to proceed with the deletion.
+        userMapper.softDeleteById(userId);
+
+    }
+
+    @Override
     @Transactional // Ensures all database operations below either succeed together or fail together.
     public UserAddResponseVO addUser(UserAddDTO userAddDTO) {
 
