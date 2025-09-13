@@ -154,7 +154,10 @@ public class UserServiceImpl implements UserService {
 
         // For security, never store plain text passwords. Here we use MD5 as a basic example.
         // In a real project, BCrypt is recommended.
-        user.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+        //user.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+        // 使用 BCrypt 生成一个带盐的、高强度的哈希值
+        String hashedPassword = BCrypt.hashpw("123456", BCrypt.gensalt(12));
+        user.setPassword(hashedPassword);
         user.setStatus("active"); // Set a default status
         user.setCreateTime(LocalDateTime.now()); // Set creation time
 
