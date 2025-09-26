@@ -29,9 +29,9 @@ public interface NoticeReadStatusMapper extends BaseMapper<NoticeReadStatus>{
             "where nrs.id is null")
     int markAllAsReadPhd(@Param("phdId") Integer phdId);
 
-    @Insert("INSERT INTO notice_read_status (notice_id, teacher_Id) " +
+    @Insert("INSERT INTO notice_read_status (notice_id, teacher_id) " +
             "select n.id, #{phdId} from notices n " +
-            "left join notice_read_status nrs on n.id = nrs.notice_id and nrs.phd_id = #{teacherId)} " +
+            "left join notice_read_status nrs on n.id = nrs.notice_id and nrs.phd_id = #{teacherId} " +
             "where nrs.id is null")
     int markAllAsReadTeacher(@Param("teacherId") Integer teacherId);
 
