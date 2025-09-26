@@ -14,6 +14,7 @@ public interface NoticesService {
 
     boolean markNoticeAsRead(Integer noticeId, Integer phdId, String role);
 
+    Void markAllAsRead(Integer id, String role);
 
 }
 

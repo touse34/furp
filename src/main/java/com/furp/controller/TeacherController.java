@@ -167,6 +167,16 @@ public class TeacherController {
     /**
      * 5.3 标记所有通知为已读
      */
+    @PutMapping("/user/notifications/mark-all-read")
+    public Result markAllNoticeAsRead() {
+        Integer teacherId = StpUtil.getSession().getInt("teacherId");
+
+        noticesService.markAllAsRead(teacherId, "teacher");
+        return Result.success("所有通知标记为已读成功");
+
+    }
+
+
 
 
 
