@@ -62,4 +62,14 @@ public class NoticesImpl implements NoticesService {
         // 或者您可以根据 rowsAffected 的值返回更精确的状态
         return true;
     }
+
+    @Override
+    public Void markAllAsRead(Integer id, String role) {
+        if (role.equals("teacher")) {
+            noticeReadStatusMapper.markAllAsReadTeacher(id);
+        } else if (role.equals("phd")) {
+            noticeReadStatusMapper.markAllAsReadPhd(id);
+        }
+        return null;
+    }
 }
