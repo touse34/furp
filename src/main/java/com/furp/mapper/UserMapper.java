@@ -83,5 +83,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Update("UPDATE user SET status = 'deleted' WHERE id = #{userId}")
     void softDeleteById(Integer userId);
+    @Update("UPDATE user SET status = 'active' WHERE id = #{userId}")
+    void enableById(Integer userId);
 }
 

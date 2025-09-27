@@ -13,6 +13,7 @@ import com.furp.response.PageResult;
 import com.furp.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.baomidou.mybatisplus.extension.ddl.DdlScriptErrorHandler.PrintlnLogErrorHandler.log;
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -40,6 +43,14 @@ public class UserServiceImpl implements UserService {
     private PhdSkillMapper phdSkillMapper;
     @Autowired
     private TeacherSkillMapper teacherSkillMapper;
+    @Autowired
+    private AnnualReviewMapper annualReviewMapper;
+    @Autowired
+    private AvailableTimeMapper availableTimeMapper;
+    @Autowired
+    private ReviewAssessorMapper reviewAssessorMapper;
+    @Autowired
+    private SchedulesMapper schedulesMapper;
 
     public User login(LoginDTO loginDTO){
         String username = loginDTO.getUsername();
@@ -125,7 +136,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(Integer userId) {
+    public void disableUserById(Integer userId) {
         // Step 1: Use the mapper to find the user by their ID.
         User user = userMapper.selectById(userId);
 
@@ -138,6 +149,79 @@ public class UserServiceImpl implements UserService {
         // Now it's safe to proceed with the deletion.
         userMapper.softDeleteById(userId);
 
+    }
+
+    @Override
+    public void enableUser(Integer userId) {
+        // Step 1: Use the mapper to find the user by their ID.
+        User user = userMapper.selectById(userId);
+
+        // Step 2: Check if the result is null.
+        if (user == null) {
+            // If the user is null, it means no user with that ID was found in the database.
+            // Throw an exception to stop the process immediately and signal an error.
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+
+        // Now it's safe to proceed with the deletion.
+        userMapper.enableById(userId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUserById(Integer userId) {
+        // 1. 首先，检查用户是否存在，并获取其角色ID
+        User user = userMapper.selectById(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+
+        Integer roleId = user.getRoleId();
+
+        // 2. 根据角色，执行不同的级联删除逻辑
+        if (roleId == 2) { // 如果是博士生 (phd)
+            // 2.1 找到 phd 表的记录，以获取其主键 phd.id
+            Phd phd = phdMapper.findByUserId(userId);
+            if (phd != null) {
+                Integer phdId = phd.getId();
+
+                // 2.1 Find all annual_review IDs associated with this PhD
+                List<Integer> reviewIds = annualReviewMapper.findIdsByPhdId(phdId);
+
+                if (reviewIds != null && !reviewIds.isEmpty()) {
+                    // 2.2 Delete the "grandchildren" first: records in schedules and review_assessor
+                    reviewAssessorMapper.deleteByAnnualReviewIds(reviewIds);
+                    schedulesMapper.deleteByAnnualReviewIds(reviewIds);
+                }
+                // 2.2 删除最底层的关联：supervisor 和 phd_skill
+                supervisorMapper.deleteByPhdId(phdId);
+                phdSkillMapper.deleteByPhdId(phdId);
+                annualReviewMapper.deleteByPhdId(phdId);
+
+                // 2.3 删除 phd 表自身的记录
+                phdMapper.deleteById(phdId);
+            }
+        } else if (roleId == 1) { // 如果是教师 (teacher)
+            // 2.1 找到 teacher 表的记录
+            Teacher teacher = teacherMapper.findByUserId(userId);
+            if (teacher != null) {
+                Integer teacherId = teacher.getId();
+
+                // 2.2 删除最底层的关联：supervisor 和 teacher_skill
+                supervisorMapper.deleteByTeacherId(teacherId);
+                teacherSkillMapper.deleteByTeacherId(teacherId);
+                availableTimeMapper.deleteByTeacherId(teacherId);
+                reviewAssessorMapper.deleteByTeacherId(teacherId);
+                schedulesMapper.deleteByTeacherId(teacherId);
+                // 2.3 删除 teacher 表自身的记录
+                teacherMapper.deleteById(teacherId);
+            }
+        }
+
+        // 3. 最后，删除 user 表中的主记录
+        userMapper.deleteById(userId);
+
+        log.info("用户及其所有关联数据已成功硬删除, userId: {}", userId);
     }
 
     @Override

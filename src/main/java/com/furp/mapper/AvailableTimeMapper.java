@@ -28,4 +28,7 @@ public interface AvailableTimeMapper extends BaseMapper<AvailableTime> {
 
     @Select("SELECT time_slot_id FROM available_time WHERE teacher_id = #{teacherId} AND academic_year = #{academicYear}")
     public Set<Integer> findSelectedSlotIdsByTeacherAndYear(@Param("teacherId")Integer teacherId, @Param("academicYear") String academicYear);
+
+    @Delete("DELETE FROM available_time WHERE teacher_id = #{teacherId}")
+    void deleteByTeacherId(Integer teacherId);
 }

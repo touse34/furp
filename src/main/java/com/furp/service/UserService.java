@@ -41,7 +41,16 @@ public interface UserService {
      */
     UserAddResponseVO addUser(UserAddDTO userAddDTO);
     /**
-     4.3 删除用户
+     4.3.1 禁用用户
+     */
+    void disableUserById(Integer userId);
+
+    /*
+    4.3.2启用用户
+     */
+    void enableUser(Integer userId);
+    /*
+    删除用户
      */
     void deleteUserById(Integer userId);
 }

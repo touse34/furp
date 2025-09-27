@@ -21,9 +21,10 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         "/swagger-resources/**",       // Swagger 资源
                         "/v3/api-docs/**",             // OpenAPI 规范数据
                         "/favicon.ico",                // 网站图标
-                        "/api/scheduling/run"      // 自动排程接口
+                        "/api/scheduling/run",      // 自动排程接口
                         //"/admin/dashboard/stats",
                         //"/admin/users"
+                        "/admin/users/{userId}"
 
                 );
     }
