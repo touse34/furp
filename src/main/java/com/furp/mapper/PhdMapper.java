@@ -21,4 +21,6 @@ public interface PhdMapper extends BaseMapper<Phd> {
     @Select("SELECT  p.student_id AS studentId,p.name,DATE_FORMAT(p.enrollment_date, '%Y-%m-%d') AS enrollmentDate,s.skill_name AS skillName FROM phd AS p LEFT JOIN phd_skill   AS ps ON ps.phd_id  = p.id LEFT JOIN skill AS s ON s.id = ps.skill_id ORDER BY p.student_id;")
     List<Phd> findAll();
 
+    @Select("SELECT * FROM phd WHERE user_id = #{userId}")
+    Phd findByUserId(Integer userId);
 }

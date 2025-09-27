@@ -3,11 +3,8 @@ package com.furp.controller;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import com.furp.DTO.*;
 import com.furp.VO.UserAddResponseVO;
-import com.furp.entity.AvailableTime;
 import com.furp.entity.Result;
-import com.furp.mapper.TimeSlotsMapper;
 import com.furp.response.PageResult;
-import com.furp.service.AvailableTimeService;
 import com.furp.service.TimeSlotsService;
 import com.furp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -81,15 +78,37 @@ public class AdminController {
     }
 
     /*
-     4.3 删除用户
+     4.3.1 禁用用户
+     */
+    @DeleteMapping("/users/disable/{userId}")
+    public Result<Void> disableUser(@PathVariable Integer userId){
+        log.info("禁用用户: {}", userId);
+        userService.disableUserById(userId);
+        return Result.success("用户删除成功");
+
+    }
+
+    /**
+     4.3.2 启用用户
+     */
+    @PutMapping("/users/enable/{userId}")
+    public Result<Void> enableUser(@PathVariable Integer userId){
+        log.info("启用用户: {}", userId);
+        userService.enableUser(userId);
+        return Result.success("用户启用成功");
+
+    }
+
+    /*
+    4.3删除用户
      */
     @DeleteMapping("/users/{userId}")
     public Result<Void> deleteUser(@PathVariable Integer userId){
         log.info("删除用户: {}", userId);
         userService.deleteUserById(userId);
         return Result.success("用户删除成功");
-
     }
+
 
 
 

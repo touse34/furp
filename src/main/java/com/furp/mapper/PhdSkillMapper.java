@@ -30,4 +30,8 @@ public interface PhdSkillMapper {
     @Insert("INSERT INTO phd_skill (phd_id, skill_id) VALUES (#{phdId}, #{skillId})")
     void insert(@Param("phdId") Integer phdId, @Param("skillId") Integer skillId);
 
+    @Delete("DELETE FROM phd_skill WHERE phd_id = #{phdId}")
+    void deleteByPhdId(Integer phdId);
+
+
 }

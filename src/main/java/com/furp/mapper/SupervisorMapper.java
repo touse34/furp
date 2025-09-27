@@ -3,10 +3,7 @@ package com.furp.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.furp.entity.Supervisor;
 import com.furp.entity.Teacher;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 @Mapper
@@ -26,5 +23,11 @@ public interface SupervisorMapper extends BaseMapper<Supervisor>{
     void insert(@Param("phdId") Integer phdId,
                 @Param("teacherId") Integer teacherId,
                 @Param("isLead") boolean isLead);
+
+    @Delete("DELETE FROM supervisor WHERE phd_id = #{phdId}")
+    void deleteByPhdId(Integer phdId);
+
+    @Delete("DELETE FROM supervisor WHERE teacher_id = #{teacherId}")
+    void deleteByTeacherId(Integer teacherId);
 
 }

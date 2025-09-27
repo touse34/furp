@@ -4,10 +4,7 @@ import com.furp.DTO.CustomResearchDirection;
 import com.furp.DTO.ResearchAreaDetail;
 import com.furp.entity.Teacher;
 import com.furp.entity.TeacherSkill;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,4 +24,7 @@ public interface TeacherSkillMapper {
 
     @Insert("INSERT INTO teacher_skill (teacher_id, skill_id) VALUES (#{teacherId}, #{skillId})")
     void insertskill(@Param("teacherId") Integer teacherId, @Param("skillId") Integer skillId);
+
+    @Delete("DELETE FROM teacher_skill WHERE teacher_id = #{teacherId}")
+    void deleteByTeacherId(Integer teacherId);
 }

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.furp.DTO.ReviewInfoVo;
 import com.furp.DTO.PendingReviewDto;
 import com.furp.entity.AnnualReview;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -65,4 +66,10 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
 
     @Update("UPDATE annual_review SET status = #{status} WHERE id = #{id}")
     int updateReviewStatusById(@Param("id") Integer id, @Param("status") String status);
+
+    @Delete("DELETE FROM annual_review WHERE phd_id = #{phdId}")
+    void deleteByPhdId(Integer phdId);
+
+    @Select("SELECT id FROM annual_review WHERE phd_id = #{phdId}")
+    List<Integer> findIdsByPhdId(Integer phdId);
 }
