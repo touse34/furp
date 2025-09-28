@@ -46,4 +46,12 @@
         s.submittedAt ASC
     </select>
 
+    <insert id="insertResearchAreaDetail" parameterType="com.furp.DTO.ResearchAreaDetail"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO skill
+            (skill_name, status, submittedAt, approvedAt)
+        VALUES
+            (#{name}, #{status}, #{createdAt}, #{approvedAt})
+    </insert>
+
 </mapper>

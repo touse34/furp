@@ -1,11 +1,8 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.*;
+import com.furp.VO.*;
 import com.furp.VO.ResearchAreasVO;
-import com.furp.VO.PendingResearchAreaVO;
-import com.furp.VO.ResearchAreasVO;
-import com.furp.VO.UserAddResponseVO;
-import com.furp.VO.UserVO;
 import com.furp.entity.Phd;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
@@ -17,6 +14,7 @@ import com.furp.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -182,6 +180,42 @@ public class UserServiceImpl implements UserService {
         // 3. Encapsulate and return the result
         return new PageResult(page.getResult(), page.getTotal(), page.getPageNum(), page.getPageSize());
     }
+
+    @Override
+    public ResearchAreaAddResponseVO addResearchArea(ResearchAreaDetail addDTO) {
+        // 1. 校验：防止重复添加
+        ResearchAreaDetail existingSkill = skillMapper.findByName(addDTO.getName());
+        if (existingSkill != null) {
+            throw new RuntimeException("研究方向 '" + addDTO.getName() + "' 已存在");
+        }
+
+        // 2. 创建并填充实体对象，准备插入数据库
+        ResearchAreaDetail newSkill = new ResearchAreaDetail();
+
+        // 这行代码对应你数据库中的 `skill_name` 字段
+        newSkill.setName(addDTO.getName());
+
+        // 这行代码对应你数据库中的 `status` 字段
+        newSkill.setStatus("approved");
+
+        // 这行代码对应你数据库中的 `submittedAt` 字段
+        newSkill.setCreatedAt(LocalDateTime.now());
+
+        // 【优化】这行代码对应你数据库中的 `approvedAt` 字段
+        // 因为是管理员直接批准，所以批准时间就是现在
+        newSkill.setApprovedAt(LocalDateTime.now());
+
+        // 3. 调用 Mapper 将 newSkill 对象插入到 `skill` 表中
+        skillMapper.insertResearchAreaDetail(newSkill);
+
+        // 4. 封装响应数据
+        ResearchAreaAddResponseVO responseVO = new ResearchAreaAddResponseVO();
+        responseVO.setId(newSkill.getId()); // 对应 `id` 字段
+        responseVO.setCreateTime(newSkill.getCreatedAt()); // 对应 `submittedAt` 字段
+
+        return responseVO;
+    }
+
     @Override
     public List<PendingResearchAreaVO> getPending(PendingResearchAreaQueryDTO queryDTO) {
         return skillMapper.findPending(queryDTO);

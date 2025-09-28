@@ -2,6 +2,7 @@ package com.furp.service;
 
 import com.furp.DTO.*;
 import com.furp.VO.PendingResearchAreaVO;
+import com.furp.VO.ResearchAreaAddResponseVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.User;
 import com.furp.response.PageResult;
@@ -70,4 +71,8 @@ public interface UserService {
     获取研究方向列表
      */
     PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO);
+    /*
+    添加研究方向
+     */
+    ResearchAreaAddResponseVO addResearchArea(ResearchAreaDetail researchAreaDetail);
 }

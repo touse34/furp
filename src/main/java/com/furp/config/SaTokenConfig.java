@@ -32,6 +32,7 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         "/admin/research-areas"
 
 
+
                 );
     }
 }

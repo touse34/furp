@@ -157,6 +157,16 @@ public class AdminController {
         return Result.success(list);
     }
 
+    /*
+    5.3 添加研究方向
+     */
+    @PostMapping("/research-areas")
+    public Result<Void> addResearchArea(@RequestBody ResearchAreaDetail researchAreaDetail) {
+        log.info("添加研究方向: {}", researchAreaDetail);
+        userService.addResearchArea(researchAreaDetail);
+        return Result.success("添加成功");
+    }
+
 
 
 
