@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.furp.mapper.SkillMapper">
+    <select id="pageQuery" resultType="com.furp.VO.ResearchAreasVO">
+        SELECT
+        s.id,
+        s.skill_name AS name,
+        s.status,
+        s.submittedAt AS createDate,
+        (
+        (SELECT COUNT(*) FROM phd_skill ps WHERE ps.skill_id = s.id)
+        +
+        (SELECT COUNT(*) FROM teacher_skill ts WHERE ts.skill_id = s.id)
+        ) AS userCount
+        FROM
+        skill s
+        <where>
+            <if test="keyword != null and keyword != ''">
+                s.skill_name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY
+        s.id DESC
+    </select>
+</mapper>

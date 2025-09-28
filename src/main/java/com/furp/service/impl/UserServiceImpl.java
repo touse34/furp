@@ -1,6 +1,7 @@
 package com.furp.service.impl;
 
 import com.furp.DTO.*;
+import com.furp.VO.ResearchAreasVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.VO.UserVO;
 import com.furp.entity.Phd;
@@ -168,6 +169,17 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Override
+    public PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO) {
+        // 1. Start pagination
+        PageHelper.startPage(queryDTO.getPage(), queryDTO.getSize());
+
+        // 2. Call the mapper method
+        Page<ResearchAreasVO> page = skillMapper.pageQuery(queryDTO);
+
+        // 3. Encapsulate and return the result
+        return new PageResult(page.getResult(), page.getTotal(), page.getPageNum(), page.getPageSize());
+    }
 
     @Override
     @Transactional
@@ -222,8 +234,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-
 // --- Private Helper Methods for Cleaner Code ---
 
     private void updatePhdSupervisors(Integer phdId, UserAddDTO userAddDTO) {
@@ -272,19 +282,6 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     @Transactional

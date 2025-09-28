@@ -58,4 +58,9 @@ public interface UserService {
     更新用户
      */
     void updateUser(Integer userId,UserAddDTO userAddDTO);
+
+    /*
+    获取研究方向列表
+     */
+    PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO);
 }

@@ -1,7 +1,10 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.furp.DTO.ResearchAreaPageQueryDTO;
+import com.furp.VO.ResearchAreasVO;
 import com.furp.entity.Skill;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -19,5 +22,5 @@ public interface SkillMapper extends BaseMapper<Skill> {
     Integer getIdByName(String name);
 
 
-
+    Page<ResearchAreasVO> pageQuery(ResearchAreaPageQueryDTO queryDTO);
 }
