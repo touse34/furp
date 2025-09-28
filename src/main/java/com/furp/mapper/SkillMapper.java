@@ -39,4 +39,6 @@ public interface SkillMapper extends BaseMapper<Skill> {
      * @return 影响的行数
      */
     int insertResearchAreaDetail(ResearchAreaDetail detailDTO);
+    @Select("SELECT * FROM skill WHERE skill_name = #{name}")
+    Skill findIfExistByName(String name);
 }

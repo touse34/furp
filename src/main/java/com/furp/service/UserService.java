@@ -75,4 +75,6 @@ public interface UserService {
     添加研究方向
      */
     ResearchAreaAddResponseVO addResearchArea(ResearchAreaDetail researchAreaDetail);
+
+    void updateResearchArea(Integer areaId, ResearchAreaUpdateDTO updateDTO);
 }

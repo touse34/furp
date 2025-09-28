@@ -4,6 +4,7 @@ import com.furp.DTO.*;
 import com.furp.VO.*;
 import com.furp.VO.ResearchAreasVO;
 import com.furp.entity.Phd;
+import com.furp.entity.Skill;
 import com.furp.entity.Teacher;
 import com.furp.entity.User;
 import com.furp.exception.AccountNotFoundException;
@@ -214,6 +215,28 @@ public class UserServiceImpl implements UserService {
         responseVO.setCreateTime(newSkill.getCreatedAt()); // 对应 `submittedAt` 字段
 
         return responseVO;
+    }
+
+    @Override
+    public void updateResearchArea(Integer areaId, ResearchAreaUpdateDTO updateDTO) {
+        // 1. Validation: Check if the research area to be updated actually exists.
+        Skill skillToUpdate = skillMapper.selectById(areaId);
+        if (skillToUpdate == null) {
+            // It's good practice to create a custom exception, e.g., ResearchAreaNotFoundException
+            throw new RuntimeException("Research area not found with ID: " + areaId);
+        }
+
+        // 2. Validation: Check if the new name is already taken by another research area.
+        Skill existingSkillWithNewName = skillMapper.findIfExistByName(updateDTO.getName());
+        if (existingSkillWithNewName != null && !existingSkillWithNewName.getId().equals(areaId)) {
+            // If a skill with the new name exists, AND it's not the one we are currently editing,
+            // then it's a duplicate.
+            throw new RuntimeException("Research area name '" + updateDTO.getName() + "' is already in use.");
+        }
+
+        // 3. Perform the update
+        skillToUpdate.setSkillName(updateDTO.getName());
+        skillMapper.updateById(skillToUpdate); // Uses MyBatis-Plus's built-in update method
     }
 
     @Override

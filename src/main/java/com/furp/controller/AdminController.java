@@ -167,6 +167,17 @@ public class AdminController {
         return Result.success("添加成功");
     }
 
+    /*
+    5.4 更新研究方向名字
+     */
+    @PutMapping("/research-areas/{areaId}")
+    public Result<Void> updateResearchArea(@PathVariable Integer areaId, @RequestBody ResearchAreaUpdateDTO updateDTO) {
+        log.info("更新研究方向 {}, 数据: {}", areaId, updateDTO);
+        userService.updateResearchArea(areaId, updateDTO);
+        return Result.success("研究方向更新成功");
+    }
+
+
 
 
 
