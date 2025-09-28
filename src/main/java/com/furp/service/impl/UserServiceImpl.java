@@ -167,6 +167,125 @@ public class UserServiceImpl implements UserService {
         userMapper.enableById(userId);
     }
 
+
+
+    @Override
+    @Transactional
+    public void updateUser(Integer userId,UserAddDTO userAddDTO) {
+        // Step 1: Precondition Check - Verify the user actually exists.
+        User userInDb = userMapper.selectById(userId);
+        if (userInDb == null) {
+            throw new RuntimeException("User not found with ID: " + userId); // Or a custom UserNotFoundException
+        }
+
+        // Step 2: Update the main 'user' table using the Dynamic Update pattern.
+        User userToUpdate = new User();
+        userToUpdate.setId(userId); // Specify which user to update.
+        userToUpdate.setName(userAddDTO.getName());
+        userToUpdate.setEmail(userAddDTO.getEmail());
+        userToUpdate.setWechatId(userToUpdate.getWechatId());
+        userToUpdate.setRoleId(userToUpdate.getRoleId());
+        // Note: We don't set password, createTime, etc. They will be ignored in the SQL.
+        userMapper.updateById(userToUpdate);
+
+        // Step 3: Update role-specific tables and relationships based on the user's EXISTING role.
+        Integer roleId = userInDb.getRoleId();
+
+        if (roleId == 2) { // --- Logic for updating a PhD Student ---
+            Phd phd = phdMapper.findByUserId(userId);
+            if (phd != null) {
+                // 3a. Update the 'phd' table details
+                Phd phdToUpdate = new Phd();
+                phdToUpdate.setId(phd.getId());
+                phdToUpdate.setStudentId(userAddDTO.getStudentId());
+                phdToUpdate.setEnrollmentDate(userAddDTO.getEnrollmentDate());
+                phdMapper.updateById(phdToUpdate);
+
+                // 3b. Update relationships by deleting old ones and inserting new ones
+                updatePhdSupervisors(phd.getId(), userAddDTO);
+                updatePhdSkills(phd.getId(), userAddDTO);
+            }
+        } else if (roleId == 1) { // --- Logic for updating a Teacher ---
+            Teacher teacher = teacherMapper.findByUserId(userId);
+            if (teacher != null) {
+                // 3a. Update the 'teacher' table details (if any)
+                // Example:
+                // Teacher teacherToUpdate = new Teacher();
+                // teacherToUpdate.setId(teacher.getId());
+                // teacherToUpdate.setTitle(userAddDTO.getTitle()); // If you add title to DTO
+                // teacherMapper.updateById(teacherToUpdate);
+
+                // 3b. Update teacher's skill relationships
+                updateTeacherSkills(teacher.getId(), userAddDTO);
+            }
+        }
+    }
+
+
+
+
+// --- Private Helper Methods for Cleaner Code ---
+
+    private void updatePhdSupervisors(Integer phdId, UserAddDTO userAddDTO) {
+        // First, delete all existing supervisor relationships for this PhD.
+        supervisorMapper.deleteByPhdId(phdId);
+
+        // Then, insert the new relationships from the DTO.
+        List<String> supervisorIdStrings = userAddDTO.getSupervisors();
+        if (supervisorIdStrings != null && !supervisorIdStrings.isEmpty()) {
+            for (String idStr : supervisorIdStrings) {
+                Integer teacherId = Integer.parseInt(idStr.replace("T", ""));
+                boolean isLead = idStr.equals(userAddDTO.getMainSupervisor());
+                supervisorMapper.insert(phdId, teacherId, isLead);
+            }
+        }
+    }
+
+    private void updatePhdSkills(Integer phdId, UserAddDTO userAddDTO) {
+        // First, delete all existing skill relationships for this PhD.
+        phdSkillMapper.deleteByPhdId(phdId);
+
+        // Then, insert the new relationships from the DTO.
+        List<String> researchAreaNames = userAddDTO.getResearchAreas();
+        if (researchAreaNames != null && !researchAreaNames.isEmpty()) {
+            for (String areaName : researchAreaNames) {
+                Integer skillId = skillMapper.getIdByName(areaName);
+                if (skillId != null) {
+                    phdSkillMapper.insert(phdId, skillId);
+                }
+            }
+        }
+    }
+
+    private void updateTeacherSkills(Integer teacherId, UserAddDTO userAddDTO) {
+        // First, delete all existing skill relationships for this Teacher.
+        teacherSkillMapper.deleteByTeacherId(teacherId);
+
+        // Then, insert the new relationships from the DTO.
+        List<String> researchAreaNames = userAddDTO.getResearchAreas();
+        if (researchAreaNames != null && !researchAreaNames.isEmpty()) {
+            for (String areaName : researchAreaNames) {
+                Integer skillId = skillMapper.getIdByName(areaName);
+                if (skillId != null) {
+                    teacherSkillMapper.insertskill(teacherId, skillId);
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @Override
     @Transactional
     public void deleteUserById(Integer userId) {

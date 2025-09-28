@@ -24,7 +24,9 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         "/api/scheduling/run",      // 自动排程接口
                         //"/admin/dashboard/stats",
                         //"/admin/users"
-                        "/admin/users/{userId}"
+                        "/admin/users/{userId}",
+                        "/admin/users"
+
 
                 );
     }

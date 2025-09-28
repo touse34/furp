@@ -109,7 +109,15 @@ public class AdminController {
         return Result.success("用户删除成功");
     }
 
-
+    /*
+    4.3更新用户信息 获取可选时间段
+     */
+    @PutMapping("/users/{userId}")
+    public Result<Void> updateUser(@PathVariable Integer userId, @RequestBody UserAddDTO userAddDTO){
+        log.info("更新用户: {}", userAddDTO);
+        userService.updateUser(userId,userAddDTO);
+        return Result.success("用户更新成功");
+    }
 
 
 
