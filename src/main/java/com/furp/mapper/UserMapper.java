@@ -73,12 +73,12 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("SELECT s.skill_name " +
             "FROM skill s " +
             "JOIN phd_skill ps ON s.id = ps.skill_id " +
-            "WHERE ps.phd_id = #{phdId}")
+            "WHERE ps.phd_id = #{phdId} AND s.status = 'approved'")
     List<String> getResearchAreaNamesByPhdId(Integer phdId);
     @Select("SELECT s.skill_name " +
             "FROM skill s " +
             "JOIN teacher_skill ts ON s.id = ts.skill_id " +
-            "WHERE ts.teacher_id = #{phdId}")
+            "WHERE ts.teacher_id = #{phdId} AND s.status = 'approved'")
     List<String> getResearchAreaNamesByTeacherId(Integer teacherId);
 
     @Update("UPDATE user SET status = 'deleted' WHERE id = #{userId}")
