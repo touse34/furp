@@ -2,6 +2,8 @@ package com.furp.service.impl;
 
 import com.furp.DTO.*;
 import com.furp.VO.ResearchAreasVO;
+import com.furp.VO.PendingResearchAreaVO;
+import com.furp.VO.ResearchAreasVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.VO.UserVO;
 import com.furp.entity.Phd;
@@ -180,6 +182,12 @@ public class UserServiceImpl implements UserService {
         // 3. Encapsulate and return the result
         return new PageResult(page.getResult(), page.getTotal(), page.getPageNum(), page.getPageSize());
     }
+    @Override
+    public List<PendingResearchAreaVO> getPending(PendingResearchAreaQueryDTO queryDTO) {
+        return skillMapper.findPending(queryDTO);
+    }
+
+
 
     @Override
     @Transactional

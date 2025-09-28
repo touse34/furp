@@ -2,6 +2,7 @@ package com.furp.controller;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
 import com.furp.DTO.*;
+import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.Result;
 import com.furp.response.PageResult;
@@ -123,6 +124,10 @@ public class AdminController {
     4.5 导入用户Excel
      */
 
+    /*
+    4.5 导入用户Excel
+     */
+
 
     /*
     5.1 获取所有研究方向
@@ -139,6 +144,17 @@ public class AdminController {
         return Result.success(pageResult);
 
 
+
+    }
+
+    /*
+    5.2 获取待审核研究方向
+     */
+    @GetMapping("/research-areas/pending")
+    public Result<List<PendingResearchAreaVO>> getPending(PendingResearchAreaQueryDTO queryDTO) {
+        log.info("查询待审核研究方向: {}", queryDTO);
+        List<PendingResearchAreaVO> list = userService.getPending(queryDTO);
+        return Result.success(list);
     }
 
 
