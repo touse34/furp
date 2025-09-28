@@ -1,7 +1,9 @@
 package com.furp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.furp.DTO.PendingResearchAreaQueryDTO;
 import com.furp.DTO.ResearchAreaPageQueryDTO;
+import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.ResearchAreasVO;
 import com.furp.entity.Skill;
 import com.github.pagehelper.Page;
@@ -23,4 +25,7 @@ public interface SkillMapper extends BaseMapper<Skill> {
 
 
     Page<ResearchAreasVO> pageQuery(ResearchAreaPageQueryDTO queryDTO);
+
+
+    List<PendingResearchAreaVO> findPending(PendingResearchAreaQueryDTO queryDTO);
 }

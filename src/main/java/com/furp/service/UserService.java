@@ -1,6 +1,7 @@
 package com.furp.service;
 
 import com.furp.DTO.*;
+import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.User;
 import com.furp.response.PageResult;
@@ -63,4 +64,9 @@ public interface UserService {
     获取研究方向列表
      */
     PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO);
+
+    /*
+    获取pending的研究方向
+     */
+    List<PendingResearchAreaVO> getPending(PendingResearchAreaQueryDTO queryDTO);
 }

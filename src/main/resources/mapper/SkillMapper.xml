@@ -22,4 +22,28 @@
         ORDER BY
         s.id DESC
     </select>
+
+    <select id="findPending" resultType="com.furp.VO.PendingResearchAreaVO">
+        SELECT
+        s.id,
+        s.skill_name AS name,
+        s.status,
+        s.submittedAt AS submitDate,
+        t.name AS submitter
+        FROM
+        skill s
+        LEFT JOIN
+        teacher_skill ts ON s.id = ts.skill_id
+        LEFT JOIN
+        teacher t ON ts.teacher_id = t.id
+        <where>
+            s.status = 'pending'
+            <if test="keyword != null and keyword != ''">
+                AND s.skill_name LIKE concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        ORDER BY
+        s.submittedAt ASC
+    </select>
+
 </mapper>
