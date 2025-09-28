@@ -25,7 +25,8 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         //"/admin/dashboard/stats",
                         //"/admin/users"
                         "/admin/users/{userId}",
-                        "/admin/users"
+                        "/admin/users",
+                        "/admin/research-areas"
 
 
                 );
