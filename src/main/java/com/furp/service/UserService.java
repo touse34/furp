@@ -53,4 +53,9 @@ public interface UserService {
     删除用户
      */
     void deleteUserById(Integer userId);
+
+    /*
+    更新用户
+     */
+    void updateUser(Integer userId,UserAddDTO userAddDTO);
 }
