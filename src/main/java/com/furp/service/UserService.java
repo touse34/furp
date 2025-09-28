@@ -60,10 +60,6 @@ public interface UserService {
      */
     void updateUser(Integer userId,UserAddDTO userAddDTO);
 
-    /*
-    获取研究方向列表
-     */
-    PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO);
 
     /*
     获取pending的研究方向

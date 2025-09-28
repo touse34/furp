@@ -26,9 +26,6 @@ public interface SkillMapper extends BaseMapper<Skill> {
     Integer getIdByName(String name);
 
 
-    Page<ResearchAreasVO> pageQuery(ResearchAreaPageQueryDTO queryDTO);
-
-
     List<PendingResearchAreaVO> findPending(PendingResearchAreaQueryDTO queryDTO);
     Page<ResearchAreasVO> pageQuery(ResearchAreaPageQueryDTO queryDTO);
 }

@@ -143,22 +143,7 @@ public class AdminController {
         // 3. 封装结果并返回
         return Result.success(pageResult);
 
-    /*
-    5.1 获取所有研究方向
-     */
-    @GetMapping("/research-areas")
-    public Result<PageResult> researchAreas(ResearchAreaPageQueryDTO QueryDTO){
-        // 1. 记录接收到的参数，便于调试
-        log.info("分页查询用户列表, 参数: {}", QueryDTO);
 
-        // 2. 调用 Service 层执行查询
-        PageResult pageResult = userService.researchAreasQuery(QueryDTO);
-
-        // 3. 封装结果并返回
-        return Result.success(pageResult);
-
-
-    }
 
     }
 

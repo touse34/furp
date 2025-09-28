@@ -187,17 +187,7 @@ public class UserServiceImpl implements UserService {
         return skillMapper.findPending(queryDTO);
     }
 
-    @Override
-    public PageResult researchAreasQuery(ResearchAreaPageQueryDTO queryDTO) {
-        // 1. Start pagination
-        PageHelper.startPage(queryDTO.getPage(), queryDTO.getSize());
 
-        // 2. Call the mapper method
-        Page<ResearchAreasVO> page = skillMapper.pageQuery(queryDTO);
-
-        // 3. Encapsulate and return the result
-        return new PageResult(page.getResult(), page.getTotal(), page.getPageNum(), page.getPageSize());
-    }
 
     @Override
     @Transactional
