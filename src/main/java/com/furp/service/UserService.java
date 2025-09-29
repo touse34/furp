@@ -3,6 +3,7 @@ package com.furp.service;
 import com.furp.DTO.*;
 import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.ResearchAreaAddResponseVO;
+import com.furp.VO.ReviewResultVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.User;
 import com.furp.response.PageResult;
@@ -79,4 +80,6 @@ public interface UserService {
     void updateResearchArea(Integer areaId, ResearchAreaUpdateDTO updateDTO);
 
     void deleteResearchArea(Integer areaId);
+
+    ReviewResultVO reviewResearchArea(Integer areaId, ResearchAreaReviewDTO reviewDTO);
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @TableName("Skill")
 @Data
 @NoArgsConstructor
@@ -12,5 +14,9 @@ import lombok.NoArgsConstructor;
 public class Skill {
     private Integer id;
     private String skillName;
+    private String status;
+    private String rejectionReason; // ADD THIS FIELD
+    private LocalDateTime submittedAt;
+    private LocalDateTime approvedAt;
 
 }

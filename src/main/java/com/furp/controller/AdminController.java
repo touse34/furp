@@ -3,6 +3,7 @@ package com.furp.controller;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import com.furp.DTO.*;
 import com.furp.VO.PendingResearchAreaVO;
+import com.furp.VO.ReviewResultVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.Result;
 import com.furp.response.PageResult;
@@ -187,7 +188,15 @@ public class AdminController {
         return Result.success("研究方向删除成功");
     }
 
-
+    /*
+    审核研究方向
+     */
+    @PutMapping("/research-areas/{areaId}/review")
+    public Result<ReviewResultVO> reviewResearchArea(@PathVariable Integer areaId, @RequestBody ResearchAreaReviewDTO reviewDTO) {
+        log.info("审核研究方向 {}, 操作: {}", areaId, reviewDTO);
+        ReviewResultVO resultVO = userService.reviewResearchArea(areaId, reviewDTO);
+        return Result.success("审核完成", resultVO);
+    }
 
 
 

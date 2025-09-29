@@ -261,6 +261,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public ReviewResultVO reviewResearchArea(Integer areaId, ResearchAreaReviewDTO reviewDTO) {
+        // 1. Validation: Check if the research area exists.
+        Skill skill = skillMapper.selectById(areaId);
+        if (skill == null) {
+            throw new RuntimeException("Research area not found with ID: " + areaId);
+        }
+
+        // 2. Validation: Check if the research area is in a reviewable state ('pending').
+        if (!"pending".equals(skill.getStatus())) {
+            throw new RuntimeException("This research area has already been reviewed and has a status of '" + skill.getStatus() + "'.");
+        }
+
+        LocalDateTime processTime = LocalDateTime.now();
+        String action = reviewDTO.getAction();
+
+        // 3. Process the action
+        if ("approve".equalsIgnoreCase(action)) {
+            skill.setStatus("approved");
+            skill.setApprovedAt(processTime);
+        } else if ("reject".equalsIgnoreCase(action)) {
+            skill.setStatus("rejected");
+            skill.setRejectionReason(reviewDTO.getReason()); // Save the rejection reason
+        } else {
+            throw new IllegalArgumentException("Invalid action: " + action + ". Must be 'approve' or 'reject'.");
+        }
+
+        // 4. Save the changes to the database
+        skillMapper.updateById(skill);
+
+        // 5. Prepare and return the response
+        ReviewResultVO responseVO = new ReviewResultVO();
+        responseVO.setStatus(skill.getStatus());
+        responseVO.setProcessTime(processTime);
+
+        return responseVO;
+    }
+
+    @Override
     public List<PendingResearchAreaVO> getPending(PendingResearchAreaQueryDTO queryDTO) {
         return skillMapper.findPending(queryDTO);
     }
