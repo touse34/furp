@@ -270,9 +270,9 @@ public class UserServiceImpl implements UserService {
         }
 
         // 2. Validation: Check if the research area is in a reviewable state ('pending').
-        if (!"pending".equals(skill.getStatus())) {
+        /*if (!"pending".equals(skill.getStatus())) {
             throw new RuntimeException("This research area has already been reviewed and has a status of '" + skill.getStatus() + "'.");
-        }
+        }*/
 
         LocalDateTime processTime = LocalDateTime.now();
         String action = reviewDTO.getAction();

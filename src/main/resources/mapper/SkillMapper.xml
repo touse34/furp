@@ -6,7 +6,7 @@
         s.id,
         s.skill_name AS name,
         s.status,
-        s.submittedAt AS createDate,
+        s.submitted_at AS createDate,
         (
         (SELECT COUNT(*) FROM phd_skill ps WHERE ps.skill_id = s.id)
         +
@@ -28,7 +28,7 @@
         s.id,
         s.skill_name AS name,
         s.status,
-        s.submittedAt AS submitDate,
+        s.submitted_at AS submitDate,
         t.name AS submitter
         FROM
         skill s
@@ -43,13 +43,13 @@
             </if>
         </where>
         ORDER BY
-        s.submittedAt ASC
+        s.submitted_at ASC
     </select>
 
     <insert id="insertResearchAreaDetail" parameterType="com.furp.DTO.ResearchAreaDetail"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO skill
-            (skill_name, status, submittedAt, approvedAt)
+            (skill_name, status, submitted_at, approvedAt)
         VALUES
             (#{name}, #{status}, #{createdAt}, #{approvedAt})
     </insert>
