@@ -77,4 +77,6 @@ public interface UserService {
     ResearchAreaAddResponseVO addResearchArea(ResearchAreaDetail researchAreaDetail);
 
     void updateResearchArea(Integer areaId, ResearchAreaUpdateDTO updateDTO);
+
+    void deleteResearchArea(Integer areaId);
 }

@@ -240,6 +240,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteResearchArea(Integer areaId) {
+        // 1. Validation: Check if the research area exists.
+        Skill skill = skillMapper.selectById(areaId);
+        if (skill == null) {
+            throw new RuntimeException("Research area not found with ID: " + areaId);
+        }
+
+        // 2. CRITICAL Validation: Check if the skill is in use by any PhDs or Teachers.
+        long phdUsageCount = phdSkillMapper.countBySkillId(areaId);
+        long teacherUsageCount = teacherSkillMapper.countBySkillId(areaId);
+
+        if (phdUsageCount > 0 || teacherUsageCount > 0) {
+            // If the skill is in use, throw an exception and prevent deletion.
+            throw new RuntimeException("Cannot delete research area '" + skill.getSkillName() + "' because it is currently assigned to users.");
+        }
+
+        // 3. If all checks pass, it is safe to perform the hard delete.
+        skillMapper.deleteById(areaId);
+    }
+
+    @Override
     public List<PendingResearchAreaVO> getPending(PendingResearchAreaQueryDTO queryDTO) {
         return skillMapper.findPending(queryDTO);
     }
@@ -536,4 +557,6 @@ public class UserServiceImpl implements UserService {
     public List<UserInfo> findAll() {
         return userMapper.findAll();
     }
+
+
 }

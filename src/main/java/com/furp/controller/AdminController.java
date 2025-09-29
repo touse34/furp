@@ -177,6 +177,15 @@ public class AdminController {
         return Result.success("研究方向更新成功");
     }
 
+    /*
+    5.5 删除研究方向
+     */
+    @DeleteMapping("/research-areas/{areaId}")
+    public Result<Void> deleteResearchArea(@PathVariable Integer areaId) {
+        log.info("删除研究方向: {}", areaId);
+        userService.deleteResearchArea(areaId);
+        return Result.success("研究方向删除成功");
+    }
 
 
 

@@ -27,4 +27,7 @@ public interface TeacherSkillMapper {
 
     @Delete("DELETE FROM teacher_skill WHERE teacher_id = #{teacherId}")
     void deleteByTeacherId(Integer teacherId);
+
+    @Select("SELECT COUNT(*) FROM teacher_skill WHERE skill_id = #{skillId}")
+    long countBySkillId(Integer areaId);
 }

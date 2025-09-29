@@ -33,5 +33,6 @@ public interface PhdSkillMapper {
     @Delete("DELETE FROM phd_skill WHERE phd_id = #{phdId}")
     void deleteByPhdId(Integer phdId);
 
-
+    @Select("SELECT COUNT(*) FROM phd_skill WHERE skill_id = #{skillId}")
+    long countBySkillId(Integer areaId);
 }
