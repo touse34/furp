@@ -44,7 +44,7 @@ public class StudentAddServiceImpl implements StudentAddService {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void batchImportStudents(MultipartFile file) {
+    public String batchImportStudents(MultipartFile file) {
         try{
             List<StudentImportDTO> dtoList = EasyExcel.read(file.getInputStream())
                     .head(StudentImportDTO.class)
@@ -55,17 +55,24 @@ public class StudentAddServiceImpl implements StudentAddService {
                 throw new RuntimeException("Excel文件为空或格式不正确");
             }
 
+            int successCount = 0; //  成功计数
+            int skipCount = 0;    //  跳过计数
+
             for (StudentImportDTO dto : dtoList){
                 if (checkStudentExist(dto.getStudentId())){
                     log.warn("学号{}已经存在，跳过导入",dto.getStudentId());
+                    skipCount++; //  记一笔跳过
                     continue;
                 }
                 saveStudentData(dto);
+                successCount++; //  记一笔成功
             }
+            return "导入结束：成功插入 " + successCount + " 条，跳过重复 " + skipCount + " 条";
         } catch (IOException e){
             log.error("Excel导入失败",e);
             throw new RuntimeException("Excel读取失败："+e.getMessage());
         }
+
     }
 
     /**

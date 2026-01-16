@@ -8,7 +8,7 @@ public interface StudentAddService {
      * 批量导入学生 (Excel)
      * @param file 前端上传的Excel文件
      */
-    void batchImportStudents(MultipartFile file);
+    String batchImportStudents(MultipartFile file);
 
     /**
      * 手动录入单个学生

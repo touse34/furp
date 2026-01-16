@@ -216,8 +216,9 @@ public class AdminController {
         }
 
         try {
-            studentAddService.batchImportStudents(file);
-            return Result.success("导入成功");
+            String msg = studentAddService.batchImportStudents(file);
+
+            return Result.success(msg);
         } catch (Exception e) {
             e.printStackTrace();
             // 把具体的错误信息返回给前端，方便调试
