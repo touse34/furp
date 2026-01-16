@@ -41,15 +41,6 @@ public class PhdController {
     @Autowired
     private NoticesService noticesService;
 
-//    @GetMapping("/phd/student/info")
-//    public Result list(){
-//        System.out.println("Student info");
-//        List<PhdInfo> phdInfoList =  phdinfoService.findAll();
-//
-//        return Result.success(phdInfoList);
-//
-//    }
-
     /**
      * 根据ID查询phd 3.1.1
      * @param

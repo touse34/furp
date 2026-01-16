@@ -210,7 +210,7 @@ public class AdminController {
      * 参数: file (Form-Data)
      */
     @PostMapping("/import")
-    public Result importStudents(@RequestParam("file") MultipartFile file) {
+    public Result<Void> importStudents(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return Result.error("上传文件不能为空");
         }
@@ -232,7 +232,7 @@ public class AdminController {
      * 参数: JSON Body
      */
     @PostMapping("/add")
-    public Result addStudent(@RequestBody StudentImportDTO studentDTO) {
+    public Result<Void> addStudent(@RequestBody StudentImportDTO studentDTO) {
         try {
             studentAddService.addOneStudent(studentDTO);
             return Result.success("添加成功");
