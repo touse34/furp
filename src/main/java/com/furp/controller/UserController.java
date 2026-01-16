@@ -2,10 +2,7 @@ package com.furp.controller;
 
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
-import com.furp.DTO.LoginDTO;
-import com.furp.DTO.LoginVo;
-import com.furp.DTO.PhdUserInfo;
-import com.furp.DTO.UserInfo;
+import com.furp.DTO.*;
 import com.furp.entity.Phd;
 import com.furp.entity.Result;
 import com.furp.entity.Teacher;
@@ -13,11 +10,13 @@ import com.furp.entity.User;
 import com.furp.mapper.PhdMapper;
 import com.furp.mapper.TeacherMapper;
 import com.furp.service.PhdUserInfoService;
+import com.furp.service.StudentAddService;
 import com.furp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;

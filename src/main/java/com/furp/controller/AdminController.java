@@ -7,11 +7,13 @@ import com.furp.VO.ReviewResultVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.Result;
 import com.furp.response.PageResult;
+import com.furp.service.StudentAddService;
 import com.furp.service.TimeSlotsService;
 import com.furp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 @Slf4j
@@ -24,6 +26,9 @@ public class AdminController {
     private TimeSlotsService timeSlotsService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentAddService studentAddService;
+
 
     /**2.3 更新日期配置（管理员）
      *
@@ -197,6 +202,46 @@ public class AdminController {
         ReviewResultVO resultVO = userService.reviewResearchArea(areaId, reviewDTO);
         return Result.success("审核完成", resultVO);
     }
+
+
+    /**
+     * 1. Excel 批量导入接口
+     * URL: POST /students/import
+     * 参数: file (Form-Data)
+     */
+    @PostMapping("/import")
+    public Result importStudents(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return Result.error("上传文件不能为空");
+        }
+
+        try {
+            studentAddService.batchImportStudents(file);
+            return Result.success("导入成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 把具体的错误信息返回给前端，方便调试
+            return Result.error("导入失败: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 2. 手动录入单个学生接口
+     * URL: POST /students/add
+     * 参数: JSON Body
+     */
+    @PostMapping("/add")
+    public Result addStudent(@RequestBody StudentImportDTO studentDTO) {
+        try {
+            studentAddService.addOneStudent(studentDTO);
+            return Result.success("添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("添加失败: " + e.getMessage());
+        }
+    }
+
+
 
 
 
