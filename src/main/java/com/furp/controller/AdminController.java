@@ -1,6 +1,7 @@
 package com.furp.controller;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaIgnore;
 import com.furp.DTO.*;
 import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.ReviewResultVO;
@@ -8,8 +9,10 @@ import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.Result;
 import com.furp.response.PageResult;
 import com.furp.service.StudentAddService;
+import com.furp.service.TeacherService;
 import com.furp.service.TimeSlotsService;
 import com.furp.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,8 @@ public class AdminController {
     private UserService userService;
     @Autowired
     private StudentAddService studentAddService;
+    @Autowired
+    private TeacherService teacherService;
 
 
     /**2.3 更新日期配置（管理员）
@@ -125,14 +130,6 @@ public class AdminController {
         userService.updateUser(userId,userAddDTO);
         return Result.success("用户更新成功");
     }
-
-    /*
-    4.5 导入用户Excel
-     */
-
-    /*
-    4.5 导入用户Excel
-     */
 
 
     /*
@@ -241,6 +238,21 @@ public class AdminController {
             return Result.error("添加失败: " + e.getMessage());
         }
     }
+
+    @PostMapping("/importteacher")
+    @Operation(summary = "从学生表提取所有导师", description = "扫描Assessor和Supervisor列，自动去重并创建User和Teacher账号")
+    public Result<Void> extractTeachers(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) return Result.error("文件不能为空");
+
+        try {
+            String msg = teacherService.extractAndImportTeachers(file);
+            return Result.success(msg, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("处理失败: " + e.getMessage());
+        }
+    }
+
 
 
 
