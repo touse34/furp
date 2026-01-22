@@ -41,4 +41,9 @@ public interface SkillMapper extends BaseMapper<Skill> {
     int insertResearchAreaDetail(ResearchAreaDetail detailDTO);
     @Select("SELECT * FROM skill WHERE skill_name = #{name}")
     Skill findIfExistByName(String name);
+
+    @Select("select s.id from skill s " +
+            "join teacher_skill t on t.skill_id = s.id " +
+            "where teacher_id = #{teacherId}")
+    List<Integer> selectSkillIdByTeacherId(Integer teacherId);
 }

@@ -1,10 +1,12 @@
 package com.furp.controller;
 
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.*;
 import com.furp.VO.AcademicTermVO;
 import com.furp.VO.NoticesVO;
+import com.furp.VO.SkillSelectionVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.entity.Result;
 import com.furp.exception.AccessDeniedException;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/teacher")
 @SaCheckRole("teacher")
@@ -186,12 +187,10 @@ public class TeacherController {
      * @return
      */
     @GetMapping("/research-areas")
-    public Result<TeacherResearchAreasResponseDTO> getTeacherResearchAreas() {
+    public Result<List<SkillSelectionVO>> getTeacherResearchAreas() {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
-
-        TeacherResearchAreasResponseDTO responseDTO = teacherResearchAreasResponseService.getTeacherResearchAreas(teacherId);
-
-        return Result.success(responseDTO);
+        List<SkillSelectionVO> skillOptions = teacherSkillService.getSkillSelectionForTeacher(teacherId);
+        return Result.success(skillOptions);
     }
 
 

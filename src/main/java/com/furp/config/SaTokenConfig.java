@@ -32,7 +32,9 @@ public class SaTokenConfig implements WebMvcConfigurer {
                         "/admin/research-areas",
                         "/admin/research-areas/{areaId}",
                         "/admin/research-areas/{areaId}/review",
-                        "/admin/import"
+                        "/admin/import",
+                        "/teacher/research-areas"
+
 
 
 
