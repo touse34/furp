@@ -42,4 +42,10 @@ public class GlobalExceptionHandler {
         return Result.error(500, "系統內部異常，請聯繫管理員");
     }
 
+    @ExceptionHandler(AccountNotFoundException.class)
+    public Result handleAccountNotFoundException(AccountNotFoundException e) {
+        // e.getMessage() 即Service 里抛出时写的 "用户名不存在"
+        return Result.error(e.getMessage());
+    }
+
 }
