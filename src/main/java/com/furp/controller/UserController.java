@@ -1,5 +1,6 @@
 package com.furp.controller;
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import com.furp.DTO.*;
@@ -44,6 +45,7 @@ public class UserController {
         return Result.success(userList);
 
     }*/
+@SaCheckRole("admin")
 @GetMapping("/admin/{roleId}")
 public Result listUsers(@PathVariable Integer roleId){
        /* System.out.println("根据roleId来查询用户");
