@@ -7,7 +7,7 @@
         #{teacherId},
         ts.academic_year, -- 新增：从 time_slots 表获取学年
         ts.start_time,
-        ts.end_time
+        ts.end_time,
         ts.id
         FROM
         time_slots ts

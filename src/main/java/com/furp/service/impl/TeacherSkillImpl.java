@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.furp.DTO.CustomResearchDirection;
 import com.furp.DTO.ResearchAreaDetail;
 import com.furp.VO.SkillSelectionVO;
@@ -41,16 +42,23 @@ public class TeacherSkillImpl implements TeacherSkillService {
 
     @Override
     public List<SkillSelectionVO> getSkillSelectionForTeacher(Integer teacherId) {
-        List<Skill> allSkills = skillMapper.selectList(null);
+        // 1. 设置过滤条件
+        LambdaQueryWrapper<Skill> queryWrapper = new LambdaQueryWrapper<>();
+        // 对应数据库里的字段 status = 'approved'
+        queryWrapper.eq(Skill::getStatus, "approved");
+        // 按名称排序
+        queryWrapper.orderByAsc(Skill::getSkillName);
+
+        // 2. 🟢 关键修改：把 queryWrapper 传进去！
+        List<Skill> approvedSkills = skillMapper.selectList(queryWrapper);
+
+        // 3. 剩下的逻辑不变...
         Set<Integer> selectedSkillIds = new HashSet<>(skillMapper.selectSkillIdByTeacherId(teacherId));
 
-        // 3. 在内存中进行组装
-        // 遍历所有技能，为每个技能创建一个 SkillSelectionVO，并设置其 selected 状态
-        return allSkills.stream()
+        return approvedSkills.stream()
                 .map(skill -> new SkillSelectionVO(
                         skill.getId(),
                         skill.getSkillName(),
-                        // 核心逻辑：如果学生的已选技能ID集合中包含当前技能的ID，则 selected 为 true
                         selectedSkillIds.contains(skill.getId())
                 ))
                 .collect(Collectors.toList());
