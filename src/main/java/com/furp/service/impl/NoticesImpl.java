@@ -1,5 +1,6 @@
 package com.furp.service.impl;
 
+import com.furp.VO.NoticeCheckVO;
 import com.furp.VO.NoticesVO;
 import com.furp.mapper.NoticeReadStatusMapper;
 import com.furp.mapper.NoticesMapper;
@@ -28,9 +29,9 @@ public class NoticesImpl implements NoticesService {
         List<NoticesVO> notices;
         if (role.equals("phd")) {
             notices = noticesMapper.findAllWithReadStatusByPhdId(Id);
-        }else if(role.equals("teacher")){
+        } else if (role.equals("teacher")) {
             notices = noticesMapper.findAllWithReadStatusByTeacherId(Id);
-        }else{
+        } else {
             notices = Collections.emptyList();
         }
         Page<NoticesVO> page = (Page<NoticesVO>) notices;
@@ -72,4 +73,14 @@ public class NoticesImpl implements NoticesService {
         }
         return null;
     }
+
+    @Override
+    public NoticeCheckVO countUnread(Integer id) {
+        NoticeCheckVO noticeCheckVO = new NoticeCheckVO();
+        int count = noticesMapper.countUnreadNotices(id);
+        noticeCheckVO.setUnReadCount(count);
+        noticeCheckVO.setHasNewNotification(count > 0);
+        return noticeCheckVO;
+    }
+
 }

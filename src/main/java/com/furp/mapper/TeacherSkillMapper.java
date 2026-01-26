@@ -18,7 +18,7 @@ public interface TeacherSkillMapper {
      * 添加新的研究领域
      * @param customResearchDirection
      */
-    @Insert("insert into skill(skill_name,submittedAt,status) values(#{name},#{submittedAt},'pending')")
+    @Insert("insert into skill(skill_name,submitted_at,status) values(#{name},#{submittedAt},'pending')")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(CustomResearchDirection customResearchDirection);
 

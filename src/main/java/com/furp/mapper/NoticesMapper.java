@@ -27,4 +27,7 @@ public interface NoticesMapper {
             "left join notice_read_status nrs on n.id = nrs.notice_id and nrs.teacher_id = #{teacherId} " +
             "order by n.create_time desc")
     List<NoticesVO> findAllWithReadStatusByTeacherId(@Param("teacherId") Integer teacherId);
+
+    @Select("select count(*) from notices left join notice_read_status nrs on notices.id = nrs.notice_id and nrs.teacher_id = #{teacherId} where teacher_id IS NULL")
+    int countUnreadNotices(@Param("teacherId") Integer teacherId);
 }
