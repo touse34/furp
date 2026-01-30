@@ -139,11 +139,11 @@ public class TeacherController {
     /**
      *5.1获取用户通知
      */
-    @GetMapping("/teacher/user/notification")
+    @GetMapping("/user/notifications")
     public Result<PageResult<NoticesVO>> getUserNotifications(@RequestParam(defaultValue = "1") int page,
-                                                        @RequestParam(defaultValue = "0") int size) {
+                                                        @RequestParam(defaultValue = "10") int limit) {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
-        PageResult<NoticesVO> notices = noticesService.getNoticeList(page, size, teacherId, "teacher");
+        PageResult<NoticesVO> notices = noticesService.getNoticeList(page, limit, teacherId, "teacher");
         return Result.success(notices);
     }
 
