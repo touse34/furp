@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface NoticesMapper {
-    @Select("SELECT " +
+    @Select("SELECT DISTINCT" +
             "    n.id, " +
             "    n.title, " +
             "    n.content, " +
@@ -22,7 +22,7 @@ public interface NoticesMapper {
             "    n.create_time DESC")
     List<NoticesVO> findAllWithReadStatusByPhdId(@Param("phdId") Integer phdId);
 
-    @Select("select n.id, n.title, n.content, n.create_time as time, n.type, (nrs.id is not null) as `read` " +
+    @Select("select distinct n.id, n.title, n.content, n.create_time as time, n.type, (nrs.id is not null) as `read` " +
             "from notices n " +
             "left join notice_read_status nrs on n.id = nrs.notice_id and nrs.teacher_id = #{teacherId} " +
             "order by n.create_time desc")

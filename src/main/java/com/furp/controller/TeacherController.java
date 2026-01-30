@@ -150,7 +150,7 @@ public class TeacherController {
     /**
      * 5.2标记通知为已读
      */
-    @PutMapping("/teacher/user/notifications/{noticeId}/read")
+    @PutMapping("/user/notifications/{noticeId}/read")
     public Result markNotificationAsRead(@PathVariable Integer noticeId) {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
 
