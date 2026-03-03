@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewInfoVo {
+    private int reviewId;
+
     private String status;
 
     private String reviewYear;

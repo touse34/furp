@@ -28,11 +28,11 @@
             ar.id AS reviewId,
             p.name AS phdName,
             ar.review_year AS reviewYear,
-            t_partner.name AS coAssessor,
+            ANY_VALUE(t_partner.name) AS coAssessor,
             (SELECT GROUP_CONCAT(sk.skill_name SEPARATOR ',') FROM phd_skill ps JOIN skill sk ON ps.skill_id = sk.id WHERE ps.phd_id = ar.phd_id) AS researchField,
-            s.start_time AS startTime,
-            s.end_time AS endTime,
-            m.location AS location,
+            ANY_VALUE(s.start_time) AS startTime,
+            ANY_VALUE(s.end_time) AS endTime,
+            ANY_VALUE(m.location) AS location,
             ar.status
         FROM
             review_assessor ra_self
@@ -56,7 +56,7 @@
                 LEFT JOIN
             meeting_room m ON s.room_id = m.id
         WHERE
-            ra_self.teacher_id = #{teacherId} AND ar.status = 'scheduled'
+            ra_self.teacher_id = #{teacherId}
         GROUP BY
             ar.id
     </select>
