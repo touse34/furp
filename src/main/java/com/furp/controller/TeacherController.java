@@ -29,6 +29,8 @@ public class TeacherController {
     private TeacherSkillService teacherSkillService;
     @Autowired
     private NoticesService noticesService;
+    @Autowired
+    private SystemSettingsService systemSettingsService;
 
     /**
      *  2.1 获取当前时间配置
@@ -302,6 +304,12 @@ public class TeacherController {
         // 插入操作并返回插入后的数据（包含id）
         CustomResearchDirection insertedDirection = teacherSkillService.addResearchArea(customResearchDirection);
         return Result.success(insertedDirection);
+    }
+
+    @GetMapping("/deadline")
+    public Result<DeadlineVO> getDeadline() {
+        DeadlineVO vo = systemSettingsService.getDeadlineInfo();
+        return Result.success(vo);
     }
 
 
