@@ -5,8 +5,10 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import com.furp.DTO.*;
 import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.ReviewResultVO;
+import com.furp.VO.TimeConfigVO;
 import com.furp.VO.UserAddResponseVO;
 import com.furp.entity.Result;
+import com.furp.entity.TimeSlots;
 import com.furp.response.PageResult;
 import com.furp.service.StudentAddService;
 import com.furp.service.TeacherService;
@@ -44,7 +46,7 @@ public class AdminController {
     public Result upDateDateConfigs(@RequestBody UpdateTimeSlotsDTO updateTimeSlots) {
         String year = updateTimeSlots.getAcademicYear();
         List<TimeSlot> slots= updateTimeSlots.getSlots();
-        int updatedCount = timeSlotsService.updateDateConfigs(year, slots);
+        int updatedCount = timeSlotsService.updateDateConfigs(slots);
         return Result.success("成功创建/更新了" + updatedCount + "个可用时间段。");
     }
 
@@ -251,6 +253,13 @@ public class AdminController {
             e.printStackTrace();
             return Result.error("处理失败: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/date-configs")
+    public Result<List<TimeSlots>> getAllDateConfigs() {
+        // 因为已经没有学期概念，所以不需要传 year，直接查全部全局时间槽
+        List<TimeSlots> list = timeSlotsService.getAllTimeSlots();
+        return Result.success(list);
     }
 
 

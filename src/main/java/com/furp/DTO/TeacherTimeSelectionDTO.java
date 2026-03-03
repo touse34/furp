@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeacherTimeSelectionDTO {
-    private String academicYear; // 学期
+public class TeacherTimeSelectionDTO { // 学期
     private List<Integer> slotIds; // 选中的时间配置ID列表
 }

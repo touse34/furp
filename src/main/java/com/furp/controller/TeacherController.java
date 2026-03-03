@@ -32,20 +32,20 @@ public class TeacherController {
 
     /**
      *  2.1 获取当前时间配置
-     * @param year
+     * @param
      * @return
      */
     @GetMapping("/time-config")
-    public Result<List<TimeConfigVO>> getTimeConfig(String year) {
-        List<TimeConfigVO> list = timeSlotsService.getAvailableTimeSlots(year);
+    public Result<List<TimeConfigVO>> getTimeConfig() {
+        List<TimeConfigVO> list = timeSlotsService.getAvailableTimeSlots();
         return Result.success(list);
     }
 
-    @GetMapping("/academic-terms")
-    public Result<List<AcademicTermVO>> getAvailableAcademicTerms() {
-            List<AcademicTermVO> terms = timeSlotsService.getAvailableAcademicTerms();
-        return Result.success(terms);
-    }
+//    @GetMapping("/academic-terms")
+//    public Result<List<AcademicTermVO>> getAvailableAcademicTerms() {
+//            List<AcademicTermVO> terms = timeSlotsService.getAvailableAcademicTerms();
+//        return Result.success(terms);
+//    }
 
 
     /**
@@ -56,7 +56,7 @@ public class TeacherController {
     @GetMapping("/user/time-selection")
     public Result<List<TimeConfigVO>> getTeacherTimeSelection(@RequestParam String academicYear) {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
-        List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots(academicYear, teacherId);
+        List<TimeConfigVO> list = timeSlotsService.getTeacherAvailableTimeSlots(teacherId);
 
         return Result.success(list);
     }

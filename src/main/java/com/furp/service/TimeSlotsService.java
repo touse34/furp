@@ -10,15 +10,24 @@ import com.furp.entity.TimeSlots;
 import java.util.List;
 
 public interface TimeSlotsService {
-    public List<TimeConfigVO> getAvailableTimeSlots(String year);
+    public List<TimeConfigVO> getAvailableTimeSlots();
 
-    int updateDateConfigs(String year, List<TimeSlot> slots);
+    int updateDateConfigs(List<TimeSlot> slots);
 
-    public List<TimeConfigVO> getTeacherAvailableTimeSlots(String year, Integer teacherId);
+    public List<TimeConfigVO> getTeacherAvailableTimeSlots(Integer teacherId);
 
-    public List<AcademicTermVO> getAvailableAcademicTerms();
+    //public List<AcademicTermVO> getAvailableAcademicTerms();
 
-    public int updateTeacherTimeSelection(Integer teacherId, TeacherTimeSelectionDTO selectedTime);
+    int updateTeacherTimeSelection(Integer teacherId, TeacherTimeSelectionDTO selectedTime);
+
+    //String getCurrentActiveTerm();
+
+    List<TimeSlots> getAllTimeSlots();
+
+    TimeSlot findTimeSlotById(Integer id);
+
+
+
 }
 
 

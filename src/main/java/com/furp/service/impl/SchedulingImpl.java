@@ -8,6 +8,7 @@ import com.furp.DTO.TimeSlot;
 import com.furp.entity.*;
 import com.furp.mapper.*;
 import com.furp.service.*;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,12 +35,13 @@ public class SchedulingImpl implements SchedulingService {
     @Autowired private AvailableTimeService availableTimeService;
     @Autowired private ReviewAssessorMapper reviewAssessorMapper;
     @Autowired private SchedulingPersistenceService SchedulingPersistenceService;
+    @Autowired private TimeSlotsService timeSlotsService;
 
 
     public void autoSchedule() {
         List<PendingReviewDto> pendingReviews = annualReviewService.getPendingReviews();
         List<Integer> pendingPhdIds = pendingReviews.stream()
-                .map(PendingReviewDto::getPhdId)
+                .map(dto -> dto.getPhdId())
                 .collect(Collectors.toList());   //获取等待分配的phdId
         List<PendingReviewDto> pendingReviewsCopy = new ArrayList<>(pendingReviews);
 
@@ -427,19 +429,21 @@ public class SchedulingImpl implements SchedulingService {
     }
 
     private List<TimeSlot> findCommonTimeSlots(List<AvailableTime> list1, List<AvailableTime> list2) {
-        List<TimeSlot> commonSlots = new ArrayList<>();
-        Set<TimeSlot> slot1 = list1.stream()
-                .map(at1 -> new TimeSlot(at1.getStartTime(), at1.getEndTime()))
+
+        Set<Integer> slotIds1 = list1.stream()
+                .map(AvailableTime::getTimeSlotId)
                 .collect(Collectors.toSet());
 
-        for(AvailableTime at2 : list2){
-            TimeSlot slot2 = new TimeSlot(at2.getStartTime(), at2.getEndTime());
-            if(slot1.contains(slot2)){
-                commonSlots.add(slot2);
-            }
-        }
+        Set<Integer> commonSlots = list2.stream()
+                .map(AvailableTime::getTimeSlotId) //对每个对象进行类方法 time -> time.getTimeSlotId()
+                .filter(slotIds1::contains)  //对每个对象进行（）内参数的方法 = id -> slotIds1.contains(id)
+                .collect(Collectors.toSet());
 
-        return commonSlots;
+        List<TimeSlot> finalSlots = commonSlots.stream()
+                .map(a->timeSlotsService.findTimeSlotById(a))
+                .toList();
+
+        return finalSlots;
 
     }
 
