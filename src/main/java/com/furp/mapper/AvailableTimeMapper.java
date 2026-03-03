@@ -23,7 +23,7 @@ public interface AvailableTimeMapper extends BaseMapper<AvailableTime> {
 //    @Delete("DELETE FROM available_time WHERE teacher_id = #{teacherId} AND academic_year = #{academicYear}")
 //    void deleteByTeacherAndYear(@Param("teacherId") Integer teacherId, @Param("academicYear") String academicYear);
 
-    void batchInsertFromTimeSlots(Integer teacherId, List<Integer> timeSlotIds);
+    void batchInsertFromTimeSlots(@Param("teacherId")Integer teacherId, @Param("timeSlotIds")List<Integer> timeSlotIds);
 
     @Select("SELECT time_slot_id FROM available_time WHERE teacher_id = #{teacherId}")
     Set<Integer> findSelectedSlotIdsByTeacherId(@Param("teacherId")Integer teacherId);

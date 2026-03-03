@@ -4,8 +4,8 @@
     <insert id="batchInsertFromTimeSlots">
         INSERT INTO available_time (teacher_id, time_slot_id)
         VALUES
-        <foreach collection="timeSlotIds" item="id" open="(" separator="," close=")">
-            （#{teacher_id}, #{id})
+        <foreach collection="timeSlotIds" item="id"  separator="," >
+            (#{teacherId}, #{id})
         </foreach>
     </insert>
 

@@ -66,7 +66,7 @@ public class TeacherController {
      * @param selectedTime
      * @return
      */
-    @PutMapping("/user/time-selection-confirm")
+    @PostMapping("/user/time-selection-confirm")
     public Result updateTeacherTimeSelection(@RequestBody TeacherTimeSelectionDTO selectedTime) {
         Integer teacherId = StpUtil.getSession().getInt("teacherId");
         int updatedCount = timeSlotsService.updateTeacherTimeSelection(teacherId, selectedTime);
