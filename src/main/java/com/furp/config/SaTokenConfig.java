@@ -1,7 +1,9 @@
 package com.furp.config;
 
+import cn.dev33.satoken.context.SaHolder;
 import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.stp.StpUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,7 +14,13 @@ public class SaTokenConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册 Sa-Token 的登录拦截器
-        registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
+        registry.addInterceptor(new SaInterceptor(handle -> {
+                    String method = SaHolder.getRequest().getMethod();
+                    if ("OPTIONS".equalsIgnoreCase(method)) {
+                        return;
+                    }
+                    StpUtil.checkLogin();
+                }))
                 .addPathPatterns("/**") // 拦截所有请求
                 .excludePathPatterns(    // -- 放行路径 --
                         "/users/login",                // 登录接口

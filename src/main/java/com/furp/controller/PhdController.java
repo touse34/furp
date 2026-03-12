@@ -86,6 +86,19 @@ public class PhdController {
     public Result<ReviewInfoVo> findCurrentReview(){
         Integer phdId = StpUtil.getSession().getInt("phdId");
         ReviewInfoVo vo = annualReviewService.getCurrentReviewDetails(phdId);
+        if (vo != null){
+            System.out.println("有!!!!!!!!!!!!!!!");
+            System.out.println("有!!!!!!!!!!!!!!!");
+            System.out.println("有!!!!!!!!!!!!!!!");
+            System.out.println("有!!!!!!!!!!!!!!!");
+            System.out.println(vo.getStartTime());
+        }else{
+            System.out.println("无");
+            System.out.println("无");
+            System.out.println("无");
+            System.out.println("无");
+        }
+
         return Result.success(vo);
 
     }

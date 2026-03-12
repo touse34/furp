@@ -46,7 +46,7 @@ public interface AnnualReviewMapper extends BaseMapper<AnnualReview> {
      * @param reviewId 评审任务的主键ID (annual_review.id)
      * @return 评审员姓名的字符串列表
      */
-    @Select("SELECT t.name " +
+    @Select("SELECT t.name as assessors " +
             "FROM teacher t " +
             "JOIN review_assessor ra ON t.id = ra.teacher_id " +
             "WHERE ra.annual_review_id = #{reviewId}")

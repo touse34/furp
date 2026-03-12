@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.furp.mapper.AnnualReviewMapper">
 <resultMap id="HistoryReviewWithAssessors" type="com.furp.DTO.ReviewInfoVo">
-    <id property="id" column="id"/>
+    <id property="reviewId" column="reviewId"/>
     <result property="reviewYear" column="review_year"/>
     <result property="startTime" column="start_time"/>
     <result property="endTime" column="end_time"/>
     <result property="location" column="location"/>
-    <result property="comment" column="comment"/>
-    <collection property="assessors" column="id"
+    <result property="comments" column="comment"/>
+    <collection property="assessors" column="reviewId"
                 select="findAssessorsByReviewId"/>
 
 </resultMap>
 
     <select id="findHistoryReviewById" resultMap="HistoryReviewWithAssessors" >
-        SELECT ar.id, ar.review_year, ar.status, s.start_time, s.end_time,
-               m.location, ar.comment
+        SELECT ar.id AS reviewId, ar.review_year, ar.status, s.start_time, s.end_time,
+               m.location, ar.final_comment AS comment
         FROM annual_review ar
                  LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL
                  LEFT JOIN meeting_room m ON m.id = s.room_id
