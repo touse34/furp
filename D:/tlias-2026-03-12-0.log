@@ -1,0 +1,1444 @@
+2026-03-12 00:34:32.008 [http-nio-8080-exec-2] ERROR com.furp.exception.GlobalExceptionHandler-token 无效：0992dd2f-9fe0-4ed1-b131-c86ad5c2985e
+cn.dev33.satoken.exception.NotLoginException: token 无效：0992dd2f-9fe0-4ed1-b131-c86ad5c2985e
+	at cn.dev33.satoken.exception.NotLoginException.newInstance(NotLoginException.java:134)
+	at cn.dev33.satoken.stp.StpLogic.getLoginId(StpLogic.java:1099)
+	at cn.dev33.satoken.stp.StpLogic.checkRoleAnd(StpLogic.java:2103)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler._checkMethod(SaCheckRoleHandler.java:48)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler.checkMethod(SaCheckRoleHandler.java:40)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler.checkMethod(SaCheckRoleHandler.java:31)
+	at cn.dev33.satoken.annotation.handler.SaAnnotationHandlerInterface.check(SaAnnotationHandlerInterface.java:42)
+	at cn.dev33.satoken.strategy.SaAnnotationStrategy.lambda$new$1(SaAnnotationStrategy.java:130)
+	at cn.dev33.satoken.strategy.SaAnnotationStrategy.lambda$new$0(SaAnnotationStrategy.java:103)
+	at cn.dev33.satoken.interceptor.SaInterceptor.preHandle(SaInterceptor.java:98)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 00:51:01.970 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m46s739ms).
+2026-03-12 04:39:36.328 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m31s599ms).
+2026-03-12 12:19:11.744 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m55s375ms).
+2026-03-12 13:49:51.709 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 13:49:51.711 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 13:49:52.697 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 13:49:52.698 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 13:49:52.703 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 13:49:52.713 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 13:49:52.717 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 13:49:52.830 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 10935 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 13:49:52.831 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 13:49:53.120 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 13:49:53.121 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 13:49:53.134 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2026-03-12 13:49:53.345 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 13:49:53.348 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:49:53.348 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 13:49:53.348 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 13:49:53.366 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 13:49:53.366 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 520 ms
+2026-03-12 13:49:53.843 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 13:49:53.921 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:49:53.927 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 13:49:53.930 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.221 seconds (process running for 1.514)
+2026-03-12 13:53:46.876 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 13:53:46.876 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 13:53:46.878 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 2 ms
+2026-03-12 13:53:46.902 [http-nio-8080-exec-2] ERROR com.furp.exception.GlobalExceptionHandler-未能读取到有效 token
+cn.dev33.satoken.exception.NotLoginException: 未能读取到有效 token
+	at cn.dev33.satoken.exception.NotLoginException.newInstance(NotLoginException.java:134)
+	at cn.dev33.satoken.stp.StpLogic.getLoginId(StpLogic.java:1093)
+	at cn.dev33.satoken.stp.StpLogic.checkLogin(StpLogic.java:1075)
+	at cn.dev33.satoken.stp.StpUtil.checkLogin(StpUtil.java:476)
+	at com.furp.config.SaTokenConfig.lambda$addInterceptors$0(SaTokenConfig.java:22)
+	at cn.dev33.satoken.interceptor.SaInterceptor.preHandle(SaInterceptor.java:102)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 13:53:56.923 [http-nio-8080-exec-3] ERROR com.furp.exception.GlobalExceptionHandler-未能读取到有效 token
+cn.dev33.satoken.exception.NotLoginException: 未能读取到有效 token
+	at cn.dev33.satoken.exception.NotLoginException.newInstance(NotLoginException.java:134)
+	at cn.dev33.satoken.stp.StpLogic.getLoginId(StpLogic.java:1093)
+	at cn.dev33.satoken.stp.StpLogic.checkLogin(StpLogic.java:1075)
+	at cn.dev33.satoken.stp.StpUtil.checkLogin(StpUtil.java:476)
+	at com.furp.config.SaTokenConfig.lambda$addInterceptors$0(SaTokenConfig.java:22)
+	at cn.dev33.satoken.interceptor.SaInterceptor.preHandle(SaInterceptor.java:102)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 13:54:29.066 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 13:54:29.067 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 13:54:29.072 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 13:54:29.079 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 13:54:29.081 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 13:54:29.168 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 10982 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 13:54:29.169 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 13:54:29.419 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 13:54:29.420 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 13:54:29.433 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2026-03-12 13:54:29.611 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 13:54:29.613 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:54:29.613 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 13:54:29.613 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 13:54:29.627 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 13:54:29.627 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 439 ms
+2026-03-12 13:54:30.051 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 13:54:30.124 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:54:30.130 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 13:54:30.134 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.055 seconds (process running for 1.285)
+2026-03-12 13:54:48.113 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 13:54:48.113 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 13:54:48.114 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 13:54:48.150 [http-nio-8080-exec-1] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Xindi Zhao, password=123456)
+2026-03-12 13:54:48.157 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 13:54:48.256 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1113e26f
+2026-03-12 13:54:48.256 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 13:59:23.734 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 13:59:23.737 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 13:59:24.935 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 13:59:24.936 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 13:59:24.940 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 13:59:24.948 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 13:59:24.951 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 13:59:25.043 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 11089 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 13:59:25.044 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 13:59:25.299 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 13:59:25.300 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 13:59:25.314 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2026-03-12 13:59:25.495 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 13:59:25.498 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:59:25.498 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 13:59:25.498 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 13:59:25.513 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 13:59:25.513 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 454 ms
+2026-03-12 13:59:25.948 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 13:59:26.018 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 13:59:26.023 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 13:59:26.027 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.08 seconds (process running for 1.306)
+2026-03-12 13:59:33.827 [http-nio-8080-exec-2] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 13:59:33.827 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 13:59:33.828 [http-nio-8080-exec-2] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 13:59:33.994 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 13:59:34.109 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@649b69d2
+2026-03-12 13:59:34.110 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 14:08:20.138 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 14:08:20.141 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 14:08:20.936 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 14:08:20.937 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 14:08:20.941 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 14:08:20.948 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 14:08:20.950 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 14:08:21.034 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 11174 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 14:08:21.034 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 14:08:21.282 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 14:08:21.283 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 14:08:21.294 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 14:08:21.470 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 14:08:21.473 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:08:21.473 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 14:08:21.473 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 14:08:21.487 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 14:08:21.487 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 440 ms
+2026-03-12 14:08:21.919 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 14:08:21.990 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:08:21.996 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 14:08:22.000 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.053 seconds (process running for 1.276)
+2026-03-12 14:08:29.419 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 14:08:29.419 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 14:08:29.420 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 14:08:29.576 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 14:08:29.688 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3af11d5f
+2026-03-12 14:08:29.688 [http-nio-8080-exec-3] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 14:08:29.935 [http-nio-8080-exec-4] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/phd/review/history', 發生未知系統異常.
+org.mybatis.spring.MyBatisSystemException: 
+### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: Could not set property 'id' of 'class com.furp.DTO.ReviewInfoVo' with value '151' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'id' in 'class com.furp.DTO.ReviewInfoVo'
+### The error may exist in file [/Users/aziko/Documents/furp/furp/target/classes/mapper/AnnualReviewMapper.xml]
+### The error may involve com.furp.mapper.AnnualReviewMapper.findHistoryReviewById
+### The error occurred while handling results
+### SQL: SELECT ar.id AS reviewId, ar.review_year, ar.status, s.start_time, s.end_time,                m.location, ar.final_comment AS comment         FROM annual_review ar                  LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL                  LEFT JOIN meeting_room m ON m.id = s.room_id         WHERE ar.phd_id = ? AND ar.status = 'completed'         ORDER BY ar.review_year DESC  LIMIT ?
+### Cause: org.apache.ibatis.reflection.ReflectionException: Could not set property 'id' of 'class com.furp.DTO.ReviewInfoVo' with value '151' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'id' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:99)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:347)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:194)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:164)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:156)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:93)
+	at jdk.proxy2/jdk.proxy2.$Proxy101.findHistoryReviewById(Unknown Source)
+	at com.furp.service.impl.AnnualReviewImpl.getHistoryReviewDetails(AnnualReviewImpl.java:65)
+	at com.furp.controller.PhdController.findHistoryReview(PhdController.java:113)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.ibatis.reflection.ReflectionException: Could not set property 'id' of 'class com.furp.DTO.ReviewInfoVo' with value '151' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'id' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.setBeanProperty(BeanWrapper.java:181)
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.set(BeanWrapper.java:61)
+	at org.apache.ibatis.reflection.MetaObject.setValue(MetaObject.java:119)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.applyPropertyMappings(DefaultResultSetHandler.java:512)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getRowValue(DefaultResultSetHandler.java:418)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:366)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValues(DefaultResultSetHandler.java:337)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSet(DefaultResultSetHandler.java:310)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSets(DefaultResultSetHandler.java:202)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:66)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:80)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:65)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at com.github.pagehelper.util.ExecutorUtil.pageQuery(ExecutorUtil.java:215)
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:147)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)
+	at jdk.proxy2/jdk.proxy2.$Proxy153.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:333)
+	... 66 common frames omitted
+Caused by: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'id' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.apache.ibatis.reflection.Reflector.getSetInvoker(Reflector.java:377)
+	at org.apache.ibatis.reflection.MetaClass.getSetInvoker(MetaClass.java:164)
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.setBeanProperty(BeanWrapper.java:172)
+	... 90 common frames omitted
+2026-03-12 14:09:07.025 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 14:09:07.027 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 14:09:07.822 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 14:09:07.822 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 14:09:07.827 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 14:09:07.834 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 14:09:07.837 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 14:09:07.922 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 11188 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 14:09:07.923 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 14:09:08.159 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 14:09:08.160 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 14:09:08.171 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 14:09:08.338 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 14:09:08.340 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:09:08.341 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 14:09:08.341 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 14:09:08.355 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 14:09:08.355 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 419 ms
+2026-03-12 14:09:08.783 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 14:09:08.852 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:09:08.857 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 14:09:08.861 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.027 seconds (process running for 1.258)
+2026-03-12 14:09:11.781 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 14:09:11.781 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 14:09:11.782 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 14:09:11.945 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 14:09:12.060 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c94e5d4
+2026-03-12 14:09:12.061 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 14:09:12.435 [http-nio-8080-exec-2] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/phd/review/history', 發生未知系統異常.
+org.mybatis.spring.MyBatisSystemException: 
+### Error querying database.  Cause: org.apache.ibatis.reflection.ReflectionException: Could not set property 'final_comment' of 'class com.furp.DTO.ReviewInfoVo' with value '研究进展顺利，实验数据充分，建议尽快整理发表。' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'final_comment' in 'class com.furp.DTO.ReviewInfoVo'
+### The error may exist in file [/Users/aziko/Documents/furp/furp/target/classes/mapper/AnnualReviewMapper.xml]
+### The error may involve com.furp.mapper.AnnualReviewMapper.findHistoryReviewById
+### The error occurred while handling results
+### SQL: SELECT ar.id AS reviewId, ar.review_year, ar.status, s.start_time, s.end_time,                m.location, ar.final_comment AS comment         FROM annual_review ar                  LEFT JOIN schedules s ON ar.id = s.annual_review_id AND s.room_id IS NOT NULL                  LEFT JOIN meeting_room m ON m.id = s.room_id         WHERE ar.phd_id = ? AND ar.status = 'completed'         ORDER BY ar.review_year DESC  LIMIT ?
+### Cause: org.apache.ibatis.reflection.ReflectionException: Could not set property 'final_comment' of 'class com.furp.DTO.ReviewInfoVo' with value '研究进展顺利，实验数据充分，建议尽快整理发表。' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'final_comment' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:99)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:347)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.selectList(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:194)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:164)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:156)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:93)
+	at jdk.proxy2/jdk.proxy2.$Proxy101.findHistoryReviewById(Unknown Source)
+	at com.furp.service.impl.AnnualReviewImpl.getHistoryReviewDetails(AnnualReviewImpl.java:65)
+	at com.furp.controller.PhdController.findHistoryReview(PhdController.java:113)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.apache.ibatis.reflection.ReflectionException: Could not set property 'final_comment' of 'class com.furp.DTO.ReviewInfoVo' with value '研究进展顺利，实验数据充分，建议尽快整理发表。' Cause: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'final_comment' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.setBeanProperty(BeanWrapper.java:181)
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.set(BeanWrapper.java:61)
+	at org.apache.ibatis.reflection.MetaObject.setValue(MetaObject.java:119)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.applyPropertyMappings(DefaultResultSetHandler.java:512)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.getRowValue(DefaultResultSetHandler.java:418)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValuesForSimpleResultMap(DefaultResultSetHandler.java:366)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleRowValues(DefaultResultSetHandler.java:337)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSet(DefaultResultSetHandler.java:310)
+	at org.apache.ibatis.executor.resultset.DefaultResultSetHandler.handleResultSets(DefaultResultSetHandler.java:202)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:66)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:80)
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:65)
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336)
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)
+	at com.github.pagehelper.util.ExecutorUtil.pageQuery(ExecutorUtil.java:215)
+	at com.github.pagehelper.PageInterceptor.intercept(PageInterceptor.java:147)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)
+	at jdk.proxy2/jdk.proxy2.$Proxy153.query(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:333)
+	... 66 common frames omitted
+Caused by: org.apache.ibatis.reflection.ReflectionException: There is no setter for property named 'final_comment' in 'class com.furp.DTO.ReviewInfoVo'
+	at org.apache.ibatis.reflection.Reflector.getSetInvoker(Reflector.java:377)
+	at org.apache.ibatis.reflection.MetaClass.getSetInvoker(MetaClass.java:164)
+	at org.apache.ibatis.reflection.wrapper.BeanWrapper.setBeanProperty(BeanWrapper.java:172)
+	... 90 common frames omitted
+2026-03-12 14:09:37.505 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 14:09:37.509 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 14:09:38.317 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 14:09:38.317 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 14:09:38.322 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 14:09:38.330 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 14:09:38.333 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 14:09:38.419 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 11198 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 14:09:38.419 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 14:09:38.662 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 14:09:38.663 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 14:09:38.674 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-03-12 14:09:38.844 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 14:09:38.846 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:09:38.847 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 14:09:38.847 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 14:09:38.861 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 14:09:38.861 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 427 ms
+2026-03-12 14:09:39.292 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 14:09:39.359 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 14:09:39.365 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 14:09:39.368 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.039 seconds (process running for 1.272)
+2026-03-12 14:09:42.008 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 14:09:42.008 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 14:09:42.009 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 14:09:42.169 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 14:09:42.276 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@46df6421
+2026-03-12 14:09:42.277 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 15:59:47.056 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m33s780ms).
+2026-03-12 16:03:04.964 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m11s921ms).
+2026-03-12 17:51:31.899 [http-nio-8080-exec-4] ERROR com.furp.exception.GlobalExceptionHandler-token 无效：74955d04-9b9d-46fe-bc3f-44886f8591c6
+cn.dev33.satoken.exception.NotLoginException: token 无效：74955d04-9b9d-46fe-bc3f-44886f8591c6
+	at cn.dev33.satoken.exception.NotLoginException.newInstance(NotLoginException.java:134)
+	at cn.dev33.satoken.stp.StpLogic.getLoginId(StpLogic.java:1099)
+	at cn.dev33.satoken.stp.StpLogic.checkRoleAnd(StpLogic.java:2103)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler._checkMethod(SaCheckRoleHandler.java:48)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler.checkMethod(SaCheckRoleHandler.java:40)
+	at cn.dev33.satoken.annotation.handler.SaCheckRoleHandler.checkMethod(SaCheckRoleHandler.java:31)
+	at cn.dev33.satoken.annotation.handler.SaAnnotationHandlerInterface.check(SaAnnotationHandlerInterface.java:42)
+	at cn.dev33.satoken.strategy.SaAnnotationStrategy.lambda$new$1(SaAnnotationStrategy.java:130)
+	at cn.dev33.satoken.strategy.SaAnnotationStrategy.lambda$new$0(SaAnnotationStrategy.java:103)
+	at cn.dev33.satoken.interceptor.SaInterceptor.preHandle(SaInterceptor.java:98)
+	at org.springframework.web.servlet.HandlerExecutionChain.applyPreHandle(HandlerExecutionChain.java:146)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1084)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 17:55:09.737 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m34s22ms).
+2026-03-12 18:32:13.323 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m51s140ms).
+2026-03-12 18:42:17.759 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m4s436ms).
+2026-03-12 18:43:55.202 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m37s443ms).
+2026-03-12 18:50:01.449 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m6s247ms).
+2026-03-12 18:51:55.297 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m53s848ms).
+2026-03-12 19:19:09.966 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 19:19:09.968 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 19:19:11.142 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 19:19:11.143 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 19:19:11.148 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 19:19:11.154 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 19:19:11.161 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 19:19:11.252 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 14773 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 19:19:11.253 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 19:19:11.570 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 19:19:11.571 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 19:19:11.583 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 19:19:11.766 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 19:19:11.768 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:19:11.768 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 19:19:11.769 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 19:19:11.785 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 19:19:11.785 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 507 ms
+2026-03-12 19:19:12.234 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 19:19:12.312 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:19:12.318 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 19:19:12.322 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.168 seconds (process running for 1.4)
+2026-03-12 19:21:42.934 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 19:21:42.934 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 19:21:42.935 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 19:21:42.976 [http-nio-8080-exec-2] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 19:21:42.982 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 19:21:43.084 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@17841c95
+2026-03-12 19:21:43.085 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 19:39:27.181 [http-nio-8080-exec-4] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Xindi Zhao, password=123456)
+2026-03-12 19:40:02.833 [http-nio-8080-exec-5] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 19:40:34.274 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 19:40:34.277 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 19:40:35.113 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 19:40:35.114 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 19:40:35.118 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 19:40:35.126 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 19:40:35.128 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 19:40:35.210 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 16303 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 19:40:35.210 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 19:40:35.432 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 19:40:35.433 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 19:40:35.444 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 19:40:35.661 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 19:40:35.663 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:40:35.664 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 19:40:35.664 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 19:40:35.678 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 19:40:35.679 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 455 ms
+2026-03-12 19:40:36.135 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 19:40:36.204 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:40:36.209 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 19:40:36.213 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.087 seconds (process running for 1.311)
+2026-03-12 19:41:47.981 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 19:41:47.982 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 19:41:47.986 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 19:41:47.994 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 19:41:47.996 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 19:41:48.082 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 16322 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 19:41:48.083 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 19:41:48.310 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 19:41:48.311 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 19:41:48.322 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-03-12 19:41:48.497 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 19:41:48.499 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:41:48.500 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 19:41:48.500 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 19:41:48.514 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 19:41:48.514 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 416 ms
+2026-03-12 19:41:48.945 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 19:41:49.013 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:41:49.018 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 19:41:49.022 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.028 seconds (process running for 1.245)
+2026-03-12 19:56:22.260 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 19:56:22.260 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 19:56:22.266 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 19:56:22.274 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 19:56:22.277 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 19:56:22.365 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 16712 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 19:56:22.365 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 19:56:22.614 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 19:56:22.615 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 19:56:22.628 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 19:56:22.805 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 19:56:22.807 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:56:22.808 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 19:56:22.808 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 19:56:22.823 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 19:56:22.823 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 443 ms
+2026-03-12 19:56:23.268 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 19:56:23.341 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 19:56:23.346 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 19:56:23.350 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.077 seconds (process running for 1.309)
+2026-03-12 20:00:20.840 [http-nio-8080-exec-10] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 20:00:20.841 [http-nio-8080-exec-10] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 20:00:20.845 [http-nio-8080-exec-10] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 4 ms
+2026-03-12 20:00:20.894 [http-nio-8080-exec-10] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 20:00:20.902 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 20:00:21.000 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1cdb56e7
+2026-03-12 20:00:21.000 [http-nio-8080-exec-10] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 20:07:10.735 [http-nio-8080-exec-6] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/auth/logout', 發生未知系統異常.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/logout.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 20:07:19.067 [http-nio-8080-exec-1] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 20:11:20.038 [http-nio-8080-exec-2] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 20:12:42.782 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 20:12:42.782 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 20:13:05.073 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 20:13:05.073 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 20:14:01.649 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 20:14:01.649 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 20:16:32.740 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 20:16:32.741 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:32.741 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:37.827 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:38.629 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:39.075 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:39.765 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 20:16:41.847 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 20:26:57.121 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 20:26:57.124 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 21:23:48.859 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 21:23:48.861 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 21:23:48.868 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 21:23:48.876 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 21:23:48.879 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 21:23:48.988 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 31124 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 21:23:48.989 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 21:23:49.281 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 21:23:49.282 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 21:23:49.295 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 21:23:49.513 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 21:23:49.516 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 21:23:49.516 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 21:23:49.516 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 21:23:49.533 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 21:23:49.533 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 530 ms
+2026-03-12 21:23:50.039 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@7829b776
+2026-03-12 21:23:50.124 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 21:23:50.131 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 21:23:50.135 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.26 seconds (process running for 1.574)
+2026-03-12 21:25:01.206 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 21:25:01.206 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 21:25:01.207 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 21:25:01.367 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 21:25:01.503 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@719d0867
+2026-03-12 21:25:01.503 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 21:26:18.397 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:26:29.043 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 21:26:29.043 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:26:34.186 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-审核研究方向 35, 操作: ResearchAreaReviewDTO(action=approved, reason=null)
+2026-03-12 21:26:34.208 [http-nio-8080-exec-10] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/admin/research-areas/35/review', 發生未知系統異常.
+java.lang.IllegalArgumentException: Invalid action: approved. Must be 'approve' or 'reject'.
+	at com.furp.service.impl.UserServiceImpl.reviewResearchArea(UserServiceImpl.java:288)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:352)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.furp.service.impl.UserServiceImpl$$SpringCGLIB$$0.reviewResearchArea(<generated>)
+	at com.furp.controller.AdminController.reviewResearchArea(AdminController.java:206)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 21:36:23.820 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:23.820 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:23.820 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:36:30.794 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:30.795 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:30.794 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:36:31.634 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:39.819 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:36:39.820 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:36:39.819 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.464 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.464 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.465 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:42:52.474 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:42:52.487 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:42:52.495 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:42:52.518 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.539 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.539 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.559 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.575 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:42:52.606 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.209 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:43:27.209 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.209 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.226 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:43:27.234 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:43:27.243 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:43:27.276 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.295 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.296 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.315 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.328 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:43:27.364 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:44:56.378 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 21:44:56.380 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 21:44:57.949 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 21:44:57.949 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 21:44:57.955 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 21:44:57.962 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 21:44:57.965 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 21:44:58.059 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 31695 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 21:44:58.059 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 21:44:58.330 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 21:44:58.331 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 21:44:58.342 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-03-12 21:44:58.530 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 21:44:58.532 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 21:44:58.533 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 21:44:58.533 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 21:44:58.550 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 21:44:58.550 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 476 ms
+2026-03-12 21:44:59.006 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 21:44:59.084 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 21:44:59.090 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 21:44:59.094 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.133 seconds (process running for 1.378)
+2026-03-12 21:45:14.983 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 21:45:14.983 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 21:45:14.986 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 21:45:15.148 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 21:45:15.263 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@730b9529
+2026-03-12 21:45:15.264 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 21:45:47.799 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:45:51.700 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:51:46.144 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:51:59.778 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:53:52.380 [http-nio-8080-exec-10] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 21:53:57.077 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 21:53:57.077 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 21:53:57.077 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:54:43.290 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 21:54:51.054 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-审核研究方向 35, 操作: ResearchAreaReviewDTO(action=approve, reason=)
+2026-03-12 21:54:52.807 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-审核研究方向 37, 操作: ResearchAreaReviewDTO(action=approve, reason=)
+2026-03-12 21:54:54.505 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-审核研究方向 38, 操作: ResearchAreaReviewDTO(action=approve, reason=)
+2026-03-12 21:55:03.970 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 21:55:03.970 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 21:55:18.414 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 21:55:20.545 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 21:55:20.545 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:01:56.018 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:01:56.019 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:07:39.809 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:07:39.810 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:07:39.809 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:08:04.881 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:13.882 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:38.318 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=lisi, status=null)
+2026-03-12 22:09:42.372 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:47.821 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=jun, status=null)
+2026-03-12 22:09:53.310 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:54.486 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:57.033 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:09:57.033 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:09:57.033 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:10:16.555 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:10:16.555 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:10:24.993 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:10:58.267 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:11:55.275 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:11:55.277 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:11:55.280 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:12:03.946 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:12:39.434 [http-nio-8080-exec-6] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 22:13:39.246 [http-nio-8080-exec-7] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/auth/logout', 發生未知系統異常.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/logout.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 22:13:49.078 [http-nio-8080-exec-6] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Xinde Zhao, password=123456)
+2026-03-12 22:13:50.228 [http-nio-8080-exec-1] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Xinde Zhao, password=123456)
+2026-03-12 22:13:53.364 [http-nio-8080-exec-9] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Xindi Zhao, password=123456)
+2026-03-12 22:26:34.713 [http-nio-8080-exec-8] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:32:18.678 [http-nio-8080-exec-3] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:33:13.997 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:33:17.404 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:33:50.274 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:33:50.274 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:34:06.870 [http-nio-8080-exec-8] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 22:34:29.949 [http-nio-8080-exec-1] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/auth/logout', 發生未知系統異常.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/logout.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 22:34:38.815 [http-nio-8080-exec-9] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:34:42.761 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:34:56.880 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-审核研究方向 39, 操作: ResearchAreaReviewDTO(action=approve, reason=)
+2026-03-12 22:34:59.171 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-审核研究方向 40, 操作: ResearchAreaReviewDTO(action=approve, reason=)
+2026-03-12 22:35:02.077 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 22:35:27.823 [http-nio-8080-exec-7] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 22:35:35.794 [http-nio-8080-exec-3] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/auth/logout', 發生未知系統異常.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/logout.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 22:36:31.185 [http-nio-8080-exec-8] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=Jing Wang, password=123456)
+2026-03-12 22:36:37.195 [http-nio-8080-exec-10] ERROR com.furp.exception.GlobalExceptionHandler-請求地址 '/api/auth/logout', 發生未知系統異常.
+org.springframework.web.servlet.resource.NoResourceFoundException: No static resource auth/logout.
+	at org.springframework.web.servlet.resource.ResourceHttpRequestHandler.handleRequest(ResourceHttpRequestHandler.java:585)
+	at org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter.handle(HttpRequestHandlerAdapter.java:52)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaFirewallCheckFilterForJakartaServlet.doFilter(SaFirewallCheckFilterForJakartaServlet.java:69)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenCorsFilterForJakartaServlet.doFilter(SaTokenCorsFilterForJakartaServlet.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at cn.dev33.satoken.filter.SaTokenContextFilterForJakartaServlet.doFilter(SaTokenContextFilterForJakartaServlet.java:40)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-03-12 22:36:50.116 [http-nio-8080-exec-2] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:37:00.317 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:37:00.317 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:37:00.318 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:37:29.398 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:37:30.483 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:37:32.166 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:37:33.704 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:38:35.039 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:38:40.277 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=xing, status=null)
+2026-03-12 22:38:44.293 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=ing, status=null)
+2026-03-12 22:38:47.605 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:47:58.314 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:48:02.313 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:51:19.538 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:51:19.538 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:51:19.538 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:51:49.968 [http-nio-8080-exec-2] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:51:53.227 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:51:53.227 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 22:51:53.227 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:58:20.405 [http-nio-8080-exec-7] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 22:58:30.405 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 22:58:30.405 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 22:58:30.405 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:00:00.798 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:00:00.798 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:00:00.801 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:02:00.904 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:02:00.906 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:02:00.912 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:02:02.423 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:16.628 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 23:14:16.629 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 23:14:19.254 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 23:14:19.254 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 23:14:19.260 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 23:14:19.269 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 23:14:19.273 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 23:14:19.365 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 40773 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 23:14:19.366 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 23:14:19.640 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 23:14:19.641 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 23:14:19.653 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2026-03-12 23:14:19.856 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 23:14:19.858 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 23:14:19.859 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 23:14:19.859 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 23:14:19.876 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 23:14:19.876 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 495 ms
+2026-03-12 23:14:20.333 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 23:14:20.412 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 23:14:20.418 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 23:14:20.422 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.153 seconds (process running for 1.392)
+2026-03-12 23:14:32.666 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 23:14:32.667 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 23:14:32.668 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 1 ms
+2026-03-12 23:14:32.706 [http-nio-8080-exec-1] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 23:14:32.712 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 23:14:32.813 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ce3ee2a
+2026-03-12 23:14:32.814 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 23:14:36.607 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:36.607 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:14:36.607 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:39.876 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:43.587 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=teacher, name=李四123, email=lisi@123.edu.cn, researchAreas=[计算机视觉, 啊啊啊呜呜呜], enrollmentDate=null, supervisors=null, mainSupervisor=null, studentId=null)
+2026-03-12 23:14:43.639 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:46.628 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:47.001 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:48.295 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:48.830 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:14:49.517 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:13.100 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:21.431 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=teacher, name=李四123, email=lisi@123.edu.cn, researchAreas=[计算机视觉, 啊啊啊呜呜呜, 新1, 🆕], enrollmentDate=null, supervisors=null, mainSupervisor=null, studentId=null)
+2026-03-12 23:15:21.462 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:22.715 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:23.127 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:25.249 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:15:25.249 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:25.249 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:15:26.048 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:20:47.325 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:20:47.325 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:20:47.325 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:31.141 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:31.141 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:31.141 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:23:38.512 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=lisi, email=lisi@tinghua.edu.cn, researchAreas=[], enrollmentDate=2021-09-01, supervisors=[T002], mainSupervisor=T002, studentId=20266)
+2026-03-12 23:23:38.544 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:43.398 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=lisi, email=lisi@tinghua.edu.cn, researchAreas=[啊啊啊呜呜呜, ss, ajjjj, 新1], enrollmentDate=2021-09-01, supervisors=[T002], mainSupervisor=T002, studentId=20266)
+2026-03-12 23:23:43.428 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:48.217 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=lisi, email=lisi@tinghua.edu.cn, researchAreas=[啊啊啊呜呜呜, ss, ajjjj, 新1], enrollmentDate=2021-09-01, supervisors=[T106], mainSupervisor=T106, studentId=20266)
+2026-03-12 23:23:48.258 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:23:55.533 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=lisi, email=lisi@tinghua.edu.cn, researchAreas=[啊啊啊呜呜呜, ss, ajjjj, 新1], enrollmentDate=2026-03-16, supervisors=[T106], mainSupervisor=T106, studentId=20266)
+2026-03-12 23:23:55.570 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:24:00.063 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:24:00.506 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:25:32.027 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:25:32.027 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:25:32.029 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:25:58.868 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:25:58.868 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:25:58.868 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:26:04.676 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=lisi, email=lisi@tinghua.edu.cn, researchAreas=[啊啊啊呜呜呜, ss, ajjjj, 新1, 大的点点滴滴], enrollmentDate=2026-03-16, supervisors=[T106], mainSupervisor=T106, studentId=20266)
+2026-03-12 23:26:04.713 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:26:13.909 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=phd, name=Yihan Zhang, email=啊啊啊, researchAreas=[ai, ajjjj, 啊啊啊呜呜呜], enrollmentDate=2021-09-11, supervisors=[T007], mainSupervisor=T007, studentId=20416070)
+2026-03-12 23:26:13.935 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:26:25.547 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:26:34.551 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-更新用户: UserAddDTO(type=teacher, name=Huan Jin, email=s上, researchAreas=[or, 啊啊啊呜呜呜], enrollmentDate=null, supervisors=null, mainSupervisor=null, studentId=null)
+2026-03-12 23:26:34.574 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:26:39.537 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:27:55.780 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:28:16.845 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:28:16.845 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:28:16.846 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:28:24.857 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:49.868 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:45:49.869 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:49.871 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:49.880 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:45:49.922 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:49.948 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:49.950 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:56.518 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:45:56.519 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:56.518 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:56.531 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:45:56.568 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:56.590 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:45:56.593 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:02.389 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:02.389 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:02.390 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:02.404 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:02.447 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:02.469 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:09.827 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:09.827 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:09.827 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:09.837 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:09.891 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:09.921 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:20.015 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:20.015 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:20.015 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:20.029 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:46:20.083 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:20.110 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:46:44.808 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown initiated...
+2026-03-12 23:46:44.810 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Shutdown completed.
+2026-03-12 23:49:18.893 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.BootstrapRegistryInitializer] names: []
+2026-03-12 23:49:18.894 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationContextInitializer] names: [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer, org.springframework.boot.context.ContextIdApplicationContextInitializer, org.springframework.boot.context.config.DelegatingApplicationContextInitializer, org.springframework.boot.rsocket.context.RSocketPortInfoApplicationContextInitializer, org.springframework.boot.web.context.ServerPortInfoApplicationContextInitializer, org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer, org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener]
+2026-03-12 23:49:18.898 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.context.ApplicationListener] names: [org.springframework.boot.ClearCachesApplicationListener, org.springframework.boot.builder.ParentContextCloserApplicationListener, org.springframework.boot.context.FileEncodingApplicationListener, org.springframework.boot.context.config.AnsiOutputApplicationListener, org.springframework.boot.context.config.DelegatingApplicationListener, org.springframework.boot.context.logging.LoggingApplicationListener, org.springframework.boot.env.EnvironmentPostProcessorApplicationListener, org.springframework.boot.autoconfigure.BackgroundPreinitializer]
+2026-03-12 23:49:18.906 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.SpringApplicationRunListener] names: [org.springframework.boot.context.event.EventPublishingRunListener]
+2026-03-12 23:49:18.909 [main] TRACE o.s.core.io.support.SpringFactoriesLoader-Loaded [org.springframework.boot.logging.LoggingSystemFactory] names: [org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory, org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory, org.springframework.boot.logging.java.JavaLoggingSystem.Factory]
+2026-03-12 23:49:18.997 [main] INFO  com.furp.ReviewDistributionSystemApplication-Starting ReviewDistributionSystemApplication using Java 21.0.5 with PID 41711 (/Users/aziko/Documents/furp/furp/target/classes started by aziko in /Users/aziko/Documents/furp/furp)
+2026-03-12 23:49:18.998 [main] INFO  com.furp.ReviewDistributionSystemApplication-No active profile set, falling back to 1 default profile: "default"
+2026-03-12 23:49:19.232 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Multiple Spring Data modules found, entering strict repository configuration mode
+2026-03-12 23:49:19.233 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-03-12 23:49:19.244 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate-Finished Spring Data repository scanning in 6 ms. Found 0 Redis repository interfaces.
+2026-03-12 23:49:19.407 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat initialized with port 8080 (http)
+2026-03-12 23:49:19.410 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Initializing ProtocolHandler ["http-nio-8080"]
+2026-03-12 23:49:19.410 [main] INFO  org.apache.catalina.core.StandardService-Starting service [Tomcat]
+2026-03-12 23:49:19.410 [main] INFO  org.apache.catalina.core.StandardEngine-Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-03-12 23:49:19.427 [main] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring embedded WebApplicationContext
+2026-03-12 23:49:19.428 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext-Root WebApplicationContext: initialization completed in 415 ms
+2026-03-12 23:49:19.862 [main] INFO  c.b.m.e.spring.MybatisPlusApplicationContextAware-Register ApplicationContext instances org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@773f7880
+2026-03-12 23:49:19.936 [main] INFO  org.apache.coyote.http11.Http11NioProtocol-Starting ProtocolHandler ["http-nio-8080"]
+2026-03-12 23:49:19.942 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer-Tomcat started on port 8080 (http) with context path '/api'
+2026-03-12 23:49:19.945 [main] INFO  com.furp.ReviewDistributionSystemApplication-Started ReviewDistributionSystemApplication in 1.04 seconds (process running for 1.266)
+2026-03-12 23:49:58.202 [http-nio-8080-exec-1] INFO  o.a.c.c.ContainerBase.[Tomcat].[localhost].[/api]-Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-12 23:49:58.203 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Initializing Servlet 'dispatcherServlet'
+2026-03-12 23:49:58.205 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet-Completed initialization in 2 ms
+2026-03-12 23:49:58.245 [http-nio-8080-exec-1] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 23:49:58.252 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Starting...
+2026-03-12 23:49:58.370 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool-HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@756f2754
+2026-03-12 23:49:58.370 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource-HikariPool-1 - Start completed.
+2026-03-12 23:50:02.485 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:50:02.485 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:02.485 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:07.165 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:07.165 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:07.170 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:50:12.654 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=195, participating=false
+2026-03-12 23:50:12.696 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:15.824 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:27.894 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=181, participating=true
+2026-03-12 23:50:27.894 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=192, participating=true
+2026-03-12 23:50:27.894 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=193, participating=true
+2026-03-12 23:50:27.896 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=184, participating=true
+2026-03-12 23:50:27.896 [http-nio-8080-exec-9] INFO  com.furp.controller.AdminController-更新用户参与状态: userId=194, participating=true
+2026-03-12 23:50:27.919 [http-nio-8080-exec-1] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:41.056 [http-nio-8080-exec-3] INFO  com.furp.controller.UserController-登录：LoginDTO(role=null, username=宁宁, password=123456)
+2026-03-12 23:50:44.104 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:50:44.104 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:44.105 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:50.213 [http-nio-8080-exec-2] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:50.214 [http-nio-8080-exec-10] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:50:50.216 [http-nio-8080-exec-3] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:50:55.287 [http-nio-8080-exec-5] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:51:07.895 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:51:07.896 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 23:51:37.762 [http-nio-8080-exec-8] INFO  com.furp.controller.AdminController-查询待审核研究方向: PendingResearchAreaQueryDTO(keyword=)
+2026-03-12 23:51:40.517 [http-nio-8080-exec-4] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: ResearchAreaPageQueryDTO(keyword=, page=1, size=100)
+2026-03-12 23:51:40.517 [http-nio-8080-exec-6] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=teacher, page=1, size=100, keyword=, status=null)
+2026-03-12 23:51:40.517 [http-nio-8080-exec-7] INFO  com.furp.controller.AdminController-分页查询用户列表, 参数: UserPageQueryDTO(type=phd, page=1, size=100, keyword=, status=null)

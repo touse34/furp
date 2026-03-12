@@ -49,7 +49,7 @@
     <insert id="insertResearchAreaDetail" parameterType="com.furp.DTO.ResearchAreaDetail"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO skill
-            (skill_name, status, submitted_at, approvedAt)
+            (skill_name, status, submitted_at, approved_at)
         VALUES
             (#{name}, #{status}, #{createdAt}, #{approvedAt})
     </insert>

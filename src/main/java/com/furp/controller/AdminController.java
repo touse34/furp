@@ -7,13 +7,16 @@ import com.furp.VO.PendingResearchAreaVO;
 import com.furp.VO.ReviewResultVO;
 import com.furp.VO.TimeConfigVO;
 import com.furp.VO.UserAddResponseVO;
+import com.furp.VO.NoticeAdminVO;
 import com.furp.entity.Result;
 import com.furp.entity.TimeSlots;
 import com.furp.response.PageResult;
+import com.furp.service.AdminNoticeService;
 import com.furp.service.StudentAddService;
 import com.furp.service.TeacherService;
 import com.furp.service.TimeSlotsService;
 import com.furp.service.UserService;
+import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,8 @@ public class AdminController {
     private StudentAddService studentAddService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private AdminNoticeService adminNoticeService;
 
 
     /**2.3 更新日期配置（管理员）
@@ -131,6 +136,16 @@ public class AdminController {
         log.info("更新用户: {}", userAddDTO);
         userService.updateUser(userId,userAddDTO);
         return Result.success("用户更新成功");
+    }
+
+    /*
+    4.4 更新用户参与本次评审状态
+     */
+    @PutMapping("/users/{userId}/participation")
+    public Result<Void> updateParticipation(@PathVariable Integer userId, @RequestBody UserParticipationDTO dto) {
+        log.info("更新用户参与状态: userId={}, participating={}", userId, dto.getParticipating());
+        userService.updateParticipation(userId, dto.getParticipating());
+        return Result.success("参与状态更新成功");
     }
 
 
@@ -262,11 +277,47 @@ public class AdminController {
         return Result.success(list);
     }
 
+    // ===================== 通知管理接口 =====================
 
+    /** 6.1 获取通知列表（管理员） */
+    @GetMapping("/notifications")
+    public Result<PageResult<NoticeAdminVO>> listNotifications(
+            @RequestParam(defaultValue = "") String status,
+            @RequestParam(defaultValue = "") String keyword,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        PageResult<NoticeAdminVO> result = adminNoticeService.listNotices(status, keyword, page, size);
+        return Result.success(result);
+    }
 
+    /** 6.2 创建通知 */
+    @PostMapping("/notifications")
+    public Result<NoticeAdminVO> createNotification(@RequestBody NoticeCreateDTO dto) {
+        Integer adminUserId = (Integer) StpUtil.getLoginId(0);
+        NoticeAdminVO vo = adminNoticeService.createNotice(dto, adminUserId);
+        return Result.success("通知创建成功", vo);
+    }
 
+    /** 6.3 更新通知 */
+    @PutMapping("/notifications/{notificationId}")
+    public Result<Void> updateNotification(@PathVariable Integer notificationId,
+                                           @RequestBody NoticeCreateDTO dto) {
+        adminNoticeService.updateNotice(notificationId, dto);
+        return Result.success("通知更新成功");
+    }
 
+    /** 6.4 删除通知 */
+    @DeleteMapping("/notifications/{notificationId}")
+    public Result<Void> deleteNotification(@PathVariable Integer notificationId) {
+        adminNoticeService.deleteNotice(notificationId);
+        return Result.success("通知删除成功");
+    }
 
-
+    /** 6.5 发送通知 */
+    @PostMapping("/notifications/{notificationId}/send")
+    public Result<NoticeAdminVO> sendNotification(@PathVariable Integer notificationId) {
+        NoticeAdminVO vo = adminNoticeService.sendNotice(notificationId);
+        return Result.success("通知发送成功", vo);
+    }
 
 }

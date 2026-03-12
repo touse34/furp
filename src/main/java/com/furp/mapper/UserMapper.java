@@ -54,6 +54,10 @@ public interface UserMapper extends BaseMapper<User> {
 
     Long countPendingResearchAreaApprovals();
 
+    Long countTotalNotifications();
+
+    Long countParticipatingPhds();
+
     Page<UserVO> pageQuery(UserPageQueryDTO userPageQueryDTO);
 
 

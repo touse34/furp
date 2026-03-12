@@ -9,5 +9,5 @@ public class UpdateTimeSlotsDTO {
 
     private String academicYear; // 学年
 
-    private List<TimeSlot> Slots; // 时间段列表
+    private List<TimeSlot> slots; // 时间段列表
 }

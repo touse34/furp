@@ -30,4 +30,5 @@ public class Teacher {
     @TableField("user_id") private Integer userId;     // 教师的用户ID
     @TableField("name") private String name;        // 教师的名字
     @TableField("is_assessor") private Integer isAssessor; // 是否是评审员，1表示是，0表示不是
+    @TableField("is_confirmed") private Boolean isConfirmed; // 是否参与评审活动
 }

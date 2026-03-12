@@ -16,4 +16,6 @@ public class DashboardStatsDTO {
     private Long totalSchedules;
     private Long totalTimeSlots;
     private Long pendingResearchAreaApprovals;
+    private Long totalNotifications;
+    private Long participatingPhds;
 }

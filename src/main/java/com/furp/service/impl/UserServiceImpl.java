@@ -320,8 +320,6 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setId(userId); // Specify which user to update.
         userToUpdate.setName(userAddDTO.getName());
         userToUpdate.setEmail(userAddDTO.getEmail());
-        userToUpdate.setWechatId(userToUpdate.getWechatId());
-        userToUpdate.setRoleId(userToUpdate.getRoleId());
         // Note: We don't set password, createTime, etc. They will be ignored in the SQL.
         userMapper.updateById(userToUpdate);
 
@@ -570,21 +568,47 @@ public class UserServiceImpl implements UserService {
         Long totalSchedules = userMapper.countTotalSchedules();
         Long totalTimeSlots = userMapper.countTotalTimeSlots();
         Long pendingResearchAreaApprovals = userMapper.countPendingResearchAreaApprovals();
+        Long totalNotifications = userMapper.countTotalNotifications();
+        Long participatingPhds = userMapper.countParticipatingPhds();
 
-        // 更新 DTO 的构造函数调用
-        DashboardStatsDTO statsDTO = new DashboardStatsDTO(
+        return new DashboardStatsDTO(
                 totalPhds,
                 totalTeachers,
                 confirmedTeachers,
                 pendingTeachers,
                 totalSchedules,
                 totalTimeSlots,
-                pendingResearchAreaApprovals
+                pendingResearchAreaApprovals,
+                totalNotifications,
+                participatingPhds
         );
+    }
 
-        return statsDTO;
-
-
+    @Override
+    @Transactional
+    public void updateParticipation(Integer userId, Boolean participating) {
+        User user = userMapper.selectById(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found with ID: " + userId);
+        }
+        Integer roleId = user.getRoleId();
+        if (roleId == 2) { // PhD
+            Phd phd = phdMapper.findByUserId(userId);
+            if (phd != null) {
+                Phd phdToUpdate = new Phd();
+                phdToUpdate.setId(phd.getId());
+                phdToUpdate.setIsParticipatingReview(participating);
+                phdMapper.updateById(phdToUpdate);
+            }
+        } else if (roleId == 1) { // Teacher
+            Teacher teacher = teacherMapper.findByUserId(userId);
+            if (teacher != null) {
+                Teacher teacherToUpdate = new Teacher();
+                teacherToUpdate.setId(teacher.getId());
+                teacherToUpdate.setIsConfirmed(participating);
+                teacherMapper.updateById(teacherToUpdate);
+            }
+        }
     }
 
     @Override

@@ -22,8 +22,9 @@ public class UserVO implements Serializable {
     // --- ADD THIS FIELD ---
     @JsonIgnore // Important: This hides the field from the final JSON output.
     private Integer phdId;
-    @JsonIgnore // 【新增】
-    private Integer teacherId; // 【新增】用于后端逻辑，存放 teacher.id
+    private Integer teacherId; // teacher.id, exposed for frontend display
+    private Boolean isConfirmed; // teacher.is_confirmed (teacher role only)
+    private Boolean isParticipatingReview; // phd.is_participating_review (phd role only)
 
     // --- 通用字段 ---
     private String id;

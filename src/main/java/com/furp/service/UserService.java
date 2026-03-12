@@ -62,6 +62,8 @@ public interface UserService {
      */
     void updateUser(Integer userId,UserAddDTO userAddDTO);
 
+    void updateParticipation(Integer userId, Boolean participating);
+
 
     /*
     获取pending的研究方向
